@@ -10,14 +10,14 @@
   :root{--ink:#1a1208;--parchment:#f5edd6;--sepia:#c4933a;--rust:#b5451b;--moss:#3d6b4f;--cream:#faf4e8;--shadow:rgba(26,18,8,0.18);}
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden;}
-  header{background:var(--ink);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;position:fixed;top:0;left:0;right:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.4);}
+  header{background:var(--ink);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px;position:fixed;top:0;left:0;right:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.4);}
   .logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--sepia);}
   .logo span{color:var(--parchment);font-weight:700;}
   .header-right{display:flex;align-items:center;gap:12px;}
   .status-dot{width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 8px #4caf50;animation:pulse-dot 2s infinite;}
   @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
   .status-label{font-size:0.75rem;color:rgba(255,255,255,0.5);font-weight:300;}
-  .app{padding-top:64px;display:grid;grid-template-columns:420px 1fr;height:100vh;}
+  .app{padding-top:72px;display:grid;grid-template-columns:420px 1fr;height:100vh;}
   .sidebar{background:var(--parchment);border-right:1px solid rgba(196,147,58,0.3);display:flex;flex-direction:column;overflow:hidden;position:relative;}
   .sidebar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sepia),var(--rust),var(--moss));}
   .sidebar-tabs{display:flex;border-bottom:1px solid rgba(196,147,58,0.2);}
@@ -55,6 +55,23 @@
   .media-thumb{position:relative;width:68px;height:68px;border-radius:8px;overflow:hidden;border:1.5px solid rgba(196,147,58,0.3);background:#f0e8d0;}
   .media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;}
   .media-thumb .remove-btn{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(181,69,27,0.9);color:white;border:none;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;}
+
+  /* GRAVADOR DE VÍDEO */
+  .video-recorder{padding:4px 0;}
+  .video-preview-live{width:100%;aspect-ratio:16/9;background:#1a1208;border-radius:10px;overflow:hidden;position:relative;margin-bottom:10px;display:none;}
+  .video-preview-live.active{display:block;}
+  .video-preview-live video{width:100%;height:100%;object-fit:cover;}
+  .video-rec-overlay{position:absolute;top:8px;left:8px;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.55);border-radius:20px;padding:4px 10px;}
+  .video-rec-dot{width:8px;height:8px;border-radius:50%;background:#ef4444;animation:pulse-dot 1s infinite;flex-shrink:0;}
+  .video-rec-timer-txt{font-size:0.78rem;font-weight:700;color:white;font-variant-numeric:tabular-nums;}
+  .video-progress-wrap{width:100%;height:5px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;position:absolute;bottom:0;left:0;}
+  .video-progress-bar{height:100%;background:#ef4444;border-radius:4px;transition:width 1s linear;}
+  .video-rec-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+  .video-list{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+  .video-item{border-radius:10px;overflow:hidden;background:#1a1208;position:relative;}
+  .video-item video{width:100%;max-height:160px;display:block;}
+  .video-item .remove-btn{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(181,69,27,0.9);color:white;border:none;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;}
+  .video-size-info{font-size:0.68rem;color:rgba(26,18,8,0.4);text-align:center;margin-top:4px;}
 
   /* ÁUDIO */
   .audio-recorder{padding:4px 0;}
@@ -109,7 +126,7 @@
   .add-student-form.open{display:block;}
   .add-student-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
   .add-student-row .full{grid-column:1/-1;}
-  .student-list-wrap{display:flex;flex-direction:column;gap:6px;}
+  .student-list-wrap{display:flex;flex-direction:column;gap:6px;overflow-y:auto;max-height:calc(100vh - 320px);padding-bottom:8px;}
   .student-card{background:white;border-radius:10px;padding:11px 14px;border:1.5px solid rgba(196,147,58,0.2);display:flex;align-items:center;gap:10px;transition:box-shadow 0.15s;}
   .student-card:hover{box-shadow:0 2px 12px var(--shadow);}
   .student-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sepia),var(--rust));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.82rem;flex-shrink:0;}
@@ -132,6 +149,15 @@
 
   /* MAPA */
   #map{width:100%;height:100%;z-index:1;}
+  /* Esconder toggle padrão do Leaflet, manter só o painel */
+  .leaflet-control-layers-toggle{display:none !important;}
+  .leaflet-control-layers{padding:0 !important;}
+  .leaflet-control-layers-expanded{padding:8px !important;}
+  /* Botão flutuante de mapa */
+  .map-layer-btn{position:absolute;bottom:90px;right:10px;z-index:500;background:white;border:2px solid rgba(196,147,58,0.4);border-radius:10px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;color:var(--sepia);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15);display:flex;align-items:center;gap:5px;transition:all 0.2s;}
+  .map-layer-btn:hover{background:rgba(196,147,58,0.08);border-color:var(--sepia);}
+  /* Container relativo para posicionar botão sobre o mapa */
+  .map-wrap{position:relative;width:100%;height:100%;}
 
   /* MODAL */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;}
@@ -181,6 +207,17 @@
   ::-webkit-scrollbar-thumb{background:rgba(196,147,58,0.3);border-radius:4px;}
   .loading{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg)}}
+  /* EDITAR ALUNO */
+  .edit-inline{background:#fffdf5;border:1.5px solid rgba(196,147,58,0.3);border-radius:8px;padding:10px 12px;margin-top:6px;display:none;}
+  .edit-inline.open{display:block;}
+  .edit-inline-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+  .edit-inline input{flex:1;min-width:80px;padding:7px 10px;font-size:0.82rem;}
+  .edit-btns{display:flex;gap:6px;}
+  .btn-edit-save{background:var(--moss);color:white;border:none;border-radius:6px;padding:6px 14px;font-size:0.78rem;font-weight:500;cursor:pointer;}
+  .btn-edit-cancel{background:rgba(26,18,8,0.07);border:none;border-radius:6px;padding:6px 14px;font-size:0.78rem;cursor:pointer;}
+  .student-edit-btn{width:24px;height:24px;border-radius:50%;background:rgba(196,147,58,0.1);border:none;cursor:pointer;color:var(--sepia);font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
+  .student-edit-btn:hover{background:rgba(196,147,58,0.2);}
+
   @media(max-width:768px){
     .app{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
     .sidebar{max-height:55vh;border-right:none;border-bottom:1px solid rgba(196,147,58,0.3);}
@@ -190,10 +227,19 @@
 </head>
 <body>
 <header>
-  <div class="logo">PK <span>Explorer</span></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button id="btnBack" style="display:none;background:rgba(255,255,255,0.1);border:none;color:var(--parchment);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:1rem;line-height:1;" title="Voltar">←</button>
+    <div>
+      <div class="logo">PK <span>Explorer</span></div>
+      <div style="font-size:0.62rem;color:rgba(245,237,214,0.45);font-family:'DM Sans',sans-serif;letter-spacing:0.04em;line-height:1.3;margin-top:1px;">
+        PK do Ontem e do Hoje &nbsp;·&nbsp; Prof. Jhaimson &amp; Prof. Francisco
+      </div>
+    </div>
+  </div>
   <div class="header-right">
     <div class="status-dot" id="statusDot"></div>
     <span class="status-label" id="statusLabel">Conectando...</span>
+    <span id="offlineBadge" style="display:none;background:#e6a817;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;cursor:pointer;" title="Pontos aguardando sincronização" onclick="processPendingUploads()">📵 0 pendente(s)</span>
   </div>
 </header>
 
@@ -273,14 +319,47 @@
 
           <!-- Painel Vídeos -->
           <div class="media-panel" id="panel-videos">
-            <div class="upload-zone">
-              <span class="upload-zone-icon">🎬</span>
-              <p>Toque para selecionar vídeos</p>
-              <p style="font-size:0.7rem;opacity:.6">MP4, MOV</p>
-              <button class="upload-btn" id="btnSelectVideo">Selecionar vídeos</button>
-              <input type="file" id="videoInput" accept="video/*" multiple>
+            <div class="video-recorder">
+              <!-- Preview ao vivo da câmera -->
+              <div class="video-preview-live" id="videoLiveWrap">
+                <video id="videoLive" autoplay muted playsinline></video>
+                <div class="video-rec-overlay" id="videoRecOverlay" style="display:none">
+                  <div class="video-rec-dot"></div>
+                  <span class="video-rec-timer-txt" id="videoRecTimer">00:00</span>
+                  <span style="font-size:0.68rem;color:rgba(255,255,255,0.7)" id="videoRecMax">&nbsp;/ 20s</span>
+                </div>
+                <div class="video-progress-wrap">
+                  <div class="video-progress-bar" id="videoProgressBar" style="width:0%"></div>
+                </div>
+              </div>
+
+              <!-- Controles -->
+              <div class="video-rec-controls">
+                <button class="rec-btn record" id="vRecStartBtn">🎬 Gravar vídeo</button>
+                <button class="rec-btn stop" id="vRecStopBtn" disabled>⏹ Parar</button>
+                <span class="rec-timer" id="vRecTimerDisplay" style="display:none">
+                  <span style="color:#ef4444;font-weight:700" id="vRecCountdown">30</span>s restantes
+                </span>
+              </div>
+              <p style="font-size:0.68rem;color:rgba(26,18,8,0.38);margin-bottom:10px">Limite: 20 segundos · qualidade otimizada para dados móveis</p>
+
+              <!-- Separador -->
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                <div style="flex:1;height:1px;background:rgba(196,147,58,0.2)"></div>
+                <span style="font-size:0.68rem;color:rgba(26,18,8,0.35)">ou</span>
+                <div style="flex:1;height:1px;background:rgba(196,147,58,0.2)"></div>
+              </div>
+
+              <!-- Upload arquivo -->
+              <div style="text-align:center">
+                <button class="upload-btn" id="btnSelectVideo" style="background:rgba(26,18,8,0.12);color:var(--ink);">📁 Escolher arquivo</button>
+                <input type="file" id="videoInput" accept="video/*" multiple>
+              </div>
+
+              <!-- Lista de vídeos gravados/selecionados -->
+              <div class="video-list" id="videoList"></div>
+              <div class="media-preview" id="videoPreview" style="display:none"></div>
             </div>
-            <div class="media-preview" id="videoPreview"></div>
           </div>
 
           <!-- Painel Áudio -->
@@ -394,7 +473,10 @@
     </div>
   </div>
 
-  <div id="map"></div>
+  <div class="map-wrap">
+    <div id="map"></div>
+    <button class="map-layer-btn" id="btnLayerToggle">🗺️ Camada</button>
+  </div>
 </div>
 
 <!-- MODAL PONTO -->
@@ -413,7 +495,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, doc, setDoc, deleteDoc, enableNetwork, disableNetwork } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -432,6 +515,38 @@ const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp);
 const storage = getStorage(fbApp);
 
+// ===== PERSISTÊNCIA OFFLINE =====
+enableIndexedDbPersistence(db).catch(err => {
+  if (err.code === 'failed-precondition') console.warn('Offline: múltiplas abas abertas');
+  else if (err.code === 'unimplemented') console.warn('Offline: navegador não suporta');
+});
+
+// Fila de mídias pendentes para upload quando voltar a internet
+let pendingUploads = JSON.parse(localStorage.getItem('pk_pending') || '[]');
+
+// Monitorar conexão
+let isOnline = navigator.onLine;
+function updateOnlineStatus() {
+  isOnline = navigator.onLine;
+  const dot = document.getElementById('statusDot');
+  const lbl = document.getElementById('statusLabel');
+  if (!isOnline) {
+    dot.style.cssText = 'background:#e6a817;box-shadow:0 0 8px #e6a817';
+    lbl.textContent = '📵 Offline — dados salvos localmente';
+    showToast('📵 Sem internet. Dados salvos offline!', '');
+  } else {
+    dot.style.cssText = 'background:#4caf50;box-shadow:0 0 8px #4caf50';
+    lbl.textContent = 'Tempo real ativo';
+    if (pendingUploads.length > 0) {
+      showToast(`📶 Internet voltou! Sincronizando ${pendingUploads.length} ponto(s)...`, 'success');
+      processPendingUploads();
+    }
+  }
+}
+window.addEventListener('online',  updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+setTimeout(updateOnlineStatus, 1500); // checar status inicial
+
 // ===== MAPA =====
 const map = L.map('map', { zoomControl: false }).setView([-5.28, -44.47], 14);
 L.control.zoom({ position: 'bottomright' }).addTo(map);
@@ -448,7 +563,7 @@ const layerHibrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z=
   attribution:'© Google', minZoom:1, maxZoom:20, maxNativeZoom:20
 });
 layerRua.addTo(map);
-L.control.layers({'🗺️ Rua':layerRua,'🛰️ Satélite':layerSat,'🛰️+🗺️ Híbrido':layerHibrid},{},{position:'topright',collapsed:false}).addTo(map);
+L.control.layers({'🗺️ Rua':layerRua,'🛰️ Satélite':layerSat,'🛰️+🗺️ Híbrido':layerHibrid},{},{position:'topright',collapsed:true}).addTo(map);
 
 // ===== ESTADO =====
 let mediaFiles = { photo:[], video:[] }, audioBlobs = [];
@@ -466,15 +581,52 @@ function showToast(msg, type='') {
 }
 
 // ===== TABS =====
+let tabHistory = ['form'];
 function switchTab(tab) {
+  if (tabHistory[tabHistory.length-1] !== tab) tabHistory.push(tab);
+  if (tabHistory.length > 5) tabHistory = tabHistory.slice(-5);
+  _applyTab(tab);
+}
+function _applyTab(tab) {
   ['form','list','students'].forEach(t => {
     document.getElementById('tab-'+t).classList.toggle('active', t===tab);
     document.getElementById('tbtn-'+t).classList.toggle('active', t===tab);
   });
+  document.getElementById('btnBack').style.display = tabHistory.length > 1 ? 'block' : 'none';
 }
 document.getElementById('tbtn-form').addEventListener('click', () => switchTab('form'));
 document.getElementById('tbtn-list').addEventListener('click', () => switchTab('list'));
 document.getElementById('tbtn-students').addEventListener('click', () => switchTab('students'));
+document.getElementById('btnBack').addEventListener('click', () => {
+  if (tabHistory.length > 1) {
+    tabHistory.pop();
+    _applyTab(tabHistory[tabHistory.length-1]);
+  }
+});
+
+// ===== BOTÃO CAMADA =====
+document.getElementById('btnLayerToggle').addEventListener('click', () => {
+  const panel = document.querySelector('.leaflet-control-layers');
+  if (!panel) return;
+  const visible = panel.classList.contains('leaflet-control-layers-expanded');
+  if (visible) {
+    panel.classList.remove('leaflet-control-layers-expanded');
+    document.getElementById('btnLayerToggle').innerHTML = '🗺️ Camada';
+  } else {
+    panel.classList.add('leaflet-control-layers-expanded');
+    document.getElementById('btnLayerToggle').innerHTML = '✕ Fechar';
+  }
+});
+// Fechar painel ao escolher qualquer camada
+document.addEventListener('change', e => {
+  if (e.target.classList.contains('leaflet-control-layers-selector')) {
+    setTimeout(() => {
+      const panel = document.querySelector('.leaflet-control-layers');
+      if (panel) panel.classList.remove('leaflet-control-layers-expanded');
+      document.getElementById('btnLayerToggle').innerHTML = '🗺️ Camada';
+    }, 300);
+  }
+});
 
 // ===== MEDIA CHIPS =====
 function openChip(name) {
@@ -531,17 +683,118 @@ document.getElementById('photoInput').addEventListener('change', function() {
   this.value = '';
 });
 
+// ===== GRAVADOR DE VÍDEO =====
+const VIDEO_LIMIT_SEC = 20;
+let videoRecorder = null, videoChunks = [], videoRecInterval = null, videoRecSeconds = 0;
+let videoStream = null;
+
+document.getElementById('vRecStartBtn').addEventListener('click', async () => {
+  try {
+    videoStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: true
+    });
+    // Mostrar preview ao vivo
+    const liveVideo = document.getElementById('videoLive');
+    liveVideo.srcObject = videoStream;
+    document.getElementById('videoLiveWrap').classList.add('active');
+    document.getElementById('videoRecOverlay').style.display = 'flex';
+
+    // Configurar MediaRecorder com qualidade reduzida (~1Mbps)
+    const opts = { mimeType: 'video/webm;codecs=vp8,opus', videoBitsPerSecond: 1_000_000 };
+    if (!MediaRecorder.isTypeSupported(opts.mimeType)) delete opts.mimeType;
+    videoChunks = [];
+    videoRecorder = new MediaRecorder(videoStream, opts);
+    videoRecorder.ondataavailable = e => { if (e.data.size > 0) videoChunks.push(e.data); };
+    videoRecorder.onstop = () => {
+      const blob = new Blob(videoChunks, { type: 'video/webm' });
+      const sizeMB = (blob.size / 1024 / 1024).toFixed(1);
+      const url = URL.createObjectURL(blob);
+      const idx = mediaFiles.video.length;
+      mediaFiles.video.push(blob);
+
+      // Adicionar na lista com preview
+      const item = document.createElement('div'); item.className = 'video-item';
+      item.innerHTML = `<video src="${url}" controls playsinline></video>
+        <p class="video-size-info">🎬 ${videoRecSeconds}s gravados · ${sizeMB}MB</p>`;
+      const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
+      rm.onclick = () => { mediaFiles.video.splice(idx, 1); item.remove(); };
+      item.appendChild(rm);
+      document.getElementById('videoList').appendChild(item);
+
+      // Resetar UI
+      document.getElementById('videoLiveWrap').classList.remove('active');
+      document.getElementById('videoRecOverlay').style.display = 'none';
+      document.getElementById('videoProgressBar').style.width = '0%';
+      document.getElementById('vRecTimerDisplay').style.display = 'none';
+      document.getElementById('vRecStartBtn').disabled = false;
+      document.getElementById('vRecStopBtn').disabled = true;
+      liveVideo.srcObject = null;
+      videoStream.getTracks().forEach(t => t.stop());
+      showToast(`🎬 Vídeo gravado! (${sizeMB}MB)`, 'success');
+    };
+
+    videoRecorder.start(200); // chunks a cada 200ms
+    videoRecSeconds = 0;
+    document.getElementById('vRecStartBtn').disabled = true;
+    document.getElementById('vRecStopBtn').disabled = false;
+    document.getElementById('vRecTimerDisplay').style.display = 'inline';
+    document.getElementById('vRecCountdown').textContent = VIDEO_LIMIT_SEC;
+    document.getElementById('videoRecTimer').textContent = '00:00';
+    document.getElementById('videoProgressBar').style.width = '0%';
+
+    videoRecInterval = setInterval(() => {
+      videoRecSeconds++;
+      const remaining = VIDEO_LIMIT_SEC - videoRecSeconds;
+      const mm = String(Math.floor(videoRecSeconds/60)).padStart(2,'0');
+      const ss = String(videoRecSeconds%60).padStart(2,'0');
+      document.getElementById('videoRecTimer').textContent = `${mm}:${ss}`;
+      document.getElementById('vRecCountdown').textContent = remaining;
+      document.getElementById('videoProgressBar').style.width = `${(videoRecSeconds/VIDEO_LIMIT_SEC)*100}%`;
+
+      // Mudar cor nos últimos 5s
+      const bar = document.getElementById('videoProgressBar');
+      bar.style.background = remaining <= 5 ? '#ef4444' : '#e6a817';
+
+      // Parar automaticamente ao atingir o limite
+      if (videoRecSeconds >= VIDEO_LIMIT_SEC) {
+        clearInterval(videoRecInterval);
+        if (videoRecorder?.state === 'recording') videoRecorder.stop();
+        showToast('⏱️ Limite de 20s atingido — vídeo salvo!', '');
+      }
+    }, 1000);
+
+  } catch(e) {
+    console.error(e);
+    showToast('Sem acesso à câmera. Verifique as permissões.', 'error');
+  }
+});
+
+document.getElementById('vRecStopBtn').addEventListener('click', () => {
+  if (videoRecorder?.state === 'recording') {
+    clearInterval(videoRecInterval);
+    videoRecorder.stop();
+    document.getElementById('vRecStopBtn').disabled = true;
+  }
+});
+
+// Upload de arquivo de vídeo (mantido como alternativa)
 document.getElementById('videoInput').addEventListener('change', function() {
   Array.from(this.files).forEach(file => {
+    const sizeMB = (file.size / 1024 / 1024).toFixed(1);
+    if (file.size > 150 * 1024 * 1024) {
+      showToast(`⚠️ Arquivo muito grande (${sizeMB}MB). Use vídeos menores.`, 'error'); return;
+    }
     mediaFiles.video.push(file);
-    const thumb = document.createElement('div'); thumb.className = 'media-thumb';
-    const vid = document.createElement('video'); vid.src = URL.createObjectURL(file);
-    thumb.appendChild(vid);
-    const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
+    const url = URL.createObjectURL(file);
     const idx = mediaFiles.video.length - 1;
-    rm.onclick = () => { mediaFiles.video.splice(idx, 1); thumb.remove(); };
-    thumb.appendChild(rm);
-    document.getElementById('videoPreview').appendChild(thumb);
+    const item = document.createElement('div'); item.className = 'video-item';
+    item.innerHTML = `<video src="${url}" controls playsinline></video>
+      <p class="video-size-info">📁 ${file.name} · ${sizeMB}MB</p>`;
+    const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
+    rm.onclick = () => { mediaFiles.video.splice(idx, 1); item.remove(); };
+    item.appendChild(rm);
+    document.getElementById('videoList').appendChild(item);
   });
   this.value = '';
 });
@@ -593,16 +846,28 @@ document.getElementById('btnGPS').addEventListener('click', () => {
   if (!navigator.geolocation) { showToast('GPS não disponível.', 'error'); return; }
   const btn = document.getElementById('btnGPS');
   btn.innerHTML = '<div class="loading"></div> Obtendo...'; btn.disabled = true;
-  navigator.geolocation.getCurrentPosition(pos => {
-    document.getElementById('lat').value = pos.coords.latitude.toFixed(6);
-    document.getElementById('lng').value = pos.coords.longitude.toFixed(6);
-    map.flyTo([pos.coords.latitude, pos.coords.longitude], 17, { duration: 1.2 });
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> ✓ Localização capturada`;
-    btn.disabled = false; showToast('📍 Localização capturada!', 'success');
+  // Estratégia: tentar até 3 leituras e pegar a mais precisa
+  let bestAccuracy = Infinity, attempts = 0;
+  const watchId = navigator.geolocation.watchPosition(pos => {
+    attempts++;
+    if (pos.coords.accuracy < bestAccuracy) {
+      bestAccuracy = pos.coords.accuracy;
+      document.getElementById('lat').value = pos.coords.latitude.toFixed(7);
+      document.getElementById('lng').value = pos.coords.longitude.toFixed(7);
+      map.flyTo([pos.coords.latitude, pos.coords.longitude], 18, { duration: 1.0 });
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> ✓ ±${Math.round(pos.coords.accuracy)}m`;
+    }
+    // Para após 3 leituras ou precisão < 15m
+    if (attempts >= 3 || pos.coords.accuracy < 15) {
+      navigator.geolocation.clearWatch(watchId);
+      btn.disabled = false;
+      showToast(`📍 GPS: ±${Math.round(bestAccuracy)}m de precisão`, bestAccuracy < 30 ? 'success' : '');
+    }
   }, () => {
+    navigator.geolocation.clearWatch(watchId);
     btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Usar minha localização atual`;
     btn.disabled = false; showToast('Erro ao obter GPS.', 'error');
-  }, { enableHighAccuracy: true, timeout: 10000 });
+  }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
 });
 
 // Clique no mapa define coordenadas
@@ -739,17 +1004,67 @@ function renderPoint(id, data) {
 window._openModal = openModal;
 
 // ===== UPLOAD MÍDIAS =====
+// Converter arquivo para base64 para guardar offline
+async function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// Upload de um arquivo para o Storage
+async function uploadOneFile(file, path) {
+  const r = sRef(storage, path);
+  await uploadBytes(r, file);
+  return getDownloadURL(r);
+}
+
+// Upload imediato (online)
 async function uploadFiles(pointId) {
   const urls = { photos:[], videos:[], audios:[] };
-  const up = async (file, path) => {
-    const r = sRef(storage, path);
-    await uploadBytes(r, file);
-    return getDownloadURL(r);
-  };
-  for (const [i,f] of mediaFiles.photo.entries()) urls.photos.push(await up(f, `pontos/${pointId}/foto_${i}`));
-  for (const [i,f] of mediaFiles.video.entries()) urls.videos.push(await up(f, `pontos/${pointId}/video_${i}`));
-  for (const [i,b] of audioBlobs.filter(Boolean).entries()) urls.audios.push(await up(b, `pontos/${pointId}/audio_${i}`));
+  for (const [i,f] of mediaFiles.photo.entries()) urls.photos.push(await uploadOneFile(f, `pontos/${pointId}/foto_${i}`));
+  for (const [i,f] of mediaFiles.video.entries()) urls.videos.push(await uploadOneFile(f, `pontos/${pointId}/video_${i}`));
+  for (const [i,b] of audioBlobs.filter(Boolean).entries()) urls.audios.push(await uploadOneFile(b, `pontos/${pointId}/audio_${i}`));
   return urls;
+}
+
+// Processar fila offline quando internet voltar
+async function processPendingUploads() {
+  if (!isOnline || pendingUploads.length === 0) return;
+  const queue = [...pendingUploads];
+  let synced = 0;
+  for (const item of queue) {
+    try {
+      // Re-upload das mídias em base64
+      const urls = { photos:[], videos:[], audios:[] };
+      for (const [i, b64] of (item.photosB64||[]).entries()) {
+        const blob = await fetch(b64).then(r=>r.blob());
+        urls.photos.push(await uploadOneFile(blob, `pontos/${item.pointId}/foto_${i}`));
+      }
+      for (const [i, b64] of (item.videosB64||[]).entries()) {
+        const blob = await fetch(b64).then(r=>r.blob());
+        urls.videos.push(await uploadOneFile(blob, `pontos/${item.pointId}/video_${i}`));
+      }
+      for (const [i, b64] of (item.audiosB64||[]).entries()) {
+        const blob = await fetch(b64).then(r=>r.blob());
+        urls.audios.push(await uploadOneFile(blob, `pontos/${item.pointId}/audio_${i}`));
+      }
+      // Salvar ponto completo com URLs reais
+      await addDoc(collection(db, 'pontos'), {
+        ...item.data, ...urls, syncedAt: serverTimestamp()
+      });
+      synced++;
+    } catch(e) { console.error('Erro ao sincronizar ponto offline:', e); }
+    // Remover da fila independente de erro
+    pendingUploads = pendingUploads.filter(p => p.pointId !== item.pointId);
+    localStorage.setItem('pk_pending', JSON.stringify(pendingUploads));
+  }
+  if (synced > 0) {
+    showToast(`✅ ${synced} ponto(s) sincronizado(s) com sucesso!`, 'success');
+    updateOfflineBadge();
+  }
 }
 
 // ===== SUBMIT PONTO =====
@@ -771,19 +1086,48 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
 
   const pointId = 'pt_' + Date.now();
   let mediaUrls = { photos:[], videos:[], audios:[] };
-  try { mediaUrls = await uploadFiles(pointId); }
-  catch(e) { console.error(e); showToast('Erro no upload de mídias.', 'error'); }
 
-  try {
-    await addDoc(collection(db, 'pontos'), {
-      name, author, category, description, extraText,
-      lat, lng, ...mediaUrls,
-      createdAt: serverTimestamp()
-    });
-    showToast('✅ Ponto registrado!', 'success');
-  } catch(e) {
-    console.error(e); showToast('Erro ao salvar. Verifique a conexão.', 'error');
-    btn.disabled = false; btn.innerHTML = '📌 Registrar Ponto Histórico'; return;
+  if (isOnline) {
+    // ONLINE: upload imediato
+    try { mediaUrls = await uploadFiles(pointId); }
+    catch(e) { console.error(e); showToast('⚠️ Mídias não enviadas, ponto salvo sem fotos.', ''); }
+    try {
+      await addDoc(collection(db, 'pontos'), {
+        name, author, category, description, extraText,
+        lat, lng, ...mediaUrls, createdAt: serverTimestamp()
+      });
+      showToast('✅ Ponto registrado e sincronizado!', 'success');
+    } catch(e) {
+      console.error(e); showToast('Erro ao salvar. Verifique a conexão.', 'error');
+      btn.disabled = false; btn.innerHTML = '📌 Registrar Ponto Histórico'; return;
+    }
+  } else {
+    // OFFLINE: guardar na fila com mídias em base64
+    btn.innerHTML = '<div class="loading"></div> Salvando offline...';
+    const photosB64 = [], videosB64 = [], audiosB64 = [];
+    for (const f of mediaFiles.photo) photosB64.push(await fileToBase64(f));
+    for (const f of mediaFiles.video) videosB64.push(await fileToBase64(f));
+    for (const b of audioBlobs.filter(Boolean)) audiosB64.push(await fileToBase64(b));
+
+    // Salvar no Firestore local (offline) sem mídias
+    try {
+      await addDoc(collection(db, 'pontos'), {
+        name, author, category, description, extraText,
+        lat, lng, photos:[], videos:[], audios:[],
+        createdAt: serverTimestamp(), offlineSaved: true
+      });
+    } catch(e) { console.warn('Firestore offline write:', e); }
+
+    // Guardar na fila de sync com as mídias em base64
+    pendingUploads.push({ pointId, data: { name, author, category, description, extraText, lat, lng, offlineSaved: true }, photosB64, videosB64, audiosB64 });
+    localStorage.setItem('pk_pending', JSON.stringify(pendingUploads));
+    updateOfflineBadge();
+
+    const nMedias = photosB64.length + videosB64.length + audiosB64.length;
+    showToast(`📵 Ponto salvo offline!${nMedias>0?' '+nMedias+' mídia(s) serão enviadas quando a internet voltar.':''}`, 'success');
+
+    // Mostrar no mapa local imediatamente
+    renderPoint(pointId, { name, author, category, description, extraText, lat, lng, photos:[], videos:[], audios:[] });
   }
 
   // Limpar form
@@ -794,6 +1138,12 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   document.getElementById('videoPreview').innerHTML = '';
   document.getElementById('audioList').innerHTML = '';
   mediaFiles = { photo:[], video:[] }; audioBlobs = [];
+  // Parar stream de vídeo se ainda ativo
+  if (videoStream) { videoStream.getTracks().forEach(t => t.stop()); videoStream = null; }
+  if (videoRecorder?.state === 'recording') { clearInterval(videoRecInterval); videoRecorder.stop(); }
+  document.getElementById('videoList').innerHTML = '';
+  document.getElementById('videoLiveWrap').classList.remove('active');
+  document.getElementById('videoProgressBar').style.width = '0%';
   // Fechar chips
   ['photos','videos','audio','texts'].forEach(n => {
     document.getElementById('panel-'+n).classList.remove('open');
@@ -912,6 +1262,8 @@ window.deleteStudentAuth = async function(id, nome) {
 
 function renderStudents() {
   const arr = Object.entries(students).sort((a,b) => {
+    if (a[1].tipo==='professor' && b[1].tipo!=='professor') return -1;
+    if (a[1].tipo!=='professor' && b[1].tipo==='professor') return 1;
     const na = parseInt(a[1].num)||999, nb = parseInt(b[1].num)||999;
     return na !== nb ? na - nb : a[1].name.localeCompare(b[1].name);
   });
@@ -923,47 +1275,118 @@ function renderStudents() {
     const ini = s.name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
     const isProf = s.tipo === 'professor';
     const avatarBg = isProf ? 'background:linear-gradient(135deg,#3d6b4f,#2f5340)' : 'background:linear-gradient(135deg,var(--sepia),var(--rust))';
-    const subInfo = isProf ? (s.disciplina||'Professor') : (s.num?'Nº '+s.num+' · ':'')+( s.turma||'—');
+    const nomeFull = isProf ? `Professor · ${s.name}` : s.name;
+    const subInfo = isProf ? (s.disciplina ? `📚 ${s.disciplina}` : '👨‍🏫 Professor') : `${s.num?'Nº '+s.num+' · ':''}${s.turma||'Sem turma'}`;
     const badge = isProf
-      ? `<span style="background:rgba(61,107,79,0.12);color:#3d6b4f;font-size:0.65rem;font-weight:600;padding:2px 7px;border-radius:20px;flex-shrink:0">👨‍🏫 Prof.</span>`
+      ? `<span style="background:rgba(61,107,79,0.12);color:#3d6b4f;font-size:0.65rem;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid rgba(61,107,79,0.2)">👨‍🏫 Professor</span>`
       : `<span class="student-pts ${pts===0?'zero':''}">${pts} pt${pts!==1?'s':''}</span>`;
-    return `<div class="student-card" style="${isProf?'border-color:rgba(61,107,79,0.3);background:rgba(61,107,79,0.03)':''}">
-      <div class="student-avatar" style="${avatarBg}">${ini}</div>
-      <div class="student-info">
-        <div class="student-name">${s.name}</div>
-        <div class="student-sub">${subInfo}</div>
+    const nameEsc = s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const turmaEsc = (s.turma||'').replace(/'/g,"\\'");
+    const numEsc = String(s.num||'').replace(/'/g,"\\'");
+    const discEsc = (s.disciplina||'').replace(/'/g,"\\'");
+    return `<div style="margin-bottom:6px">
+      <div class="student-card" style="${isProf?'border-color:rgba(61,107,79,0.35);background:rgba(61,107,79,0.04)':''}">
+        <div class="student-avatar" style="${avatarBg}">${ini}</div>
+        <div class="student-info">
+          <div class="student-name">${nomeFull}</div>
+          <div class="student-sub">${subInfo}</div>
+        </div>
+        ${badge}
+        <button class="student-edit-btn" onclick="toggleEditInline('${id}')" title="Editar">✏️</button>
+        <button class="student-del" onclick="deleteStudentAuth('${id}','${nameEsc}')" title="Remover (requer senha)">🔒</button>
       </div>
-      ${badge}
-      <button class="student-del" onclick="deleteStudentAuth('${id}','${s.name.replace(/'/g,'\'')}')" title="Remover (requer senha)">🔒</button>
+      <div class="edit-inline" id="edit-${id}">
+        <div class="edit-inline-row">
+          <input type="text" id="edit-name-${id}" placeholder="Nome completo" value="${nameEsc}">
+          ${isProf
+            ? `<input type="text" id="edit-disc-${id}" placeholder="Disciplina" value="${discEsc}" style="flex:0.7">`
+            : `<input type="text" id="edit-turma-${id}" placeholder="Turma ex: 9ºA" value="${turmaEsc}" style="flex:0.7">
+               <input type="text" id="edit-num-${id}" placeholder="Nº" value="${numEsc}" style="flex:0.3;min-width:50px">`
+          }
+        </div>
+        <div class="edit-btns">
+          <button class="btn-edit-save" onclick="saveEditInline('${id}','${isProf}')">💾 Salvar</button>
+          <button class="btn-edit-cancel" onclick="toggleEditInline('${id}')">Cancelar</button>
+        </div>
+      </div>
     </div>`;
   }).join('');
   renderRanking(arr);
   updateStats();
 }
 
+window.toggleEditInline = function(id) {
+  const el = document.getElementById('edit-'+id);
+  el.classList.toggle('open');
+  if (el.classList.contains('open')) document.getElementById('edit-name-'+id)?.focus();
+};
+
+window.saveEditInline = async function(id, isProf) {
+  const name = document.getElementById('edit-name-'+id)?.value.trim();
+  if (!name) { showToast('Nome não pode ser vazio.','error'); return; }
+  const old = students[id] || {};
+  const updated = { ...old, name };
+  if (isProf === 'true') {
+    updated.disciplina = document.getElementById('edit-disc-'+id)?.value.trim() || '';
+  } else {
+    updated.turma = document.getElementById('edit-turma-'+id)?.value.trim() || '';
+    updated.num   = document.getElementById('edit-num-'+id)?.value.trim() || '';
+  }
+  students[id] = updated;
+  try {
+    await setDoc(doc(db, 'alunos', id), updated);
+    showToast('✅ Dados salvos!','success');
+  } catch { showToast('Erro ao salvar.','error'); return; }
+  renderStudents();
+};
+
+
 function updateStudentSelect(arr) {
   const sel = document.getElementById('authorSelect');
   const cur = sel.value;
   sel.innerHTML = '<option value="">Selecionar aluno...</option>';
-  (arr || Object.entries(students)).forEach(([,s]) => {
-    const o = document.createElement('option');
-    o.value = s.name;
-    o.textContent = s.name + (s.turma ? ' ('+s.turma+')' : '');
-    sel.appendChild(o);
-  });
+  (arr || Object.entries(students))
+    .filter(([,s]) => s.tipo !== 'professor')  // professores não aparecem como autores
+    .forEach(([,s]) => {
+      const o = document.createElement('option');
+      o.value = s.name;
+      o.textContent = s.name + (s.turma ? ' ('+s.turma+')' : '');
+      sel.appendChild(o);
+    });
   if (cur) sel.value = cur;
 }
 
 function renderRanking(arr) {
   if (!arr || arr.length === 0) { document.getElementById('rankingSection').style.display='none'; return; }
   document.getElementById('rankingSection').style.display = 'block';
-  const top = arr.map(([,s]) => ({ name:s.name, pts:Object.values(pointsData).filter(p=>p.author===s.name).length }))
-    .sort((a,b) => b.pts - a.pts).slice(0,8);
+
+  // Deduplicar por nome antes de montar o ranking
+  const seen = new Set();
+  const unique = arr.filter(([,s]) => {
+    if (seen.has(s.name)) return false;
+    seen.add(s.name); return true;
+  });
+
+  // Apenas alunos (não professores) no ranking
+  const top = unique
+    .filter(([,s]) => s.tipo !== 'professor')
+    .map(([,s]) => {
+      const pts = Object.values(pointsData).filter(p => p.author === s.name).length;
+      // Exibir primeiro nome + inicial do sobrenome para evitar confusão
+      const partes = s.name.trim().split(' ');
+      const display = partes.length > 1
+        ? `${partes[0]} ${partes[1][0]}.`
+        : partes[0];
+      return { display, fullName: s.name, pts };
+    })
+    .sort((a,b) => b.pts - a.pts)
+    .slice(0, 8);
+
   const max = Math.max(...top.map(s=>s.pts), 1);
   document.getElementById('rankingList').innerHTML = top.map((s,i) => `
-    <div class="ranking-row">
+    <div class="ranking-row" title="${s.fullName}">
       <div class="r-pos">${i+1}º</div>
-      <div class="r-name">${s.name.split(' ')[0]}</div>
+      <div class="r-name">${s.display}</div>
       <div class="r-bar-wrap"><div class="r-bar" style="width:${Math.round(s.pts/max*100)}%"></div></div>
       <div class="r-count">${s.pts}</div>
     </div>`).join('');
@@ -1028,13 +1451,31 @@ document.getElementById('btnPDF').addEventListener('click', () => {
   const win = window.open('','_blank'); win.document.write(html); win.document.close();
 });
 
+function updateOfflineBadge() {
+  const badge = document.getElementById('offlineBadge');
+  if (pendingUploads.length > 0) {
+    badge.style.display = 'inline-block';
+    badge.textContent = `📵 ${pendingUploads.length} pendente(s)`;
+  } else {
+    badge.style.display = 'none';
+  }
+}
+// Mostrar badge imediato se há pendentes do uso anterior
+updateOfflineBadge();
+
 // ===== FIREBASE LISTENERS =====
 const qP = query(collection(db, 'pontos'), orderBy('createdAt', 'desc'));
-onSnapshot(qP, snap => {
-  document.getElementById('statusDot').style.cssText = 'background:#4caf50;box-shadow:0 0 8px #4caf50';
-  document.getElementById('statusLabel').textContent = 'Tempo real ativo';
-  snap.docChanges().forEach(c => {
-    if (c.type === 'added' || c.type === 'modified') renderPoint(c.doc.id, c.doc.data());
+onSnapshot(qP, { includeMetadataChanges: true }, snap => {
+  const fromCache = snap.metadata.fromCache;
+  if (!fromCache) {
+    document.getElementById('statusDot').style.cssText = 'background:#4caf50;box-shadow:0 0 8px #4caf50';
+    document.getElementById('statusLabel').textContent = 'Tempo real ativo';
+  } else if (!isOnline) {
+    document.getElementById('statusDot').style.cssText = 'background:#e6a817;box-shadow:0 0 8px #e6a817';
+    document.getElementById('statusLabel').textContent = '📵 Offline — dados salvos localmente';
+  }
+  snap.docChanges().forEach(ch => {
+    if (ch.type === 'added' || ch.type === 'modified') renderPoint(ch.doc.id, ch.doc.data());
   });
 }, () => {
   document.getElementById('statusDot').style.background = '#b5451b';
