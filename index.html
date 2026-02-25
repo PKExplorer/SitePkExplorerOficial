@@ -218,10 +218,98 @@
   .student-edit-btn{width:24px;height:24px;border-radius:50%;background:rgba(196,147,58,0.1);border:none;cursor:pointer;color:var(--sepia);font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
   .student-edit-btn:hover{background:rgba(196,147,58,0.2);}
 
+  /* ===== MOBILE — layout app nativo ===== */
   @media(max-width:768px){
-    .app{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
-    .sidebar{max-height:55vh;border-right:none;border-bottom:1px solid rgba(196,147,58,0.3);}
-    #map{height:45vh;}
+
+    /* Header menor e compacto */
+    header{height:56px;padding:0 14px;}
+    .logo{font-size:1.1rem;}
+    .status-label{display:none;}
+    .app{padding-top:56px;}
+
+    /* Tela inteira: sidebar ou mapa ocupam 100% */
+    .app{
+      display:block;
+      height:calc(100vh - 56px);
+      position:relative;
+    }
+
+    /* Sidebar vira tela cheia quando ativa */
+    .sidebar{
+      position:absolute;
+      inset:0 0 58px 0;
+      max-height:none;
+      height:auto;
+      border:none;
+      z-index:10;
+      display:none;
+      overflow:hidden;
+    }
+    .sidebar.mobile-active{display:flex;}
+
+    /* Mapa ocupa tudo menos a barra inferior */
+    .map-wrap{
+      position:absolute;
+      inset:0;
+      bottom:58px;
+    }
+    #map{height:100%;}
+
+    /* Abas no topo da sidebar compactas */
+    .sidebar-tabs{position:sticky;top:0;z-index:5;background:var(--parchment);}
+    .tab-btn{font-size:0.68rem;padding:11px 2px;}
+
+    /* Barra de navegação inferior (como app) */
+    .mobile-nav{
+      display:flex;
+      position:fixed;
+      bottom:0; left:0; right:0;
+      height:58px;
+      background:var(--ink);
+      z-index:200;
+      border-top:1px solid rgba(196,147,58,0.2);
+    }
+    .mobile-nav-btn{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:3px;
+      background:none;
+      border:none;
+      color:rgba(255,255,255,0.45);
+      font-family:'DM Sans',sans-serif;
+      font-size:0.6rem;
+      font-weight:500;
+      cursor:pointer;
+      transition:color 0.2s;
+      padding:6px 0;
+    }
+    .mobile-nav-btn .nav-icon{font-size:1.2rem;line-height:1;}
+    .mobile-nav-btn.active{color:var(--sepia);}
+    .mobile-nav-btn.active .nav-icon{filter:drop-shadow(0 0 4px rgba(196,147,58,0.6));}
+
+    /* Botão flutuante de camada — reposicionar acima da barra */
+    .map-layer-btn{bottom:68px;}
+
+    /* Zoom do Leaflet acima da barra */
+    .leaflet-bottom.leaflet-right{bottom:68px !important;}
+
+    /* Formulário com scroll suave */
+    .form-area{padding:14px 16px;}
+    .tab-panel{overflow-y:auto;-webkit-overflow-scrolling:touch;}
+
+    /* Modal mobile */
+    .modal-overlay{padding:0;align-items:flex-end;}
+    .modal{border-radius:20px 20px 0 0;max-height:90vh;}
+
+    /* Chips de mídia menores */
+    .media-chip{padding:7px 12px;font-size:0.76rem;}
+
+    /* Alunos */
+    .students-area{padding:12px 14px;}
+    .student-list-wrap{max-height:calc(100vh - 280px);}
   }
 </style>
 </head>
@@ -477,6 +565,22 @@
     <div id="map"></div>
     <button class="map-layer-btn" id="btnLayerToggle">🗺️ Camada</button>
   </div>
+
+  <!-- Barra de navegação inferior — só visível no mobile -->
+  <nav class="mobile-nav" id="mobileNav" style="display:none">
+    <button class="mobile-nav-btn active" id="mnav-map" onclick="mobileNav('map')">
+      <span class="nav-icon">🗺️</span>Mapa
+    </button>
+    <button class="mobile-nav-btn" id="mnav-form" onclick="mobileNav('form')">
+      <span class="nav-icon">📌</span>Registrar
+    </button>
+    <button class="mobile-nav-btn" id="mnav-list" onclick="mobileNav('list')">
+      <span class="nav-icon">📍</span>Pontos
+    </button>
+    <button class="mobile-nav-btn" id="mnav-students" onclick="mobileNav('students')">
+      <span class="nav-icon">👥</span>Alunos
+    </button>
+  </nav>
 </div>
 
 <!-- MODAL PONTO -->
@@ -1462,6 +1566,53 @@ function updateOfflineBadge() {
 }
 // Mostrar badge imediato se há pendentes do uso anterior
 updateOfflineBadge();
+
+// ===== NAVEGAÇÃO MOBILE =====
+function isMobile() { return window.innerWidth <= 768; }
+
+let currentMobileView = 'map'; // map | form | list | students
+
+function mobileNav(view) {
+  if (!isMobile()) return;
+  currentMobileView = view;
+
+  // Atualizar botões ativos
+  ['map','form','list','students'].forEach(v => {
+    document.getElementById('mnav-'+v)?.classList.toggle('active', v === view);
+  });
+
+  const sidebar = document.querySelector('.sidebar');
+  if (view === 'map') {
+    // Mostrar mapa, esconder sidebar
+    sidebar.classList.remove('mobile-active');
+  } else {
+    // Mostrar sidebar e ir para a tab correta
+    sidebar.classList.add('mobile-active');
+    switchTab(view);
+  }
+}
+
+function setupMobile() {
+  const nav = document.getElementById('mobileNav');
+  if (isMobile()) {
+    nav.style.display = 'flex';
+    document.querySelector('.sidebar').classList.remove('mobile-active');
+  } else {
+    nav.style.display = 'none';
+    document.querySelector('.sidebar').classList.add('mobile-active');
+    document.querySelector('.sidebar').style.display = '';
+  }
+}
+
+// Inicializar e monitorar resize
+setupMobile();
+window.addEventListener('resize', setupMobile);
+
+// No mobile, ao clicar num ponto do mapa vai para o mapa
+const _origSwitchTab = switchTab;
+
+// Expor mobileNav globalmente para os onclick do HTML
+window.mobileNav = mobileNav;
 
 // ===== FIREBASE LISTENERS =====
 const qP = query(collection(db, 'pontos'), orderBy('createdAt', 'desc'));
