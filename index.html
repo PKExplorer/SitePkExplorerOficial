@@ -218,98 +218,49 @@
   .student-edit-btn{width:24px;height:24px;border-radius:50%;background:rgba(196,147,58,0.1);border:none;cursor:pointer;color:var(--sepia);font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
   .student-edit-btn:hover{background:rgba(196,147,58,0.2);}
 
-  /* ===== MOBILE — layout app nativo ===== */
+  /* ===== MOBILE — layout 50/50 com drag handle ===== */
   @media(max-width:768px){
-
-    /* Header menor e compacto */
-    header{height:56px;padding:0 14px;}
-    .logo{font-size:1.1rem;}
-    .status-label{display:none;}
-    .app{padding-top:56px;}
-
-    /* Tela inteira: sidebar ou mapa ocupam 100% */
     .app{
-      display:block;
-      height:calc(100vh - 56px);
-      position:relative;
+      grid-template-columns:1fr;
+      grid-template-rows:1fr auto 1fr;
+      height:calc(100vh - 72px);
     }
-
-    /* Sidebar vira tela cheia quando ativa */
     .sidebar{
-      position:absolute;
-      inset:0 0 58px 0;
-      max-height:none;
-      height:auto;
-      border:none;
-      z-index:10;
-      display:none;
+      height:100%;
+      border-right:none;
+      border-bottom:none;
       overflow:hidden;
     }
-    .sidebar.mobile-active{display:flex;}
-
-    /* Mapa ocupa tudo menos a barra inferior */
-    .map-wrap{
-      position:absolute;
-      inset:0;
-      bottom:58px;
-    }
+    .map-wrap{height:100%;}
     #map{height:100%;}
 
-    /* Abas no topo da sidebar compactas */
-    .sidebar-tabs{position:sticky;top:0;z-index:5;background:var(--parchment);}
-    .tab-btn{font-size:0.68rem;padding:11px 2px;}
-
-    /* Barra de navegação inferior (como app) */
-    .mobile-nav{
+    /* Drag handle */
+    .drag-handle{
       display:flex;
-      position:fixed;
-      bottom:0; left:0; right:0;
-      height:58px;
-      background:var(--ink);
-      z-index:200;
-      border-top:1px solid rgba(196,147,58,0.2);
-    }
-    .mobile-nav-btn{
-      flex:1;
-      display:flex;
-      flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:3px;
-      background:none;
-      border:none;
-      color:rgba(255,255,255,0.45);
-      font-family:'DM Sans',sans-serif;
-      font-size:0.6rem;
-      font-weight:500;
-      cursor:pointer;
-      transition:color 0.2s;
-      padding:6px 0;
+      height:22px;
+      background:var(--parchment);
+      border-top:1px solid rgba(196,147,58,0.25);
+      border-bottom:1px solid rgba(196,147,58,0.25);
+      cursor:ns-resize;
+      touch-action:none;
+      user-select:none;
+      z-index:50;
+      flex-shrink:0;
     }
-    .mobile-nav-btn .nav-icon{font-size:1.2rem;line-height:1;}
-    .mobile-nav-btn.active{color:var(--sepia);}
-    .mobile-nav-btn.active .nav-icon{filter:drop-shadow(0 0 4px rgba(196,147,58,0.6));}
-
-    /* Botão flutuante de camada — reposicionar acima da barra */
-    .map-layer-btn{bottom:68px;}
-
-    /* Zoom do Leaflet acima da barra */
-    .leaflet-bottom.leaflet-right{bottom:68px !important;}
-
-    /* Formulário com scroll suave */
-    .form-area{padding:14px 16px;}
-    .tab-panel{overflow-y:auto;-webkit-overflow-scrolling:touch;}
-
-    /* Modal mobile */
-    .modal-overlay{padding:0;align-items:flex-end;}
-    .modal{border-radius:20px 20px 0 0;max-height:90vh;}
+    .drag-handle-bar{
+      width:40px;height:4px;
+      background:rgba(196,147,58,0.5);
+      border-radius:4px;
+    }
 
     /* Chips de mídia menores */
     .media-chip{padding:7px 12px;font-size:0.76rem;}
 
-    /* Alunos */
-    .students-area{padding:12px 14px;}
-    .student-list-wrap{max-height:calc(100vh - 280px);}
+    /* Modal mobile — sobe do rodapé */
+    .modal-overlay{padding:0;align-items:flex-end;}
+    .modal{border-radius:20px 20px 0 0;max-height:92vh;}
   }
 </style>
 </head>
@@ -561,26 +512,15 @@
     </div>
   </div>
 
+  <!-- Drag handle — só visível no mobile -->
+  <div class="drag-handle" id="dragHandle" style="display:none">
+    <div class="drag-handle-bar"></div>
+  </div>
+
   <div class="map-wrap">
     <div id="map"></div>
     <button class="map-layer-btn" id="btnLayerToggle">🗺️ Camada</button>
   </div>
-
-  <!-- Barra de navegação inferior — só visível no mobile -->
-  <nav class="mobile-nav" id="mobileNav" style="display:none">
-    <button class="mobile-nav-btn active" id="mnav-map" onclick="mobileNav('map')">
-      <span class="nav-icon">🗺️</span>Mapa
-    </button>
-    <button class="mobile-nav-btn" id="mnav-form" onclick="mobileNav('form')">
-      <span class="nav-icon">📌</span>Registrar
-    </button>
-    <button class="mobile-nav-btn" id="mnav-list" onclick="mobileNav('list')">
-      <span class="nav-icon">📍</span>Pontos
-    </button>
-    <button class="mobile-nav-btn" id="mnav-students" onclick="mobileNav('students')">
-      <span class="nav-icon">👥</span>Alunos
-    </button>
-  </nav>
 </div>
 
 <!-- MODAL PONTO -->
@@ -1567,52 +1507,109 @@ function updateOfflineBadge() {
 // Mostrar badge imediato se há pendentes do uso anterior
 updateOfflineBadge();
 
-// ===== NAVEGAÇÃO MOBILE =====
+// ===== DRAG HANDLE MOBILE =====
 function isMobile() { return window.innerWidth <= 768; }
 
-let currentMobileView = 'map'; // map | form | list | students
+function setupDragHandle() {
+  const handle = document.getElementById('dragHandle');
+  const app    = document.querySelector('.app');
+  const sidebar = document.querySelector('.sidebar');
+  const mapWrap = document.querySelector('.map-wrap');
 
-function mobileNav(view) {
-  if (!isMobile()) return;
-  currentMobileView = view;
+  if (!isMobile()) {
+    handle.style.display = 'none';
+    // Desktop: reset para grid normal
+    app.style.gridTemplateRows = '';
+    sidebar.style.height = '';
+    mapWrap.style.height = '';
+    return;
+  }
 
-  // Atualizar botões ativos
-  ['map','form','list','students'].forEach(v => {
-    document.getElementById('mnav-'+v)?.classList.toggle('active', v === view);
+  handle.style.display = 'flex';
+
+  const totalH = () => window.innerHeight - 72; // altura disponível
+  let sidebarH = Math.round(totalH() * 0.50);   // começa 50/50
+
+  function applyHeights(sh) {
+    const total = totalH();
+    sh = Math.max(80, Math.min(total - 80, sh)); // limites: min 80px cada lado
+    sidebarH = sh;
+    const mapH = total - sh - 22; // 22px = altura do handle
+    sidebar.style.height  = sh + 'px';
+    mapWrap.style.height  = mapH + 'px';
+    app.style.gridTemplateRows = `${sh}px 22px ${mapH}px`;
+    map.invalidateSize(); // avisar o Leaflet que o tamanho mudou
+  }
+
+  applyHeights(sidebarH);
+
+  // ---- Touch ----
+  let startY = 0, startH = 0, dragging = false;
+
+  handle.addEventListener('touchstart', e => {
+    dragging = true;
+    startY = e.touches[0].clientY;
+    startH = sidebarH;
+    handle.style.background = 'rgba(196,147,58,0.15)';
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const dy = e.touches[0].clientY - startY;
+    applyHeights(startH + dy);
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchend', () => {
+    if (!dragging) return;
+    dragging = false;
+    handle.style.background = '';
   });
 
-  const sidebar = document.querySelector('.sidebar');
-  if (view === 'map') {
-    // Mostrar mapa, esconder sidebar
-    sidebar.classList.remove('mobile-active');
-  } else {
-    // Mostrar sidebar e ir para a tab correta
-    sidebar.classList.add('mobile-active');
-    switchTab(view);
-  }
+  // ---- Mouse (desktop/dev) ----
+  handle.addEventListener('mousedown', e => {
+    dragging = true;
+    startY = e.clientY;
+    startH = sidebarH;
+    handle.style.background = 'rgba(196,147,58,0.15)';
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    applyHeights(startH + (e.clientY - startY));
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    handle.style.background = '';
+  });
+
+  // Toque duplo: alternar entre 80/20 e 50/50 e 20/80
+  let lastTap = 0;
+  handle.addEventListener('touchend', () => {
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      const total = totalH();
+      const presets = [
+        Math.round(total * 0.20),
+        Math.round(total * 0.50),
+        Math.round(total * 0.80),
+      ];
+      const closest = presets.reduce((a, b) =>
+        Math.abs(b - sidebarH) < Math.abs(a - sidebarH) ? b : a
+      );
+      const next = presets[(presets.indexOf(closest) + 1) % presets.length];
+      applyHeights(next);
+    }
+    lastTap = now;
+  });
 }
 
-function setupMobile() {
-  const nav = document.getElementById('mobileNav');
-  if (isMobile()) {
-    nav.style.display = 'flex';
-    document.querySelector('.sidebar').classList.remove('mobile-active');
-  } else {
-    nav.style.display = 'none';
-    document.querySelector('.sidebar').classList.add('mobile-active');
-    document.querySelector('.sidebar').style.display = '';
-  }
-}
-
-// Inicializar e monitorar resize
-setupMobile();
-window.addEventListener('resize', setupMobile);
-
-// No mobile, ao clicar num ponto do mapa vai para o mapa
-const _origSwitchTab = switchTab;
-
-// Expor mobileNav globalmente para os onclick do HTML
-window.mobileNav = mobileNav;
+setupDragHandle();
+window.addEventListener('resize', setupDragHandle);
 
 // ===== FIREBASE LISTENERS =====
 const qP = query(collection(db, 'pontos'), orderBy('createdAt', 'desc'));
