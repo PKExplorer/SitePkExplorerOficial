@@ -162,13 +162,44 @@
   /* MODAL */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;}
   .modal-overlay.open{display:flex;}
-  .modal{background:white;border-radius:16px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:modal-in 0.25s ease;}
+  .modal{background:white;border-radius:16px;max-width:660px;width:100%;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:modal-in 0.25s ease;overflow:hidden;}
   @keyframes modal-in{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}
-  .modal-header{padding:20px 24px 0;display:flex;justify-content:space-between;align-items:flex-start;}
+  /* Header fixo — nunca some ao rolar */
+  .modal-header{padding:16px 20px 12px;display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;border-bottom:1px solid rgba(196,147,58,0.15);background:white;position:sticky;top:0;z-index:10;}
   .modal-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;}
   .modal-cat{font-size:0.75rem;color:var(--sepia);font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-top:3px;}
-  .modal-close{background:none;border:none;cursor:pointer;color:rgba(26,18,8,0.4);font-size:1.5rem;line-height:1;padding:4px;}
-  .modal-body{padding:16px 24px 24px;}
+  /* X grande, fácil de tocar no mobile */
+  .modal-close{background:rgba(26,18,8,0.07);border:none;cursor:pointer;color:var(--ink);font-size:1.1rem;line-height:1;padding:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
+  .modal-close:hover{background:rgba(181,69,27,0.12);color:var(--rust);}
+  /* Corpo com scroll próprio */
+  .modal-body{padding:16px 24px 28px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
+  /* Galeria carrossel */
+  .photo-carousel{position:relative;width:100%;overflow:hidden;border-radius:10px;background:#111;margin-bottom:8px;}
+  .carousel-track{display:flex;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
+  .carousel-track img{width:100%;flex-shrink:0;max-height:340px;object-fit:contain;cursor:zoom-in;}
+  .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:white;font-size:1.3rem;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:background 0.2s;}
+  .carousel-btn:hover{background:rgba(0,0,0,0.75);}
+  .carousel-prev{left:8px;} .carousel-next{right:8px;}
+  .carousel-dots{display:flex;justify-content:center;gap:5px;padding:8px 0;}
+  .carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(196,147,58,0.25);cursor:pointer;transition:background 0.2s;}
+  .carousel-dot.active{background:var(--sepia);}
+  .carousel-counter{position:absolute;top:8px;right:10px;background:rgba(0,0,0,0.55);color:white;font-size:0.72rem;font-weight:600;padding:3px 8px;border-radius:20px;}
+  /* Lightbox pinch-to-zoom */
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;}
+  .lightbox.open{display:flex;}
+  .lightbox-img{max-width:100%;max-height:90vh;object-fit:contain;touch-action:none;transform-origin:center;transition:transform 0.1s;}
+  .lightbox-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.15);border:none;color:white;font-size:1.2rem;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .lightbox-hint{position:absolute;bottom:20px;color:rgba(255,255,255,0.45);font-size:0.72rem;font-family:'DM Sans',sans-serif;}
+  /* Popup com scroll */
+  .leaflet-popup-content{max-height:70vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .popup-close-btn{position:absolute;top:6px;right:6px;background:rgba(26,18,8,0.08);border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;color:var(--ink);}
+  /* Mobile: modal sobe do rodapé */
+  @media(max-width:768px){
+    .modal-overlay{padding:0;align-items:flex-end;}
+    .modal{border-radius:20px 20px 0 0;max-height:92vh;width:100%;}
+    .modal-header{padding:14px 16px 10px;}
+    .modal-body{padding:12px 16px 24px;}
+  }
   .modal-meta{background:rgba(196,147,58,0.07);border-radius:10px;padding:12px 14px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:10px;}
   .modal-meta-item{font-size:0.8rem;color:rgba(26,18,8,0.65);}
   .modal-meta-item strong{color:var(--ink);}
@@ -935,11 +966,122 @@ function createIcon(big = false) {
 }
 
 // ===== MODAL =====
+// ===== LIGHTBOX COM PINCH-TO-ZOOM =====
+const lightbox = document.createElement('div');
+lightbox.className = 'lightbox';
+lightbox.innerHTML = `
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <img class="lightbox-img" id="lbImg">
+  <div class="lightbox-hint">Dois dedos para zoom · Toque para fechar</div>`;
+document.body.appendChild(lightbox);
+
+let lbScale = 1, lbLastDist = 0;
+const lbImg = document.getElementById('lbImg');
+
+function openLightbox(src) {
+  lbImg.src = src; lbScale = 1;
+  lbImg.style.transform = 'scale(1)';
+  lightbox.classList.add('open');
+}
+document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target === lbImg) lightbox.classList.remove('open'); });
+
+// Pinch-to-zoom
+lbImg.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    lbLastDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+  }
+}, { passive: true });
+
+lbImg.addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    const dist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    lbScale = Math.max(0.5, Math.min(5, lbScale * (dist / lbLastDist)));
+    lbImg.style.transform = `scale(${lbScale})`;
+    lbLastDist = dist;
+    e.preventDefault();
+  }
+}, { passive: false });
+
+lbImg.addEventListener('touchend', e => {
+  if (e.touches.length < 2 && lbScale < 1) {
+    lbScale = 1; lbImg.style.transform = 'scale(1)';
+  }
+});
+
+// ===== CARROSSEL =====
+let carouselIdx = 0;
+window._carouselGo = function(dir) {
+  const track = document.querySelector('.carousel-track');
+  const imgs = track?.querySelectorAll('img');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const counter = document.querySelector('.carousel-counter');
+  if (!imgs) return;
+  carouselIdx = (carouselIdx + dir + imgs.length) % imgs.length;
+  track.style.transform = `translateX(-${carouselIdx * 100}%)`;
+  dots.forEach((d,i) => d.classList.toggle('active', i === carouselIdx));
+  if (counter) counter.textContent = `${carouselIdx+1} / ${imgs.length}`;
+};
+window._carouselDot = function(i) {
+  carouselIdx = i - 1;
+  window._carouselGo(1);
+  carouselIdx = i;
+  const track = document.querySelector('.carousel-track');
+  const imgs = track?.querySelectorAll('img');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const counter = document.querySelector('.carousel-counter');
+  if (!track || !imgs) return;
+  track.style.transform = `translateX(-${i * 100}%)`;
+  dots.forEach((d,j) => d.classList.toggle('active', j === i));
+  if (counter) counter.textContent = `${i+1} / ${imgs.length}`;
+  carouselIdx = i;
+};
+
+function buildPhotosHTML(photos) {
+  if (!photos?.length) return '';
+  const label = `<div class="modal-media-label">📷 Fotos (${photos.length})</div>`;
+
+  if (photos.length >= 5) {
+    // Carrossel
+    carouselIdx = 0;
+    const slides = photos.map((u,i) =>
+      `<img src="${u}" loading="lazy" onclick="openLightbox('${u}')" style="cursor:zoom-in" alt="Foto ${i+1}">`
+    ).join('');
+    const dots = photos.map((_,i) =>
+      `<span class="carousel-dot${i===0?' active':''}" onclick="_carouselDot(${i})"></span>`
+    ).join('');
+    return `<div class="modal-media-section">${label}
+      <div class="photo-carousel">
+        <div class="carousel-track">${slides}</div>
+        <button class="carousel-btn carousel-prev" onclick="_carouselGo(-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="_carouselGo(1)">›</button>
+        <div class="carousel-counter">1 / ${photos.length}</div>
+      </div>
+      <div class="carousel-dots">${dots}</div>
+    </div>`;
+  } else {
+    // Grade normal com lightbox
+    const imgs = photos.map(u =>
+      `<img class="modal-photo" src="${u}" onclick="openLightbox('${u}')" loading="lazy" title="Clique para ampliar">`
+    ).join('');
+    return `<div class="modal-media-section">${label}<div class="modal-photos">${imgs}</div></div>`;
+  }
+}
+
 function openModal(id) {
   const d = pointsData[id]; if (!d) return;
   document.getElementById('modalTitle').textContent = d.name;
   document.getElementById('modalCat').textContent = d.category;
-  const hora = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString('pt-BR') : (d.createdAt ? new Date(d.createdAt).toLocaleString('pt-BR') : '—');
+  const hora = d.createdAt?.toDate
+    ? d.createdAt.toDate().toLocaleString('pt-BR')
+    : (d.createdAt ? new Date(d.createdAt).toLocaleString('pt-BR') : '—');
+
   let body = `
     <div class="modal-meta">
       <div class="modal-meta-item">👤 <strong>${d.author}</strong></div>
@@ -947,14 +1089,12 @@ function openModal(id) {
       <div class="modal-meta-item">📍 ${d.lat?.toFixed(5)}, ${d.lng?.toFixed(5)}</div>
     </div>
     <div class="modal-desc">${d.description || 'Sem descrição.'}</div>`;
-  if (d.photos?.length) {
-    body += `<div class="modal-media-section"><div class="modal-media-label">📷 Fotos (${d.photos.length})</div><div class="modal-photos">`;
-    d.photos.forEach(u => { body += `<img class="modal-photo" src="${u}" onclick="window.open('${u}','_blank')" loading="lazy">`; });
-    body += `</div></div>`;
-  }
+
+  body += buildPhotosHTML(d.photos);
+
   if (d.videos?.length) {
     body += `<div class="modal-media-section"><div class="modal-media-label">🎬 Vídeos</div>`;
-    d.videos.forEach(u => { body += `<video class="modal-video" controls src="${u}"></video>`; });
+    d.videos.forEach(u => { body += `<video class="modal-video" controls src="${u}" playsinline></video>`; });
     body += `</div>`;
   }
   if (d.audios?.length) {
@@ -962,13 +1102,20 @@ function openModal(id) {
     d.audios.forEach(u => { body += `<audio class="modal-audio" controls src="${u}"></audio>`; });
     body += `</div>`;
   }
-  if (d.extraText) body += `<div class="modal-media-section"><div class="modal-media-label">📝 Anotações</div><div class="modal-text-note">${d.extraText}</div></div>`;
+  if (d.extraText) {
+    body += `<div class="modal-media-section"><div class="modal-media-label">📝 Anotações</div>
+      <div class="modal-text-note">${d.extraText}</div></div>`;
+  }
+
   document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('modalBody').scrollTop = 0;
   document.getElementById('modalOverlay').classList.add('open');
 }
 
 document.getElementById('btnCloseModal').addEventListener('click', () => document.getElementById('modalOverlay').classList.remove('open'));
 document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+// ESC fecha modal
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('modalOverlay').classList.remove('open'); lightbox.classList.remove('open'); } });
 
 // ===== RENDER PONTO NO MAPA E LISTA =====
 function renderPoint(id, data) {
@@ -985,15 +1132,16 @@ function renderPoint(id, data) {
     const hora = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '—';
     const thumbHTML = data.photos?.length ? `<img class="popup-thumb" src="${data.photos[0]}" onclick="window.open('${data.photos[0]}','_blank')">` : '';
 
-    const popup = L.popup({ autoPan: true, maxWidth: 280 }).setContent(`
-      <div style="min-width:220px">
-        <div class="popup-title">${data.name}</div>
+    const popup = L.popup({ autoPan: true, maxWidth: 300, maxHeight: 400 }).setContent(`
+      <div style="min-width:240px;max-height:360px;overflow-y:auto;padding-right:2px;position:relative;">
+        <button class="popup-close-btn" onclick="this.closest('.leaflet-popup').querySelector('.leaflet-popup-close-button')?.click()" title="Fechar">✕</button>
+        <div class="popup-title" style="padding-right:28px">${data.name}</div>
         <div class="popup-cat">${data.category}</div>
-        <div class="popup-desc">${(data.description||'').substring(0,120)}${(data.description||'').length>120?'...':''}</div>
+        <div class="popup-desc">${(data.description||'').substring(0,180)}${(data.description||'').length>180?'...':''}</div>
         <div class="popup-meta">👤 ${data.author} · 🕐 ${hora}</div>
         ${badges.length ? `<div class="popup-media-row">${badges.map(b=>`<span class="popup-media-badge">${b}</span>`).join('')}</div>` : ''}
         ${thumbHTML}
-        <button class="popup-open-btn" onclick="window._openModal('${id}')">Ver tudo →</button>
+        <button class="popup-open-btn" onclick="window._openModal('${id}')">🔍 Ver tudo →</button>
       </div>`);
 
     const marker = L.marker([data.lat, data.lng], { icon: createIcon(false) });
@@ -1388,15 +1536,37 @@ window.saveEditInline = async function(id, isProf) {
 function updateStudentSelect(arr) {
   const sel = document.getElementById('authorSelect');
   const cur = sel.value;
-  sel.innerHTML = '<option value="">Selecionar aluno...</option>';
-  (arr || Object.entries(students))
-    .filter(([,s]) => s.tipo !== 'professor')  // professores não aparecem como autores
-    .forEach(([,s]) => {
+  sel.innerHTML = '<option value="">Selecionar autor...</option>';
+  const entries = arr || Object.entries(students);
+
+  // Alunos primeiro
+  const alunos = entries.filter(([,s]) => s.tipo !== 'professor');
+  if (alunos.length) {
+    const grp = document.createElement('optgroup');
+    grp.label = '👨‍🎓 Alunos';
+    alunos.forEach(([,s]) => {
       const o = document.createElement('option');
       o.value = s.name;
       o.textContent = s.name + (s.turma ? ' ('+s.turma+')' : '');
-      sel.appendChild(o);
+      grp.appendChild(o);
     });
+    sel.appendChild(grp);
+  }
+
+  // Professores separados
+  const profs = entries.filter(([,s]) => s.tipo === 'professor');
+  if (profs.length) {
+    const grp = document.createElement('optgroup');
+    grp.label = '👨‍🏫 Professores';
+    profs.forEach(([,s]) => {
+      const o = document.createElement('option');
+      o.value = s.name;
+      o.textContent = s.name + ' — Professor';
+      grp.appendChild(o);
+    });
+    sel.appendChild(grp);
+  }
+
   if (cur) sel.value = cur;
 }
 
