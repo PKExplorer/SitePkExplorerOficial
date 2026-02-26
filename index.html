@@ -175,8 +175,8 @@
   .modal-body{padding:16px 24px 28px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
   /* Galeria carrossel */
   .photo-carousel{position:relative;width:100%;overflow:hidden;border-radius:10px;background:#111;margin-bottom:8px;}
-  .carousel-track{display:flex;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
-  .carousel-track img{width:100%;flex-shrink:0;max-height:340px;object-fit:contain;cursor:zoom-in;}
+  .carousel-track{display:flex;transition:none;}  /* transition controlada via JS após load */
+  .carousel-track img{width:100%;flex-shrink:0;height:280px;object-fit:contain;cursor:zoom-in;background:#111;opacity:0;transition:opacity 0.3s ease;}
   .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:white;font-size:1.3rem;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:background 0.2s;}
   .carousel-btn:hover{background:rgba(0,0,0,0.75);}
   .carousel-prev{left:8px;} .carousel-next{right:8px;}
@@ -227,6 +227,7 @@
   .popup-media-row{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;}
   .popup-media-badge{font-size:0.72rem;background:rgba(196,147,58,0.12);padding:3px 8px;border-radius:10px;color:var(--sepia);font-weight:500;}
   .popup-thumb{width:100%;max-height:140px;object-fit:cover;border-radius:8px;margin-top:8px;cursor:pointer;}
+  .popup-enviando{font-size:0.72rem;color:rgba(26,18,8,0.4);text-align:center;padding:8px;background:rgba(196,147,58,0.06);border-radius:8px;margin-top:8px;}
 
   .toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:var(--parchment);padding:13px 18px;border-radius:10px;font-size:0.84rem;z-index:9999;transform:translateY(100px);opacity:0;transition:transform 0.3s,opacity 0.3s;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-left:3px solid var(--sepia);}
   .toast.show{transform:translateY(0);opacity:1;}
@@ -355,7 +356,8 @@
   <div class="header-right">
     <div class="status-dot" id="statusDot"></div>
     <span class="status-label" id="statusLabel">Conectando...</span>
-    <span id="offlineBadge" style="display:none;background:#e6a817;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;cursor:pointer;" title="Pontos aguardando sincronização" onclick="processPendingUploads()">📵 0 pendente(s)</span>
+    <span id="offlineBadge" style="display:none;background:#e6a817;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;cursor:pointer;" title="Clique para sincronizar agora" onclick="processPendingUploads()">📵 0 foto(s) pendente(s)</span>
+    <span id="uploadingBadge" style="display:none;background:#3d6b4f;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;">⬆️ Enviando fotos...</span>
   </div>
 </header>
 
@@ -1113,48 +1115,69 @@ lbImg.addEventListener('touchend', e => {
 });
 
 // ===== CARROSSEL =====
+// ===== CARROSSEL — versão corrigida sem tremido =====
 let carouselIdx = 0;
-window._carouselGo = function(dir) {
-  const track = document.querySelector('.carousel-track');
-  const imgs = track?.querySelectorAll('img');
-  const dots = document.querySelectorAll('.carousel-dot');
-  const counter = document.querySelector('.carousel-counter');
-  if (!imgs) return;
-  carouselIdx = (carouselIdx + dir + imgs.length) % imgs.length;
-  track.style.transform = `translateX(-${carouselIdx * 100}%)`;
-  dots.forEach((d,i) => d.classList.toggle('active', i === carouselIdx));
-  if (counter) counter.textContent = `${carouselIdx+1} / ${imgs.length}`;
-};
-window._carouselDot = function(i) {
-  carouselIdx = i - 1;
-  window._carouselGo(1);
+
+function carouselGetEl() {
+  return {
+    track:   document.querySelector('.carousel-track'),
+    imgs:    document.querySelectorAll('.carousel-track img'),
+    dots:    document.querySelectorAll('.carousel-dot'),
+    counter: document.querySelector('.carousel-counter'),
+  };
+}
+
+function carouselMoveTo(i, animate) {
+  const { track, imgs, dots, counter } = carouselGetEl();
+  if (!track || !imgs.length) return;
+  i = (i + imgs.length) % imgs.length;
   carouselIdx = i;
-  const track = document.querySelector('.carousel-track');
-  const imgs = track?.querySelectorAll('img');
-  const dots = document.querySelectorAll('.carousel-dot');
-  const counter = document.querySelector('.carousel-counter');
-  if (!track || !imgs) return;
-  track.style.transform = `translateX(-${i * 100}%)`;
+  // Usar px exatos — evita tremido causado por % com imagens de tamanhos diferentes
+  const w = track.parentElement.offsetWidth || track.offsetWidth || 300;
+  if (animate) {
+    track.style.transition = 'transform 0.32s cubic-bezier(.4,0,.2,1)';
+  } else {
+    track.style.transition = 'none';
+  }
+  track.style.transform = `translateX(-${i * w}px)`;
+  // Fixar largura de cada slide em px
+  imgs.forEach(img => { img.parentElement && (img.style.width = w + 'px'); img.style.width = w + 'px'; });
   dots.forEach((d,j) => d.classList.toggle('active', j === i));
   if (counter) counter.textContent = `${i+1} / ${imgs.length}`;
-  carouselIdx = i;
-};
+}
+
+window._carouselGo = function(dir) { carouselMoveTo(carouselIdx + dir, true); };
+window._carouselDot = function(i)  { carouselMoveTo(i, true); };
+
+// Swipe touch no carrossel
+let cTouchX = 0;
+document.addEventListener('touchstart', e => {
+  if (e.target.closest('.photo-carousel')) cTouchX = e.touches[0].clientX;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  if (!e.target.closest('.photo-carousel')) return;
+  const dx = e.changedTouches[0].clientX - cTouchX;
+  if (Math.abs(dx) > 40) window._carouselGo(dx < 0 ? 1 : -1);
+}, { passive: true });
 
 function buildPhotosHTML(photos) {
   if (!photos?.length) return '';
   const label = `<div class="modal-media-label">📷 Fotos (${photos.length})</div>`;
 
   if (photos.length >= 5) {
-    // Carrossel
+    // Carrossel — imagens com onload para aparecer só quando prontas
     carouselIdx = 0;
     const slides = photos.map((u,i) =>
-      `<img src="${u}" loading="lazy" onclick="openLightbox('${u}')" style="cursor:zoom-in" alt="Foto ${i+1}">`
+      `<img src="${u}" alt="Foto ${i+1}"
+        style="cursor:zoom-in;width:100%;flex-shrink:0;height:280px;object-fit:contain;background:#111;opacity:0;transition:opacity 0.3s ease;"
+        onload="this.style.opacity='1'; if(${i}===0){ window._carouselInit && window._carouselInit(); }"
+        onclick="openLightbox('${u}')">`
     ).join('');
     const dots = photos.map((_,i) =>
       `<span class="carousel-dot${i===0?' active':''}" onclick="_carouselDot(${i})"></span>`
     ).join('');
     return `<div class="modal-media-section">${label}
-      <div class="photo-carousel">
+      <div class="photo-carousel" id="photoCarousel">
         <div class="carousel-track">${slides}</div>
         <button class="carousel-btn carousel-prev" onclick="_carouselGo(-1)">‹</button>
         <button class="carousel-btn carousel-next" onclick="_carouselGo(1)">›</button>
@@ -1163,13 +1186,22 @@ function buildPhotosHTML(photos) {
       <div class="carousel-dots">${dots}</div>
     </div>`;
   } else {
-    // Grade normal com lightbox
+    // Grade normal com lightbox + fade-in ao carregar
     const imgs = photos.map(u =>
-      `<img class="modal-photo" src="${u}" onclick="openLightbox('${u}')" loading="lazy" title="Clique para ampliar">`
+      `<img class="modal-photo" src="${u}"
+        onclick="openLightbox('${u}')"
+        style="opacity:0;transition:opacity 0.3s ease;"
+        onload="this.style.opacity='1'"
+        loading="lazy" title="Clique para ampliar">`
     ).join('');
     return `<div class="modal-media-section">${label}<div class="modal-photos">${imgs}</div></div>`;
   }
 }
+
+// Chamado após a primeira imagem carregar: posiciona sem animação
+window._carouselInit = function() {
+  carouselMoveTo(0, false);
+};
 
 function openModal(id) {
   const d = pointsData[id]; if (!d) return;
@@ -1227,7 +1259,9 @@ function renderPoint(id, data) {
     if (data.extraText) badges.push('📝');
 
     const hora = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '—';
-    const thumbHTML = data.photos?.length ? `<img class="popup-thumb" src="${data.photos[0]}" onclick="window.open('${data.photos[0]}','_blank')">` : '';
+    const thumbHTML = data.photos?.length
+      ? `<img class="popup-thumb" src="${data.photos[0]}" onclick="window.open('${data.photos[0]}','_blank')">`
+      : (data.fotosEnviando ? `<div class="popup-enviando"><div class="loading" style="border-color:rgba(196,147,58,0.3);border-top-color:var(--sepia);display:inline-block;margin-right:6px"></div>Fotos sendo enviadas...</div>` : '');
 
     const popup = L.popup({ autoPan: true, maxWidth: 300, maxHeight: 400 }).setContent(`
       <div style="min-width:240px;max-height:360px;overflow-y:auto;padding-right:2px;position:relative;">
@@ -1370,6 +1404,16 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   if (!name || !category) { showToast('Preencha nome e categoria.', 'error'); return; }
   if (isNaN(lat) || isNaN(lng)) { showToast('Capture a localização GPS primeiro.', 'error'); return; }
 
+  // ⚠️ Verificar nome duplicado
+  const nomeLower = name.toLowerCase().trim();
+  const pontoExistente = Object.values(pointsData).find(p =>
+    p.name?.toLowerCase().trim() === nomeLower
+  );
+  if (pontoExistente) {
+    const continuar = confirm(`⚠️ Já existe um ponto com o nome:\n\n"${pontoExistente.name}" (cadastrado por ${pontoExistente.author})\n\nDeseja cadastrar mesmo assim?`);
+    if (!continuar) return;
+  }
+
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.innerHTML = '<div class="loading"></div> Enviando...';
 
@@ -1377,15 +1421,47 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   let mediaUrls = { photos:[], videos:[], audios:[] };
 
   if (isOnline) {
-    // ONLINE: upload imediato
-    try { mediaUrls = await uploadFiles(pointId); }
-    catch(e) { console.error(e); showToast('⚠️ Mídias não enviadas, ponto salvo sem fotos.', ''); }
+    // ONLINE: salvar ponto IMEDIATAMENTE sem esperar fotos
+    // Fotos vão em background para não travar o aluno
     try {
-      await addDoc(collection(db, 'pontos'), {
+      const docRef = await addDoc(collection(db, 'pontos'), {
         name, author, category, description, extraText,
-        lat, lng, ...mediaUrls, createdAt: serverTimestamp()
+        lat, lng, photos:[], videos:[], audios:[],
+        createdAt: serverTimestamp(), fotosEnviando: true
       });
-      showToast('✅ Ponto registrado e sincronizado!', 'success');
+
+      const temMidia = mediaFiles.photo.length > 0 || mediaFiles.video.length > 0 || audioBlobs.filter(Boolean).length > 0;
+      if (temMidia) {
+        showToast(`✅ Ponto registrado! ${mediaFiles.photo.length > 0 ? `📷 ${mediaFiles.photo.length} foto(s) sendo enviada(s) em background...` : ''}`, 'success');
+        document.getElementById('uploadingBadge').style.display = 'inline-block';
+
+        // Capturar mídias antes de limpar o form
+        const fotosParaEnviar  = [...mediaFiles.photo];
+        const videosParaEnviar = [...mediaFiles.video];
+        const audiosParaEnviar = [...audioBlobs.filter(Boolean)];
+
+        // Upload em background — não bloqueia o aluno
+        (async () => {
+          try {
+            const urls = { photos:[], videos:[], audios:[] };
+            for (const [i,f] of fotosParaEnviar.entries())  urls.photos.push(await uploadOneFile(f, `pontos/${pointId}/foto_${i}`));
+            for (const [i,f] of videosParaEnviar.entries()) urls.videos.push(await uploadOneFile(f, `pontos/${pointId}/video_${i}`));
+            for (const [i,b] of audiosParaEnviar.entries()) urls.audios.push(await uploadOneFile(b, `pontos/${pointId}/audio_${i}`));
+            // Atualizar doc com URLs reais
+            await setDoc(doc(db, 'pontos', docRef.id), { ...urls, fotosEnviando: false }, { merge: true });
+            showToast('✅ Todas as fotos enviadas com sucesso!', 'success');
+          } catch(e) {
+            console.error('Erro no upload background:', e);
+            showToast('⚠️ Algumas fotos não foram enviadas. Tente sincronizar pelo badge.', 'error');
+          } finally {
+            document.getElementById('uploadingBadge').style.display = 'none';
+          }
+        })();
+      } else {
+        // Sem mídia: atualizar para remover flag fotosEnviando
+        await setDoc(doc(db, 'pontos', docRef.id), { fotosEnviando: false }, { merge: true });
+        showToast('✅ Ponto registrado!', 'success');
+      }
     } catch(e) {
       console.error(e); showToast('Erro ao salvar. Verifique a conexão.', 'error');
       btn.disabled = false; btn.innerHTML = '📌 Registrar Ponto Histórico'; return;
