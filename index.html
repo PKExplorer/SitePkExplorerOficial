@@ -22,7 +22,25 @@
   .sidebar{background:var(--parchment);border-right:1px solid rgba(196,147,58,0.3);display:flex;flex-direction:column;overflow:hidden;position:relative;}
   .sidebar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sepia),var(--rust),var(--moss));}
   .sidebar-tabs{display:flex;border-bottom:1px solid rgba(196,147,58,0.2);}
-  .tab-btn{flex:1;padding:13px 4px;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;background:none;border:none;cursor:pointer;color:rgba(26,18,8,0.45);border-bottom:2px solid transparent;transition:all 0.2s;margin-bottom:-1px;white-space:nowrap;}
+  .tab-btn{flex:1;padding:13px 2px;font-family:'DM Sans',sans-serif;font-size:0.68rem;font-weight:500;background:none;border:none;cursor:pointer;color:rgba(26,18,8,0.45);border-bottom:2px solid transparent;transition:all 0.2s;margin-bottom:-1px;white-space:nowrap;}
+  /* Roteiro */
+  .roteiro-area{padding:14px;display:flex;flex-direction:column;gap:10px;}
+  .roteiro-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+  .roteiro-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);}
+  .roteiro-subtitle{font-size:0.72rem;color:rgba(26,18,8,0.45);margin-top:2px;}
+  .roteiro-card{background:white;border-radius:10px;border:1.5px solid rgba(196,147,58,0.25);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+  .roteiro-card-header{background:var(--ink);padding:9px 14px;display:flex;align-items:center;gap:8px;}
+  .roteiro-num{background:var(--sepia);color:white;font-size:0.68rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .roteiro-nome{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:white;flex:1;}
+  .roteiro-cidade{font-size:0.65rem;color:rgba(196,147,58,0.85);font-weight:500;white-space:nowrap;}
+  .roteiro-body{padding:10px 14px;}
+  .roteiro-desc{font-size:0.76rem;color:rgba(26,18,8,0.65);line-height:1.5;margin-bottom:8px;}
+  .roteiro-status{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+  .roteiro-gps{font-size:0.68rem;color:rgba(26,18,8,0.4);font-style:italic;}
+  .roteiro-gps.ok{color:var(--moss);font-style:normal;font-weight:600;}
+  .btn-registrar-visita{background:var(--sepia);color:white;border:none;border-radius:20px;padding:5px 12px;font-size:0.72rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s;white-space:nowrap;}
+  .btn-registrar-visita:hover{background:var(--rust);}
+  .roteiro-cidade-badge{background:rgba(196,147,58,0.12);color:var(--sepia);font-size:0.63rem;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid rgba(196,147,58,0.3);}
   .tab-btn.active{color:var(--rust);border-bottom-color:var(--rust);}
   .tab-panel{display:none;flex:1;overflow-y:auto;}
   .tab-panel.active{display:flex;flex-direction:column;}
@@ -171,6 +189,8 @@
   .modal-cat{font-size:0.75rem;color:var(--sepia);font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-top:3px;}
   /* X grande, fácil de tocar no mobile */
   .modal-close{background:rgba(26,18,8,0.07);border:none;cursor:pointer;color:var(--ink);font-size:1.1rem;line-height:1;padding:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
+  .btn-excluir-ponto{background:none;border:1px solid rgba(181,69,27,0.3);color:var(--rust);border-radius:8px;padding:7px 14px;font-size:0.76rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;width:100%;text-align:center;}
+  .btn-excluir-ponto:hover{background:var(--rust);color:white;border-color:var(--rust);}
   .modal-close:hover{background:rgba(181,69,27,0.12);color:var(--rust);}
   /* Corpo com scroll próprio */
   .modal-body{padding:16px 24px 28px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
@@ -358,7 +378,6 @@
     <div class="status-dot" id="statusDot"></div>
     <span class="status-label" id="statusLabel">Conectando...</span>
     <span id="offlineBadge" style="display:none;background:#e6a817;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;cursor:pointer;" title="Clique para sincronizar agora" onclick="processPendingUploads()">📵 0 foto(s) pendente(s)</span>
-    <span id="uploadingBadge" style="display:none;background:#3d6b4f;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;">⬆️ Enviando fotos...</span>
   </div>
 </header>
 
@@ -367,7 +386,8 @@
     <div class="sidebar-tabs" style="padding-top:4px;">
       <button class="tab-btn active" id="tbtn-form">✏️ Registrar</button>
       <button class="tab-btn" id="tbtn-list">📍 Pontos</button>
-      <button class="tab-btn" id="tbtn-students">👥 Alunos/Eletiva</button>
+      <button class="tab-btn" id="tbtn-roteiro">🗺️ Roteiro</button>
+      <button class="tab-btn" id="tbtn-students">👥 Eletiva</button>
     </div>
 
     <!-- ===== TAB REGISTRAR ===== -->
@@ -521,6 +541,113 @@
     </div>
 
     <!-- ===== TAB PONTOS ===== -->
+    <!-- ===== TAB ROTEIRO ===== -->
+    <div class="tab-panel" id="tab-roteiro">
+      <div class="roteiro-area">
+        <div>
+          <div class="roteiro-title">🗺️ Roteiro de Campo</div>
+          <div class="roteiro-subtitle">PK do Ontem e do Hoje · 6 paradas históricas</div>
+        </div>
+
+        <!-- PONTO 1 -->
+        <div class="roteiro-card" id="rcard-1">
+          <div class="roteiro-card-header">
+            <div class="roteiro-num">1</div>
+            <div class="roteiro-nome">Riacho Firmino</div>
+            <div class="roteiro-cidade-badge">Pres. Dutra</div>
+          </div>
+          <div class="roteiro-body">
+            <div class="roteiro-desc">Marco natural da região, importante para compreender os primeiros pontos de ocupação e circulação que deu origem ao município. Os riachos eram fundamentais para abastecimento, agricultura e fixação das primeiras famílias.</div>
+            <div class="roteiro-status">
+              <span class="roteiro-gps" id="rgps-1">📍 GPS a capturar no dia</span>
+              <button class="btn-registrar-visita" onclick="iniciarVisita(1,'Riacho Firmino','Recursos Hídricos')">+ Registrar minha visita</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PONTO 2 -->
+        <div class="roteiro-card" id="rcard-2">
+          <div class="roteiro-card-header">
+            <div class="roteiro-num">2</div>
+            <div class="roteiro-nome">Brejeiras de São Bento, Caxixi e Corrente</div>
+            <div class="roteiro-cidade-badge">Tuntum – MA</div>
+          </div>
+          <div class="roteiro-body">
+            <div class="roteiro-desc">Áreas brejeiras (alagadiças) que ajudam a compreender a dinâmica ambiental da região, os limites territoriais históricos e a influência da geografia na formação das comunidades e rotas antigas.</div>
+            <div class="roteiro-status">
+              <span class="roteiro-gps" id="rgps-2">📍 GPS a capturar no dia · <em>Tuntum, MA</em></span>
+              <button class="btn-registrar-visita" onclick="iniciarVisita(2,'Brejeiras – Tuntum','Meio Ambiente')">+ Registrar minha visita</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PONTO 3 -->
+        <div class="roteiro-card" id="rcard-3">
+          <div class="roteiro-card-header">
+            <div class="roteiro-num">3</div>
+            <div class="roteiro-nome">Praça São Sebastião</div>
+            <div class="roteiro-cidade-badge">Pres. Dutra</div>
+          </div>
+          <div class="roteiro-body">
+            <div class="roteiro-desc">Praça central e tradicional da cidade, espaço histórico de convivência, eventos religiosos, manifestações culturais e encontros comunitários. Um dos marcos urbanos mais importantes do desenvolvimento de Presidente Dutra.</div>
+            <div class="roteiro-status">
+              <span class="roteiro-gps" id="rgps-3">📍 GPS a capturar no dia</span>
+              <button class="btn-registrar-visita" onclick="iniciarVisita(3,'Praça São Sebastião','Praça / Espaço Público')">+ Registrar minha visita</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PONTO 4 -->
+        <div class="roteiro-card" id="rcard-4">
+          <div class="roteiro-card-header">
+            <div class="roteiro-num">4</div>
+            <div class="roteiro-nome">U.E. Dr. Murilo Braga</div>
+            <div class="roteiro-cidade-badge">Pres. Dutra</div>
+          </div>
+          <div class="roteiro-body">
+            <div class="roteiro-desc">Instituição pública de ensino que integra a história educacional do município. Representa o avanço da educação formal e a consolidação das políticas públicas voltadas para a formação da população.</div>
+            <div class="roteiro-status">
+              <span class="roteiro-gps" id="rgps-4">📍 GPS a capturar no dia</span>
+              <button class="btn-registrar-visita" onclick="iniciarVisita(4,'U.E. Dr. Murilo Braga','Prédio Público')">+ Registrar minha visita</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PONTO 5 -->
+        <div class="roteiro-card" id="rcard-5">
+          <div class="roteiro-card-header">
+            <div class="roteiro-num">5</div>
+            <div class="roteiro-nome">Riacho Preguiça</div>
+            <div class="roteiro-cidade-badge">Pres. Dutra</div>
+          </div>
+          <div class="roteiro-body">
+            <div class="roteiro-desc">Curso d'água que possui importância histórica na organização territorial e no cotidiano das primeiras ocupações. Contribuiu decisivamente para o desenvolvimento econômico e social da região.</div>
+            <div class="roteiro-status">
+              <span class="roteiro-gps" id="rgps-5">📍 GPS a capturar no dia</span>
+              <button class="btn-registrar-visita" onclick="iniciarVisita(5,'Riacho Preguiça','Recursos Hídricos')">+ Registrar minha visita</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PONTO 6 -->
+        <div class="roteiro-card" id="rcard-6">
+          <div class="roteiro-card-header">
+            <div class="roteiro-num">6</div>
+            <div class="roteiro-nome">As Furnas – Creoli do Joviniano</div>
+            <div class="roteiro-cidade-badge">Zona Rural · ~18km</div>
+          </div>
+          <div class="roteiro-body">
+            <div class="roteiro-desc">Formações espeleológicas naturais estudadas pela UEMA. Furnas 1, 2 e 4 localizadas no Povoado Creoli do Joviniano. Patrimônio natural e científico do município, com estrada pavimentada e nova praça no acesso.</div>
+            <div class="roteiro-status">
+              <span class="roteiro-gps" id="rgps-6">📍 GPS a capturar no dia · <em>~18km da sede</em></span>
+              <button class="btn-registrar-visita" onclick="iniciarVisita(6,'As Furnas – Creoli do Joviniano','Patrimônio Natural')">+ Registrar minha visita</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <div class="tab-panel" id="tab-list">
       <div class="points-list-area">
         <div class="list-header">Pontos registrados <span class="count-badge" id="countBadge">0</span></div>
@@ -614,6 +741,9 @@
       <button class="modal-close" id="btnCloseModal">×</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
+    <div style="padding:0 20px 16px;">
+      <button class="btn-excluir-ponto" id="btnExcluirPonto" style="display:none;">🗑️ Excluir este ponto</button>
+    </div>
   </div>
 </div>
 
@@ -729,7 +859,7 @@ const layerSat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}
 const layerHibrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
   attribution:'© Google', minZoom:1, maxZoom:20, maxNativeZoom:20
 });
-layerRua.addTo(map);
+layerSat.addTo(map); // Padrão: satélite
 L.control.layers({'🗺️ Rua':layerRua,'🛰️ Satélite':layerSat,'🛰️+🗺️ Híbrido':layerHibrid},{},{position:'topright',collapsed:true}).addTo(map);
 
 // ===== ESTADO =====
@@ -755,7 +885,7 @@ function switchTab(tab) {
   _applyTab(tab);
 }
 function _applyTab(tab) {
-  ['form','list','students'].forEach(t => {
+  ['form','list','roteiro','students'].forEach(t => {
     document.getElementById('tab-'+t).classList.toggle('active', t===tab);
     document.getElementById('tbtn-'+t).classList.toggle('active', t===tab);
   });
@@ -763,6 +893,7 @@ function _applyTab(tab) {
 }
 document.getElementById('tbtn-form').addEventListener('click', () => switchTab('form'));
 document.getElementById('tbtn-list').addEventListener('click', () => switchTab('list'));
+document.getElementById('tbtn-roteiro').addEventListener('click', () => switchTab('roteiro'));
 document.getElementById('tbtn-students').addEventListener('click', () => switchTab('students'));
 document.getElementById('btnBack').addEventListener('click', () => {
   if (tabHistory.length > 1) {
@@ -1053,6 +1184,42 @@ map.on('click', e => {
 });
 
 // ===== ÍCONE =====
+// Ícone estrela dourada para pontos do roteiro
+function createRoteirIcon(num, big = false) {
+  const s = big ? 38 : 32;
+  return L.divIcon({
+    className: '',
+    html: `<div style="position:relative;width:${s}px;height:${s+8}px;text-align:center;">
+      <div style="width:${s}px;height:${s}px;background:#c4933a;border:2.5px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.35);font-size:${s*0.42}px;font-weight:700;color:white;font-family:'DM Sans',sans-serif;">${num}</div>
+      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:${big?8:5}px;height:3px;background:rgba(0,0,0,0.2);border-radius:50%;filter:blur(2px)"></div>
+    </div>`,
+    iconSize: [s, s+8], iconAnchor: [s/2, s+8], popupAnchor: [0, -(s+12)]
+  });
+}
+
+// Preencher form de Registrar com dados do ponto do roteiro
+window.iniciarVisita = function(num, nome, categoria) {
+  switchTab('form');
+  // Preencher nome e categoria automaticamente
+  const fNome = document.getElementById('pointName');
+  const fCat  = document.getElementById('category');
+  if (fNome) fNome.value = nome;
+  if (fCat) {
+    // Tentar selecionar a categoria correspondente
+    const opts = Array.from(fCat.options);
+    const match = opts.find(o => o.value === categoria || o.text.includes(categoria));
+    if (match) fCat.value = match.value;
+  }
+  // Rolar o form para o topo
+  document.getElementById('tab-form').scrollTop = 0;
+  showToast('📍 Ponto ' + num + ' pré-preenchido! Capture o GPS e complete o registro.', 'success');
+  // Destacar campo GPS
+  setTimeout(() => {
+    const gpsBtn = document.getElementById('btnGPS');
+    if (gpsBtn) { gpsBtn.style.animation = 'pulse-dot 0.8s 3'; }
+  }, 500);
+};
+
 function createIcon(big = false) {
   const s = big ? 38 : 30;
   return L.divIcon({
@@ -1203,9 +1370,21 @@ function openModal(id) {
   document.getElementById('modalBody').innerHTML = body;
   document.getElementById('modalBody').scrollTop = 0;
   document.getElementById('modalOverlay').classList.add('open');
+  atualizarBotaoExcluir(id, d.name);
 }
 
 document.getElementById('btnCloseModal').addEventListener('click', () => document.getElementById('modalOverlay').classList.remove('open'));
+
+// Botão excluir ponto — conectar ao abrir o modal
+function atualizarBotaoExcluir(pointId, pointName) {
+  const btnExcluir = document.getElementById('btnExcluirPonto');
+  if (!btnExcluir) return;
+  // Verificar se o autor selecionado é professor autorizado
+  const profAtual = document.getElementById('authorSelect')?.value || '';
+  const podeExcluir = ['francisco','jhaimson'].some(p => profAtual.toLowerCase().includes(p));
+  btnExcluir.style.display = podeExcluir ? 'block' : 'none';
+  btnExcluir.onclick = () => confirmarExclusao(pointId, pointName);
+}
 document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 // ESC fecha modal
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('modalOverlay').classList.remove('open'); lightbox.classList.remove('open'); } });
@@ -1225,7 +1404,7 @@ function renderPoint(id, data) {
     const hora = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '—';
     const thumbHTML = data.photos?.length
       ? `<img class="popup-thumb" src="${data.photos[0]}" onclick="window.open('${data.photos[0]}','_blank')">`
-      : (data.fotosEnviando ? `<div class="popup-enviando"><div class="loading" style="border-color:rgba(196,147,58,0.3);border-top-color:var(--sepia);display:inline-block;margin-right:6px"></div>Fotos sendo enviadas...</div>` : '');
+      : '';
 
     const popup = L.popup({ autoPan: true, maxWidth: 300, maxHeight: 400 }).setContent(`
       <div style="min-width:240px;max-height:360px;overflow-y:auto;padding-right:2px;position:relative;">
@@ -1239,7 +1418,13 @@ function renderPoint(id, data) {
         <button class="popup-open-btn" onclick="window._openModal('${id}')">🔍 Ver tudo →</button>
       </div>`);
 
-    const marker = L.marker([data.lat, data.lng], { icon: createIcon(false) });
+    // Verificar se é um ponto do roteiro para usar ícone dourado
+    const roteiroNomes = ["Riacho Firmino", "Brejeiras", "Praça São Sebastião", "U.E. Dr. Murilo Braga", "Riacho Preguiça", "As Furnas"];
+    const roteiroIdx = roteiroNomes.findIndex(n => data.name?.toLowerCase().includes(n.toLowerCase()));
+    const isRoteiro = roteiroIdx >= 0;
+    const marker = L.marker([data.lat, data.lng], {
+      icon: isRoteiro ? createRoteirIcon(roteiroIdx + 1, false) : createIcon(false)
+    });
     marker.bindPopup(popup);
 
     function flyAndOpen() {
@@ -1385,53 +1570,62 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   let mediaUrls = { photos:[], videos:[], audios:[] };
 
   if (isOnline) {
-    // ONLINE: salvar ponto imediatamente, fotos em background
+    // ONLINE: upload síncrono com progresso — garante que fotos chegam antes de salvar
     try {
-      const temMidia = mediaFiles.photo.length > 0 || mediaFiles.video.length > 0 || audioBlobs.filter(Boolean).length > 0;
-
-      // Capturar mídias ANTES de qualquer await (evita perder referências)
       const fotosParaEnviar  = [...mediaFiles.photo];
       const videosParaEnviar = [...mediaFiles.video];
       const audiosParaEnviar = [...audioBlobs.filter(Boolean)];
+      const totalMidias = fotosParaEnviar.length + videosParaEnviar.length + audiosParaEnviar.length;
 
-      // Criar documento — usar docRef.id como ID consistente para Storage e Firestore
+      // Criar doc primeiro para obter firestoreId
       const docRef = await addDoc(collection(db, 'pontos'), {
         name, author, category, description, extraText,
         lat, lng, photos:[], videos:[], audios:[],
-        createdAt: serverTimestamp(),
-        fotosEnviando: temMidia
+        createdAt: serverTimestamp(), fotosEnviando: totalMidias > 0
       });
-      const firestoreId = docRef.id; // ID real do Firestore — usar em TUDO
+      const firestoreId = docRef.id;
 
-      if (temMidia) {
-        const nFotos = fotosParaEnviar.length;
-        showToast(`✅ Ponto registrado!${nFotos > 0 ? ` 📷 ${nFotos} foto(s) sendo enviada(s)...` : ''}`, 'success');
-        document.getElementById('uploadingBadge').style.display = 'inline-block';
-
-        // Upload em background usando firestoreId (consistente com o doc)
-        (async () => {
-          try {
-            const urls = { photos:[], videos:[], audios:[] };
-            for (const [i,f] of fotosParaEnviar.entries())
-              urls.photos.push(await uploadOneFile(f, `pontos/${firestoreId}/foto_${i}`));
-            for (const [i,f] of videosParaEnviar.entries())
-              urls.videos.push(await uploadOneFile(f, `pontos/${firestoreId}/video_${i}`));
-            for (const [i,b] of audiosParaEnviar.entries())
-              urls.audios.push(await uploadOneFile(b, `pontos/${firestoreId}/audio_${i}`));
-
-            // Atualizar doc com todas as URLs + desligar flag
-            await setDoc(doc(db, 'pontos', firestoreId), { ...urls, fotosEnviando: false }, { merge: true });
-            showToast(`✅ ${nFotos > 0 ? nFotos + ' foto(s) enviada(s)!' : 'Mídia enviada!'}`, 'success');
-          } catch(e) {
-            console.error('Erro upload background:', e);
-            showToast('⚠️ Erro ao enviar fotos. Verifique a conexão.', 'error');
-          } finally {
-            document.getElementById('uploadingBadge').style.display = 'none';
+      // Upload das mídias com progresso no botão
+      const urls = { photos:[], videos:[], audios:[] };
+      if (totalMidias > 0) {
+        let enviados = 0;
+        const atualizarProgresso = () => {
+          enviados++;
+          btn.innerHTML = '<div class="loading"></div> Enviando ' + enviados + '/' + totalMidias + '...';
+        };
+        try {
+          for (const [i,f] of fotosParaEnviar.entries()) {
+            urls.photos.push(await uploadOneFile(f, 'pontos/' + firestoreId + '/foto_' + i));
+            atualizarProgresso();
           }
-        })();
+          for (const [i,f] of videosParaEnviar.entries()) {
+            urls.videos.push(await uploadOneFile(f, 'pontos/' + firestoreId + '/video_' + i));
+            atualizarProgresso();
+          }
+          for (const [i,b] of audiosParaEnviar.entries()) {
+            urls.audios.push(await uploadOneFile(b, 'pontos/' + firestoreId + '/audio_' + i));
+            atualizarProgresso();
+          }
+        } catch(uploadErr) {
+          console.error('Erro upload mídia:', uploadErr);
+          showToast('⚠️ Ponto salvo, mas erro ao enviar fotos. Tente novamente.', 'error');
+        }
+        // Atualizar doc com URLs reais e desligar flag
+        await setDoc(doc(db, 'pontos', firestoreId), { ...urls, fotosEnviando: false }, { merge: true });
+        showToast('✅ Ponto e ' + totalMidias + ' mídia(s) registrados!', 'success');
       } else {
+        await setDoc(doc(db, 'pontos', firestoreId), { fotosEnviando: false }, { merge: true });
         showToast('✅ Ponto registrado!', 'success');
       }
+
+      // Atualizar badge do roteiro
+      const roteiroNomesReg = ['Riacho Firmino','Brejeiras','Praça São Sebastião','U.E. Dr. Murilo Braga','Riacho Preguiça','As Furnas'];
+      const ridx = roteiroNomesReg.findIndex(n => name.toLowerCase().includes(n.toLowerCase()));
+      if (ridx >= 0) {
+        const gpsEl = document.getElementById('rgps-' + (ridx+1));
+        if (gpsEl) { gpsEl.textContent = '✅ Registrado por ' + author; gpsEl.classList.add('ok'); }
+      }
+
     } catch(e) {
       console.error(e); showToast('Erro ao salvar. Verifique a conexão.', 'error');
       btn.disabled = false; btn.innerHTML = '📌 Registrar Ponto Histórico'; return;
@@ -2099,6 +2293,32 @@ document.getElementById('btnAvalPDF').addEventListener('click', () => {
 
 
 
+// ===== EXCLUIR PONTO (só professores) =====
+window.confirmarExclusao = async function(pointId, pointName) {
+  const senha = prompt('🔐 Digite a senha para excluir o ponto "' + pointName + '":');
+  if (!senha) return;
+  // Senha dos professores (mesma do sistema de avaliação)
+  if (senha !== 'prof2026') {
+    alert('❌ Senha incorreta. Apenas Prof. Francisco e Prof. Jhaimson podem excluir pontos.');
+    return;
+  }
+  const confirmar = confirm('⚠️ Tem certeza que deseja excluir o ponto "' + pointName + '"? Esta ação não pode ser desfeita.');
+  if (!confirmar) return;
+
+  try {
+    await deleteDoc(doc(db, 'pontos', pointId));
+    document.getElementById('modalOverlay').style.display = 'none';
+    // Remover marcador do mapa
+    if (markers[pointId]) { map.removeLayer(markers[pointId]); delete markers[pointId]; }
+    const li = document.getElementById('pt-' + pointId); if (li) li.remove();
+    delete pointsData[pointId];
+    showToast('🗑️ Ponto "' + pointName + '" excluído.', 'success');
+  } catch(e) {
+    console.error(e);
+    showToast('Erro ao excluir ponto.', 'error');
+  }
+};
+
 // ===== FIREBASE LISTENERS =====
 const qP = query(collection(db, 'pontos'), orderBy('createdAt', 'desc'));
 onSnapshot(qP, { includeMetadataChanges: true }, snap => {
@@ -2112,13 +2332,7 @@ onSnapshot(qP, { includeMetadataChanges: true }, snap => {
   }
   snap.docChanges().forEach(ch => {
     if (ch.type === 'added' || ch.type === 'modified') {
-      const incoming = ch.doc.data();
-      const existing = pointsData[ch.doc.id];
-      // Não regride: se o ponto já tem fotos no mapa e chegou versão sem fotos (fotosEnviando), manter as fotos existentes
-      if (existing?.photos?.length > 0 && incoming.fotosEnviando && !(incoming.photos?.length > 0)) {
-        incoming.photos = existing.photos;
-      }
-      renderPoint(ch.doc.id, incoming);
+      renderPoint(ch.doc.id, ch.doc.data());
     }
   });
 }, () => {
