@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{--ink:#1a1208;--parchment:#f5edd6;--sepia:#c4933a;--rust:#b5451b;--moss:#3d6b4f;--cream:#faf4e8;--shadow:rgba(26,18,8,0.18);}
-  
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden;}
   header{background:var(--ink);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px;position:fixed;top:0;left:0;right:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.4);}
@@ -23,16 +22,13 @@
   .sidebar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sepia),var(--rust),var(--moss));}
   .sidebar-tabs{display:flex;border-bottom:1px solid rgba(196,147,58,0.2);}
   .tab-btn{flex:1;padding:13px 2px;font-family:'DM Sans',sans-serif;font-size:0.68rem;font-weight:500;background:none;border:none;cursor:pointer;color:rgba(26,18,8,0.45);border-bottom:2px solid transparent;transition:all 0.2s;margin-bottom:-1px;white-space:nowrap;}
-  /* Roteiro */
   .roteiro-area{padding:14px;display:flex;flex-direction:column;gap:10px;}
-  .roteiro-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
   .roteiro-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);}
   .roteiro-subtitle{font-size:0.72rem;color:rgba(26,18,8,0.45);margin-top:2px;}
   .roteiro-card{background:white;border-radius:10px;border:1.5px solid rgba(196,147,58,0.25);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
   .roteiro-card-header{background:var(--ink);padding:9px 14px;display:flex;align-items:center;gap:8px;}
   .roteiro-num{background:var(--sepia);color:white;font-size:0.68rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
   .roteiro-nome{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:white;flex:1;}
-  .roteiro-cidade{font-size:0.65rem;color:rgba(196,147,58,0.85);font-weight:500;white-space:nowrap;}
   .roteiro-body{padding:10px 14px;}
   .roteiro-desc{font-size:0.76rem;color:rgba(26,18,8,0.65);line-height:1.5;margin-bottom:8px;}
   .roteiro-status{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
@@ -47,15 +43,13 @@
   .form-area{padding:18px 22px;}
   .form-group{margin-bottom:13px;}
   label{display:block;font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:rgba(26,18,8,0.5);margin-bottom:5px;}
-  input,textarea,select{width:100%;background:white;border:1.5px solid rgba(196,147,58,0.2);color:var(--ink);border-radius:8px;padding:9px 13px;font-family:'DM Sans',sans-serif;font-size:0.87rem;color:var(--ink);transition:border-color 0.2s,box-shadow 0.2s;outline:none;}
+  input,textarea,select{width:100%;background:white;border:1.5px solid rgba(196,147,58,0.2);color:var(--ink);border-radius:8px;padding:9px 13px;font-family:'DM Sans',sans-serif;font-size:0.87rem;transition:border-color 0.2s,box-shadow 0.2s;outline:none;}
   input:focus,textarea:focus,select:focus{border-color:var(--sepia);box-shadow:0 0 0 3px rgba(196,147,58,0.15);}
   textarea{resize:vertical;min-height:70px;line-height:1.5;}
   select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c4933a' fill='none' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;cursor:pointer;}
   .gps-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
   .gps-btn{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--moss);color:white;border:none;border-radius:8px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;cursor:pointer;transition:background 0.2s;}
   .gps-btn:hover{background:#2f5340;}
-
-  /* MÍDIA — botões visíveis como chips */
   .media-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
   .media-chip{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:24px;border:2px solid rgba(196,147,58,0.35);background:white;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;cursor:pointer;color:rgba(26,18,8,0.6);transition:all 0.2s;user-select:none;}
   .media-chip:hover{border-color:var(--sepia);color:var(--sepia);background:rgba(196,147,58,0.05);}
@@ -74,8 +68,6 @@
   .media-thumb{position:relative;width:68px;height:68px;border-radius:8px;overflow:hidden;border:1.5px solid rgba(196,147,58,0.3);background:#f0e8d0;}
   .media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;}
   .media-thumb .remove-btn{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(181,69,27,0.9);color:white;border:none;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;}
-
-  /* GRAVADOR DE VÍDEO */
   .video-recorder{padding:4px 0;}
   .video-preview-live{width:100%;aspect-ratio:16/9;background:#1a1208;border-radius:10px;overflow:hidden;position:relative;margin-bottom:10px;display:none;}
   .video-preview-live.active{display:block;}
@@ -91,8 +83,6 @@
   .video-item video{width:100%;max-height:160px;display:block;}
   .video-item .remove-btn{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(181,69,27,0.9);color:white;border:none;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;}
   .video-size-info{font-size:0.68rem;color:rgba(26,18,8,0.4);text-align:center;margin-top:4px;}
-
-  /* ÁUDIO */
   .audio-recorder{padding:4px 0;}
   .recorder-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
   .rec-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border-radius:20px;border:none;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;cursor:pointer;transition:all 0.2s;}
@@ -105,12 +95,9 @@
   .audio-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(196,147,58,0.08);border-radius:8px;border:1px solid rgba(196,147,58,0.2);}
   .audio-item audio{flex:1;height:32px;}
   .audio-item .remove-btn{width:22px;height:22px;border-radius:50%;background:var(--rust);color:white;border:none;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-
   .submit-btn{width:100%;background:var(--rust);color:white;border:none;border-radius:8px;padding:13px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s,box-shadow 0.2s;letter-spacing:0.02em;margin-top:4px;}
   .submit-btn:hover{background:#963c17;box-shadow:0 4px 16px rgba(181,69,27,0.35);}
   .submit-btn:disabled{background:#ccc;cursor:not-allowed;box-shadow:none;}
-
-  /* LISTA PONTOS */
   .points-list-area{flex:1;overflow-y:auto;padding:16px 22px;}
   .list-header{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
   .count-badge{background:var(--sepia);color:white;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;padding:2px 8px;border-radius:20px;}
@@ -122,8 +109,6 @@
   .category-tag{background:rgba(196,147,58,0.15);color:var(--sepia);font-size:0.66rem;font-weight:500;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:0.05em;}
   .point-media-icons{display:flex;gap:4px;margin-top:4px;}
   .media-icon-badge{font-size:0.68rem;background:rgba(26,18,8,0.07);padding:1px 6px;border-radius:10px;}
-
-  /* ALUNOS */
   .students-area{padding:18px 22px;display:flex;flex-direction:column;gap:14px;flex:1;overflow-y:auto;}
   .students-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
   .students-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;}
@@ -165,62 +150,43 @@
   .r-bar-wrap{width:70px;background:rgba(196,147,58,0.12);border-radius:20px;height:6px;overflow:hidden;}
   .r-bar{height:100%;background:linear-gradient(90deg,var(--sepia),var(--rust));border-radius:20px;transition:width 0.6s ease;}
   .r-count{font-size:0.78rem;font-weight:700;color:var(--rust);width:22px;text-align:right;}
-
-  /* MAPA */
   #map{width:100%;height:100%;z-index:1;}
-  /* Esconder toggle padrão do Leaflet, manter só o painel */
   .leaflet-control-layers-toggle{display:none !important;}
   .leaflet-control-layers{padding:0 !important;}
   .leaflet-control-layers-expanded{padding:8px !important;}
-  /* Botão flutuante de mapa */
   .map-layer-btn{position:absolute;bottom:90px;right:10px;z-index:500;background:white;border:2px solid rgba(196,147,58,0.4);border-radius:10px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;color:var(--sepia);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15);display:flex;align-items:center;gap:5px;transition:all 0.2s;}
   .map-layer-btn:hover{background:rgba(196,147,58,0.08);border-color:var(--sepia);}
-  /* Container relativo para posicionar botão sobre o mapa */
   .map-wrap{position:relative;width:100%;height:100%;}
-
-  /* MODAL */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;}
   .modal-overlay.open{display:flex;}
   .modal{background:white;border-radius:16px;max-width:660px;width:100%;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:modal-in 0.25s ease;overflow:hidden;}
   @keyframes modal-in{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}
-  /* Header fixo — nunca some ao rolar */
   .modal-header{padding:16px 20px 12px;display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;border-bottom:1px solid rgba(196,147,58,0.15);background:white;position:sticky;top:0;z-index:10;}
   .modal-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;}
   .modal-cat{font-size:0.75rem;color:var(--sepia);font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-top:3px;}
-  /* X grande, fácil de tocar no mobile */
   .modal-close{background:rgba(26,18,8,0.07);border:none;cursor:pointer;color:var(--ink);font-size:1.1rem;line-height:1;padding:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
   .btn-excluir-ponto{background:none;border:1px solid rgba(181,69,27,0.3);color:var(--rust);border-radius:8px;padding:7px 14px;font-size:0.76rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;width:100%;text-align:center;}
   .btn-excluir-ponto:hover{background:var(--rust);color:white;border-color:var(--rust);}
   .modal-close:hover{background:rgba(181,69,27,0.12);color:var(--rust);}
-  /* Corpo com scroll próprio */
   .modal-body{padding:16px 24px 28px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
-  /* Galeria carrossel */
   .photo-carousel{position:relative;width:100%;overflow:hidden;border-radius:10px;background:#111;margin-bottom:8px;}
   .carousel-track{display:flex;}
   .carousel-track img{width:100%;flex-shrink:0;height:280px;object-fit:contain;cursor:zoom-in;background:#111;}
   .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:none;color:white;font-size:1.3rem;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:background 0.2s;}
   .carousel-btn:hover{background:rgba(0,0,0,0.75);}
-  .carousel-prev{left:8px;} .carousel-next{right:8px;}
+  .carousel-prev{left:8px;}.carousel-next{right:8px;}
   .carousel-dots{display:flex;justify-content:center;gap:5px;padding:8px 0;}
   .carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(196,147,58,0.25);cursor:pointer;transition:background 0.2s;}
   .carousel-dot.active{background:var(--sepia);}
   .carousel-counter{position:absolute;top:8px;right:10px;background:rgba(0,0,0,0.55);color:white;font-size:0.72rem;font-weight:600;padding:3px 8px;border-radius:20px;}
-  /* Lightbox pinch-to-zoom */
   .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;}
   .lightbox.open{display:flex;}
   .lightbox-img{max-width:100%;max-height:90vh;object-fit:contain;touch-action:none;transform-origin:center;transition:transform 0.1s;}
   .lightbox-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.15);border:none;color:white;font-size:1.2rem;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
   .lightbox-hint{position:absolute;bottom:20px;color:rgba(255,255,255,0.45);font-size:0.72rem;font-family:'DM Sans',sans-serif;}
-  /* Popup com scroll */
   .leaflet-popup-content{max-height:70vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .popup-close-btn{position:absolute;top:6px;right:6px;background:rgba(26,18,8,0.08);border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;color:var(--ink);}
-  /* Mobile: modal sobe do rodapé */
-  @media(max-width:768px){
-    .modal-overlay{padding:0;align-items:flex-end;}
-    .modal{border-radius:20px 20px 0 0;max-height:92vh;width:100%;}
-    .modal-header{padding:14px 16px 10px;}
-    .modal-body{padding:12px 16px 24px;}
-  }
+  @media(max-width:768px){.modal-overlay{padding:0;align-items:flex-end;}.modal{border-radius:20px 20px 0 0;max-height:92vh;width:100%;}.modal-header{padding:14px 16px 10px;}.modal-body{padding:12px 16px 24px;}}
   .modal-meta{background:rgba(196,147,58,0.07);border-radius:10px;padding:12px 14px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:10px;}
   .modal-meta-item{font-size:0.8rem;color:rgba(26,18,8,0.65);}
   .modal-meta-item strong{color:var(--ink);}
@@ -233,8 +199,6 @@
   .modal-video{width:100%;border-radius:10px;margin-bottom:8px;}
   .modal-audio{width:100%;margin-bottom:8px;}
   .modal-text-note{background:rgba(196,147,58,0.08);border-left:3px solid var(--sepia);border-radius:0 8px 8px 0;padding:12px 14px;font-size:0.87rem;line-height:1.6;margin-bottom:8px;}
-
-  /* POPUP */
   .leaflet-control-layers{background:white !important;border:1.5px solid rgba(196,147,58,0.35) !important;border-radius:10px !important;box-shadow:0 4px 16px rgba(0,0,0,0.15) !important;font-family:'DM Sans',sans-serif !important;}
   .leaflet-control-layers label{font-size:0.82rem !important;font-weight:500 !important;color:#1a1208 !important;padding:5px 10px !important;border-radius:6px !important;cursor:pointer !important;display:flex !important;align-items:center !important;gap:6px !important;text-transform:none !important;letter-spacing:normal !important;}
   .leaflet-control-layers label:hover{background:rgba(196,147,58,0.1) !important;}
@@ -248,8 +212,6 @@
   .popup-media-row{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;}
   .popup-media-badge{font-size:0.72rem;background:rgba(196,147,58,0.12);padding:3px 8px;border-radius:10px;color:var(--sepia);font-weight:500;}
   .popup-thumb{width:100%;max-height:140px;object-fit:cover;border-radius:8px;margin-top:8px;cursor:pointer;}
-  .popup-enviando{font-size:0.72rem;color:rgba(26,18,8,0.4);text-align:center;padding:8px;background:rgba(196,147,58,0.06);border-radius:8px;margin-top:8px;}
-
   .toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:var(--parchment);padding:13px 18px;border-radius:10px;font-size:0.84rem;z-index:9999;transform:translateY(100px);opacity:0;transition:transform 0.3s,opacity 0.3s;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-left:3px solid var(--sepia);}
   .toast.show{transform:translateY(0);opacity:1;}
   .toast.success{border-left-color:var(--moss);}
@@ -260,7 +222,6 @@
   ::-webkit-scrollbar-thumb{background:rgba(196,147,58,0.3);border-radius:4px;}
   .loading{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg)}}
-  /* AVALIAÇÃO PROFESSOR */
   .aval-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:4000;display:none;align-items:center;justify-content:center;padding:16px;}
   .aval-overlay.open{display:flex;}
   .aval-modal{background:white;border-radius:16px;max-width:700px;width:100%;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,0.45);animation:modal-in 0.25s ease;overflow:hidden;}
@@ -277,7 +238,6 @@
   .aval-table tr:hover td{background:rgba(196,147,58,0.04);}
   .aval-table .aluno-nome{font-weight:500;}
   .aval-table .aluno-turma{font-size:0.72rem;color:rgba(26,18,8,0.45);}
-  /* Botões de conceito */
   .conceito-group{display:flex;gap:4px;justify-content:center;flex-wrap:nowrap;}
   .conceito-btn{border:1.5px solid transparent;border-radius:20px;padding:4px 10px;font-size:0.7rem;font-weight:600;cursor:pointer;background:rgba(26,18,8,0.05);color:rgba(26,18,8,0.4);transition:all 0.15s;white-space:nowrap;}
   .conceito-btn:hover{opacity:0.8;}
@@ -285,28 +245,19 @@
   .conceito-btn.sel-B{background:#c4933a;border-color:#c4933a;color:white;}
   .conceito-btn.sel-R{background:#e6a817;border-color:#e6a817;color:white;}
   .conceito-btn.sel-I{background:#b5451b;border-color:#b5451b;color:white;}
-  /* Participação checkboxes */
   .part-group{display:flex;gap:6px;justify-content:center;}
   .part-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(26,18,8,0.15);background:none;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
   .part-btn.sel{border-color:transparent;}
   .part-btn[data-p="1"].sel{background:#3d6b4f;}
   .part-btn[data-p="2"].sel{background:#e6a817;}
   .part-btn[data-p="3"].sel{background:#b5451b;}
-  /* Footer */
   .aval-footer{padding:14px 22px;border-top:1px solid rgba(196,147,58,0.15);display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
   .aval-save-btn{background:var(--moss);color:white;border:none;border-radius:8px;padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;}
   .aval-pdf-btn{background:var(--rust);color:white;border:none;border-radius:8px;padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;}
   .aval-legend{display:flex;gap:10px;flex-wrap:wrap;padding:8px 22px 0;font-size:0.68rem;}
   .aval-legend span{display:flex;align-items:center;gap:4px;}
   .aval-legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
-  @media(max-width:768px){
-    .aval-modal{max-height:95vh;border-radius:20px 20px 0 0;}
-    .aval-overlay{padding:0;align-items:flex-end;}
-    .conceito-group{flex-wrap:wrap;}
-    .conceito-btn{padding:4px 7px;font-size:0.65rem;}
-  }
-
-  /* EDITAR ALUNO */
+  @media(max-width:768px){.aval-modal{max-height:95vh;border-radius:20px 20px 0 0;}.aval-overlay{padding:0;align-items:flex-end;}.conceito-group{flex-wrap:wrap;}.conceito-btn{padding:4px 7px;font-size:0.65rem;}}
   .edit-inline{background:#fffdf5;border:1.5px solid rgba(196,147,58,0.3);border-radius:8px;padding:10px 12px;margin-top:6px;display:none;}
   .edit-inline.open{display:block;}
   .edit-inline-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
@@ -316,48 +267,14 @@
   .btn-edit-cancel{background:rgba(26,18,8,0.07);border:none;border-radius:6px;padding:6px 14px;font-size:0.78rem;cursor:pointer;}
   .student-edit-btn{width:24px;height:24px;border-radius:50%;background:rgba(196,147,58,0.1);border:none;cursor:pointer;color:var(--sepia);font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
   .student-edit-btn:hover{background:rgba(196,147,58,0.2);}
-
-  /* ===== MOBILE — layout 50/50 com drag handle ===== */
   @media(max-width:768px){
-    .app{
-      grid-template-columns:1fr;
-      grid-template-rows:1fr auto 1fr;
-      height:calc(100vh - 72px);
-    }
-    .sidebar{
-      height:100%;
-      border-right:none;
-      border-bottom:none;
-      overflow:hidden;
-    }
+    .app{grid-template-columns:1fr;grid-template-rows:1fr auto 1fr;height:calc(100vh - 72px);}
+    .sidebar{height:100%;border-right:none;border-bottom:none;overflow:hidden;}
     .map-wrap{height:100%;}
     #map{height:100%;}
-
-    /* Drag handle */
-    .drag-handle{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:22px;
-      background:var(--parchment);
-      border-top:1px solid rgba(196,147,58,0.25);
-      border-bottom:1px solid rgba(196,147,58,0.25);
-      cursor:ns-resize;
-      touch-action:none;
-      user-select:none;
-      z-index:50;
-      flex-shrink:0;
-    }
-    .drag-handle-bar{
-      width:40px;height:4px;
-      background:rgba(196,147,58,0.5);
-      border-radius:4px;
-    }
-
-    /* Chips de mídia menores */
+    .drag-handle{display:flex;align-items:center;justify-content:center;height:22px;background:var(--parchment);border-top:1px solid rgba(196,147,58,0.25);border-bottom:1px solid rgba(196,147,58,0.25);cursor:ns-resize;touch-action:none;user-select:none;z-index:50;flex-shrink:0;}
+    .drag-handle-bar{width:40px;height:4px;background:rgba(196,147,58,0.5);border-radius:4px;}
     .media-chip{padding:7px 12px;font-size:0.76rem;}
-
-    /* Modal mobile — sobe do rodapé */
     .modal-overlay{padding:0;align-items:flex-end;}
     .modal{border-radius:20px 20px 0 0;max-height:92vh;}
   }
@@ -377,10 +294,9 @@
   <div class="header-right">
     <div class="status-dot" id="statusDot"></div>
     <span class="status-label" id="statusLabel">Conectando...</span>
-    <span id="offlineBadge" style="display:none;background:#e6a817;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;cursor:pointer;" title="Clique para sincronizar agora" onclick="processPendingUploads()">📵 0 foto(s) pendente(s)</span>
+    <span id="offlineBadge" style="display:none;background:#e6a817;color:white;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;cursor:pointer;" title="Clique para sincronizar agora" onclick="window.processPendingUploads&&window.processPendingUploads()">📵 0 foto(s) pendente(s)</span>
   </div>
 </header>
-
 <div class="app">
   <div class="sidebar">
     <div class="sidebar-tabs" style="padding-top:4px;">
@@ -389,62 +305,23 @@
       <button class="tab-btn" id="tbtn-roteiro">🗺️ Roteiro</button>
       <button class="tab-btn" id="tbtn-students">👥 Eletiva</button>
     </div>
-
-    <!-- ===== TAB REGISTRAR ===== -->
     <div class="tab-panel active" id="tab-form">
       <div class="form-area">
-        <div class="form-group">
-          <label>Aluno responsável</label>
-          <select id="authorSelect"><option value="">Selecionar aluno...</option></select>
-        </div>
-        <div class="form-group">
-          <label>Nome do ponto histórico</label>
-          <input type="text" id="pointName" placeholder="Ex: Casarão da Família Ferreira">
-        </div>
-        <div class="form-group">
-          <label>Categoria</label>
-          <select id="category">
-            <option value="">Selecionar...</option>
-            <option value="Arquitetura">🏛️ Arquitetura</option>
-            <option value="Prédio Público/Privado">🏢 Prédio Público/Privado</option>
-            <option value="Cultura">🎭 Cultura e Arte</option>
-            <option value="Monumento Histórico">🗿 Monumento Histórico</option>
-            <option value="Marco Geográfico">🗺️ Marco Geográfico</option>
-            <option value="Personalidade">👤 Personalidade Histórica</option>
-            <option value="Religião">⛪ Religião</option>
-            <option value="Natureza">🌿 Natureza</option>
-            <option value="Outro">📌 Outro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Descrição histórica</label>
-          <textarea id="description" placeholder="Descreva o significado histórico deste lugar..."></textarea>
-        </div>
-
-        <!-- MÍDIA — chips clicáveis -->
+        <div class="form-group"><label>Aluno responsável</label><select id="authorSelect"><option value="">Selecionar aluno...</option></select></div>
+        <div class="form-group"><label>Nome do ponto histórico</label><input type="text" id="pointName" placeholder="Ex: Casarão da Família Ferreira"></div>
+        <div class="form-group"><label>Categoria</label><select id="category"><option value="">Selecionar...</option><option value="Arquitetura">🏛️ Arquitetura</option><option value="Prédio Público/Privado">🏢 Prédio Público/Privado</option><option value="Cultura">🎭 Cultura e Arte</option><option value="Monumento Histórico">🗿 Monumento Histórico</option><option value="Marco Geográfico">🗺️ Marco Geográfico</option><option value="Personalidade">👤 Personalidade Histórica</option><option value="Religião">⛪ Religião</option><option value="Natureza">🌿 Natureza</option><option value="Outro">📌 Outro</option></select></div>
+        <div class="form-group"><label>Descrição histórica</label><textarea id="description" placeholder="Descreva o significado histórico deste lugar..."></textarea></div>
         <div class="form-group">
           <label>Mídias (opcional)</label>
           <div class="media-chips">
-            <div class="media-chip" id="chip-photos">
-              <span class="media-chip-icon">📷</span> Fotos
-            </div>
-            <div class="media-chip" id="chip-videos">
-              <span class="media-chip-icon">🎬</span> Vídeos
-            </div>
-            <div class="media-chip" id="chip-audio">
-              <span class="media-chip-icon">🎙️</span> Áudio
-            </div>
-            <div class="media-chip" id="chip-texts">
-              <span class="media-chip-icon">📝</span> Anotação
-            </div>
-            <div class="media-chip" id="chip-aval" style="border-color:#3d6b4f;color:#3d6b4f;" title="Somente professores">
-              <span class="media-chip-icon">📊</span> Avaliação
-            </div>
+            <div class="media-chip" id="chip-photos"><span class="media-chip-icon">📷</span> Fotos</div>
+            <div class="media-chip" id="chip-videos"><span class="media-chip-icon">🎬</span> Vídeos</div>
+            <div class="media-chip" id="chip-audio"><span class="media-chip-icon">🎙️</span> Áudio</div>
+            <div class="media-chip" id="chip-texts"><span class="media-chip-icon">📝</span> Anotação</div>
+            <div class="media-chip" id="chip-aval" style="border-color:#3d6b4f;color:#3d6b4f;" title="Somente professores"><span class="media-chip-icon">📊</span> Avaliação</div>
           </div>
-
-          <!-- Painel Fotos -->
           <div class="media-panel" id="panel-photos">
-            <div class="upload-zone" id="uploadZonePhoto">
+            <div class="upload-zone">
               <span class="upload-zone-icon">📷</span>
               <p style="font-weight:500;color:rgba(26,18,8,0.7)">Adicionar fotos ao ponto</p>
               <p style="font-size:0.7rem;opacity:.6;margin-bottom:10px">No celular: use a câmera ou a galeria</p>
@@ -458,341 +335,58 @@
             </div>
             <div class="media-preview" id="photoPreview"></div>
           </div>
-
-          <!-- Painel Vídeos -->
           <div class="media-panel" id="panel-videos">
             <div class="video-recorder">
-              <!-- Preview ao vivo da câmera -->
-              <div class="video-preview-live" id="videoLiveWrap">
-                <video id="videoLive" autoplay muted playsinline></video>
-                <div class="video-rec-overlay" id="videoRecOverlay" style="display:none">
-                  <div class="video-rec-dot"></div>
-                  <span class="video-rec-timer-txt" id="videoRecTimer">00:00</span>
-                  <span style="font-size:0.68rem;color:rgba(255,255,255,0.7)" id="videoRecMax">&nbsp;/ 20s</span>
-                </div>
-                <div class="video-progress-wrap">
-                  <div class="video-progress-bar" id="videoProgressBar" style="width:0%"></div>
-                </div>
-              </div>
-
-              <!-- Controles -->
-              <div class="video-rec-controls">
-                <button class="rec-btn record" id="vRecStartBtn">🎬 Gravar vídeo</button>
-                <button class="rec-btn stop" id="vRecStopBtn" disabled>⏹ Parar</button>
-                <span class="rec-timer" id="vRecTimerDisplay" style="display:none">
-                  <span style="color:#ef4444;font-weight:700" id="vRecCountdown">30</span>s restantes
-                </span>
-              </div>
+              <div class="video-preview-live" id="videoLiveWrap"><video id="videoLive" autoplay muted playsinline></video><div class="video-rec-overlay" id="videoRecOverlay" style="display:none"><div class="video-rec-dot"></div><span class="video-rec-timer-txt" id="videoRecTimer">00:00</span><span style="font-size:0.68rem;color:rgba(255,255,255,0.7)">&nbsp;/ 20s</span></div><div class="video-progress-wrap"><div class="video-progress-bar" id="videoProgressBar" style="width:0%"></div></div></div>
+              <div class="video-rec-controls"><button class="rec-btn record" id="vRecStartBtn">🎬 Gravar vídeo</button><button class="rec-btn stop" id="vRecStopBtn" disabled>⏹ Parar</button><span class="rec-timer" id="vRecTimerDisplay" style="display:none"><span style="color:#ef4444;font-weight:700" id="vRecCountdown">30</span>s restantes</span></div>
               <p style="font-size:0.68rem;color:rgba(26,18,8,0.38);margin-bottom:10px">Limite: 20 segundos · qualidade otimizada para dados móveis</p>
-
-              <!-- Separador -->
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-                <div style="flex:1;height:1px;background:rgba(196,147,58,0.2)"></div>
-                <span style="font-size:0.68rem;color:rgba(26,18,8,0.35)">ou</span>
-                <div style="flex:1;height:1px;background:rgba(196,147,58,0.2)"></div>
-              </div>
-
-              <!-- Upload arquivo -->
-              <div style="text-align:center">
-                <button class="upload-btn" id="btnSelectVideo" style="background:rgba(26,18,8,0.12);color:var(--ink);">📁 Escolher arquivo</button>
-                <input type="file" id="videoInput" accept="video/*" multiple>
-              </div>
-
-              <!-- Lista de vídeos gravados/selecionados -->
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="flex:1;height:1px;background:rgba(196,147,58,0.2)"></div><span style="font-size:0.68rem;color:rgba(26,18,8,0.35)">ou</span><div style="flex:1;height:1px;background:rgba(196,147,58,0.2)"></div></div>
+              <div style="text-align:center"><button class="upload-btn" id="btnSelectVideo" style="background:rgba(26,18,8,0.12);color:var(--ink);">📁 Escolher arquivo</button><input type="file" id="videoInput" accept="video/*" multiple></div>
               <div class="video-list" id="videoList"></div>
               <div class="media-preview" id="videoPreview" style="display:none"></div>
             </div>
           </div>
-
-          <!-- Painel Áudio -->
-          <div class="media-panel" id="panel-audio">
-            <div class="audio-recorder">
-              <div class="recorder-controls">
-                <button class="rec-btn record" id="recStartBtn">⏺ Gravar</button>
-                <button class="rec-btn stop" id="recStopBtn" disabled>⏹ Parar</button>
-                <span class="rec-timer" id="recTimer">00:00</span>
-                <span class="rec-dot" id="recDot" style="display:none"></span>
-              </div>
-              <p style="font-size:0.72rem;color:rgba(26,18,8,0.4);margin-bottom:8px;">Grave uma narração sobre o local</p>
-              <div class="audio-list" id="audioList"></div>
-            </div>
-          </div>
-
-          <!-- Painel Texto -->
-          <div class="media-panel" id="panel-texts">
-            <label style="margin-bottom:6px">Anotações, fontes ou curiosidades</label>
-            <textarea id="extraText" placeholder="Ex: Segundo o livro X, este local foi palco de..." style="min-height:80px"></textarea>
-          </div>
+          <div class="media-panel" id="panel-audio"><div class="audio-recorder"><div class="recorder-controls"><button class="rec-btn record" id="recStartBtn">⏺ Gravar</button><button class="rec-btn stop" id="recStopBtn" disabled>⏹ Parar</button><span class="rec-timer" id="recTimer">00:00</span><span class="rec-dot" id="recDot" style="display:none"></span></div><p style="font-size:0.72rem;color:rgba(26,18,8,0.4);margin-bottom:8px;">Grave uma narração sobre o local</p><div class="audio-list" id="audioList"></div></div></div>
+          <div class="media-panel" id="panel-texts"><label style="margin-bottom:6px">Anotações, fontes ou curiosidades</label><textarea id="extraText" placeholder="Ex: Segundo o livro X, este local foi palco de..." style="min-height:80px"></textarea></div>
         </div>
-
-        <div class="form-group">
-          <label>Localização GPS</label>
-          <div class="gps-row">
-            <input type="text" id="lat" placeholder="Latitude" readonly>
-            <input type="text" id="lng" placeholder="Longitude" readonly>
-            <button class="gps-btn" id="btnGPS">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-              Usar minha localização atual
-            </button>
-          </div>
-        </div>
+        <div class="form-group"><label>Localização GPS</label><div class="gps-row"><input type="text" id="lat" placeholder="Latitude" readonly><input type="text" id="lng" placeholder="Longitude" readonly><button class="gps-btn" id="btnGPS"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Usar minha localização atual</button></div></div>
         <button class="submit-btn" id="submitBtn">📌 Registrar Ponto Histórico</button>
       </div>
     </div>
-
-    <!-- ===== TAB PONTOS ===== -->
-    <!-- ===== TAB ROTEIRO ===== -->
     <div class="tab-panel" id="tab-roteiro">
       <div class="roteiro-area">
-        <div>
-          <div class="roteiro-title">🗺️ Roteiro de Campo</div>
-          <div class="roteiro-subtitle">PK do Ontem e do Hoje · 6 paradas históricas</div>
-        </div>
-
-        <!-- PONTO 1 -->
-        <div class="roteiro-card" id="rcard-1">
-          <div class="roteiro-card-header">
-            <div class="roteiro-num">1</div>
-            <div class="roteiro-nome">Riacho Firmino</div>
-            <div class="roteiro-cidade-badge">Pres. Dutra</div>
-          </div>
-          <div class="roteiro-body">
-            <div class="roteiro-desc">Marco natural da região, importante para compreender os primeiros pontos de ocupação e circulação que deu origem ao município. Os riachos eram fundamentais para abastecimento, agricultura e fixação das primeiras famílias.</div>
-            <div class="roteiro-status">
-              <span class="roteiro-gps" id="rgps-1">📍 GPS a capturar no dia</span>
-              <button class="btn-registrar-visita" onclick="iniciarVisita(1,'Riacho Firmino','Recursos Hídricos')">+ Registrar minha visita</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PONTO 2 -->
-        <div class="roteiro-card" id="rcard-2">
-          <div class="roteiro-card-header">
-            <div class="roteiro-num">2</div>
-            <div class="roteiro-nome">Brejeiras de São Bento, Caxixi e Corrente</div>
-            <div class="roteiro-cidade-badge">Tuntum – MA</div>
-          </div>
-          <div class="roteiro-body">
-            <div class="roteiro-desc">Áreas brejeiras (alagadiças) que ajudam a compreender a dinâmica ambiental da região, os limites territoriais históricos e a influência da geografia na formação das comunidades e rotas antigas.</div>
-            <div class="roteiro-status">
-              <span class="roteiro-gps" id="rgps-2">📍 GPS a capturar no dia · <em>Tuntum, MA</em></span>
-              <button class="btn-registrar-visita" onclick="iniciarVisita(2,'Brejeiras – Tuntum','Meio Ambiente')">+ Registrar minha visita</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PONTO 3 -->
-        <div class="roteiro-card" id="rcard-3">
-          <div class="roteiro-card-header">
-            <div class="roteiro-num">3</div>
-            <div class="roteiro-nome">Praça São Sebastião</div>
-            <div class="roteiro-cidade-badge">Pres. Dutra</div>
-          </div>
-          <div class="roteiro-body">
-            <div class="roteiro-desc">Praça central e tradicional da cidade, espaço histórico de convivência, eventos religiosos, manifestações culturais e encontros comunitários. Um dos marcos urbanos mais importantes do desenvolvimento de Presidente Dutra.</div>
-            <div class="roteiro-status">
-              <span class="roteiro-gps" id="rgps-3">📍 GPS a capturar no dia</span>
-              <button class="btn-registrar-visita" onclick="iniciarVisita(3,'Praça São Sebastião','Praça / Espaço Público')">+ Registrar minha visita</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PONTO 4 -->
-        <div class="roteiro-card" id="rcard-4">
-          <div class="roteiro-card-header">
-            <div class="roteiro-num">4</div>
-            <div class="roteiro-nome">U.E. Dr. Murilo Braga</div>
-            <div class="roteiro-cidade-badge">Pres. Dutra</div>
-          </div>
-          <div class="roteiro-body">
-            <div class="roteiro-desc">Instituição pública de ensino que integra a história educacional do município. Representa o avanço da educação formal e a consolidação das políticas públicas voltadas para a formação da população.</div>
-            <div class="roteiro-status">
-              <span class="roteiro-gps" id="rgps-4">📍 GPS a capturar no dia</span>
-              <button class="btn-registrar-visita" onclick="iniciarVisita(4,'U.E. Dr. Murilo Braga','Prédio Público')">+ Registrar minha visita</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PONTO 5 -->
-        <div class="roteiro-card" id="rcard-5">
-          <div class="roteiro-card-header">
-            <div class="roteiro-num">5</div>
-            <div class="roteiro-nome">Riacho Preguiça</div>
-            <div class="roteiro-cidade-badge">Pres. Dutra</div>
-          </div>
-          <div class="roteiro-body">
-            <div class="roteiro-desc">Curso d'água que possui importância histórica na organização territorial e no cotidiano das primeiras ocupações. Contribuiu decisivamente para o desenvolvimento econômico e social da região.</div>
-            <div class="roteiro-status">
-              <span class="roteiro-gps" id="rgps-5">📍 GPS a capturar no dia</span>
-              <button class="btn-registrar-visita" onclick="iniciarVisita(5,'Riacho Preguiça','Recursos Hídricos')">+ Registrar minha visita</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PONTO 6 -->
-        <div class="roteiro-card" id="rcard-6">
-          <div class="roteiro-card-header">
-            <div class="roteiro-num">6</div>
-            <div class="roteiro-nome">As Furnas – Creoli do Joviniano</div>
-            <div class="roteiro-cidade-badge">Zona Rural · ~18km</div>
-          </div>
-          <div class="roteiro-body">
-            <div class="roteiro-desc">Formações espeleológicas naturais estudadas pela UEMA. Furnas 1, 2 e 4 localizadas no Povoado Creoli do Joviniano. Patrimônio natural e científico do município, com estrada pavimentada e nova praça no acesso.</div>
-            <div class="roteiro-status">
-              <span class="roteiro-gps" id="rgps-6">📍 GPS a capturar no dia · <em>~18km da sede</em></span>
-              <button class="btn-registrar-visita" onclick="iniciarVisita(6,'As Furnas – Creoli do Joviniano','Patrimônio Natural')">+ Registrar minha visita</button>
-            </div>
-          </div>
-        </div>
-
+        <div><div class="roteiro-title">🗺️ Roteiro de Campo</div><div class="roteiro-subtitle">PK do Ontem e do Hoje · 6 paradas históricas</div></div>
+        <div class="roteiro-card"><div class="roteiro-card-header"><div class="roteiro-num">1</div><div class="roteiro-nome">Riacho Firmino</div><div class="roteiro-cidade-badge">Pres. Dutra</div></div><div class="roteiro-body"><div class="roteiro-desc">Marco natural da região, importante para compreender os primeiros pontos de ocupação e circulação que deu origem ao município.</div><div class="roteiro-status"><span class="roteiro-gps" id="rgps-1">📍 GPS a capturar no dia</span><button class="btn-registrar-visita" onclick="iniciarVisita(1,'Riacho Firmino','Recursos Hídricos')">+ Registrar minha visita</button></div></div></div>
+        <div class="roteiro-card"><div class="roteiro-card-header"><div class="roteiro-num">2</div><div class="roteiro-nome">Brejeiras de São Bento, Caxixi e Corrente</div><div class="roteiro-cidade-badge">Tuntum – MA</div></div><div class="roteiro-body"><div class="roteiro-desc">Áreas brejeiras que ajudam a compreender a dinâmica ambiental da região e os limites territoriais históricos.</div><div class="roteiro-status"><span class="roteiro-gps" id="rgps-2">📍 GPS a capturar no dia · <em>Tuntum, MA</em></span><button class="btn-registrar-visita" onclick="iniciarVisita(2,'Brejeiras – Tuntum','Meio Ambiente')">+ Registrar minha visita</button></div></div></div>
+        <div class="roteiro-card"><div class="roteiro-card-header"><div class="roteiro-num">3</div><div class="roteiro-nome">Praça São Sebastião</div><div class="roteiro-cidade-badge">Pres. Dutra</div></div><div class="roteiro-body"><div class="roteiro-desc">Praça central e tradicional da cidade, espaço histórico de convivência e manifestações culturais.</div><div class="roteiro-status"><span class="roteiro-gps" id="rgps-3">📍 GPS a capturar no dia</span><button class="btn-registrar-visita" onclick="iniciarVisita(3,'Praça São Sebastião','Praça / Espaço Público')">+ Registrar minha visita</button></div></div></div>
+        <div class="roteiro-card"><div class="roteiro-card-header"><div class="roteiro-num">4</div><div class="roteiro-nome">U.E. Dr. Murilo Braga</div><div class="roteiro-cidade-badge">Pres. Dutra</div></div><div class="roteiro-body"><div class="roteiro-desc">Instituição pública de ensino que integra a história educacional do município.</div><div class="roteiro-status"><span class="roteiro-gps" id="rgps-4">📍 GPS a capturar no dia</span><button class="btn-registrar-visita" onclick="iniciarVisita(4,'U.E. Dr. Murilo Braga','Prédio Público')">+ Registrar minha visita</button></div></div></div>
+        <div class="roteiro-card"><div class="roteiro-card-header"><div class="roteiro-num">5</div><div class="roteiro-nome">Riacho Preguiça</div><div class="roteiro-cidade-badge">Pres. Dutra</div></div><div class="roteiro-body"><div class="roteiro-desc">Curso d'água com importância histórica na organização territorial e cotidiano das primeiras ocupações.</div><div class="roteiro-status"><span class="roteiro-gps" id="rgps-5">📍 GPS a capturar no dia</span><button class="btn-registrar-visita" onclick="iniciarVisita(5,'Riacho Preguiça','Recursos Hídricos')">+ Registrar minha visita</button></div></div></div>
+        <div class="roteiro-card"><div class="roteiro-card-header"><div class="roteiro-num">6</div><div class="roteiro-nome">As Furnas – Creoli do Joviniano</div><div class="roteiro-cidade-badge">Zona Rural · ~18km</div></div><div class="roteiro-body"><div class="roteiro-desc">Formações espeleológicas naturais estudadas pela UEMA. Patrimônio natural e científico do município.</div><div class="roteiro-status"><span class="roteiro-gps" id="rgps-6">📍 GPS a capturar no dia · <em>~18km da sede</em></span><button class="btn-registrar-visita" onclick="iniciarVisita(6,'As Furnas – Creoli do Joviniano','Patrimônio Natural')">+ Registrar minha visita</button></div></div></div>
       </div>
     </div>
-
-    <div class="tab-panel" id="tab-list">
-      <div class="points-list-area">
-        <div class="list-header">Pontos registrados <span class="count-badge" id="countBadge">0</span></div>
-        <div id="pointsList"><div class="empty-state"><p>Nenhum ponto cadastrado ainda.</p></div></div>
-      </div>
-    </div>
-
-    <!-- ===== TAB ALUNOS ===== -->
+    <div class="tab-panel" id="tab-list"><div class="points-list-area"><div class="list-header">Pontos registrados <span class="count-badge" id="countBadge">0</span></div><div id="pointsList"><div class="empty-state"><p>Nenhum ponto cadastrado ainda.</p></div></div></div></div>
     <div class="tab-panel" id="tab-students">
       <div class="students-area">
-        <div class="students-header">
-          <div class="students-title">👥 Alunos / Eletiva</div>
-          <div class="students-actions" style="flex-wrap:wrap;gap:6px;">
-            <button class="btn-sm outline" id="btnToggleAddForm" title="Máx. 32 alunos">+ Aluno <span id="cntAlunos" style="font-size:0.68rem;opacity:0.7">(0/32)</span></button>
-            <button class="btn-sm outline" id="btnToggleProfForm" style="border-color:#3d6b4f;color:#3d6b4f;" title="Máx. 2 professores">+ Professor <span id="cntProfs" style="font-size:0.68rem;opacity:0.7">(0/2)</span></button>
-            <button class="btn-sm secondary" id="btnPDF">📄 PDF</button>
-          </div>
-        </div>
-        <div class="report-stats">
-          <div class="stat-box"><div class="stat-num" id="statAlunos">0</div><div class="stat-lbl">Alunos</div></div>
-          <div class="stat-box"><div class="stat-num" id="statPontos">0</div><div class="stat-lbl">Pontos</div></div>
-          <div class="stat-box"><div class="stat-num" id="statParticip">0</div><div class="stat-lbl">Participaram</div></div>
-        </div>
-        <div id="limitBanner" style="display:none" class="limit-banner">🔒 Limite de 34 participantes atingido.<br>Todos os alunos e professores já estão cadastrados.</div>
-        <div class="add-student-form" id="addStudentForm">
-          <div class="add-student-row" style="margin-bottom:10px">
-            <div class="full form-group" style="margin-bottom:10px">
-              <label>Nome completo *</label>
-              <input type="text" id="sName" placeholder="Nome do aluno ou professor">
-            </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label>Turma</label>
-              <input type="text" id="sTurma" placeholder="Ex: 9ºA">
-            </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label>Nº</label>
-              <input type="number" id="sNum" placeholder="01" min="1" max="50">
-            </div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn-sm primary" id="btnAddStudent" style="flex:1">Salvar</button>
-            <button class="btn-sm outline" id="btnCancelAdd">Cancelar</button>
-          </div>
-        </div>
-        <!-- FORM PROFESSOR -->
-        <div class="add-student-form" id="addProfForm">
-          <div style="background:rgba(61,107,79,0.08);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:0.78rem;color:#3d6b4f;font-weight:500;">👨‍🏫 Cadastrar professor — máx. 2 vagas</div>
-          <div class="add-student-row" style="margin-bottom:10px">
-            <div class="full form-group" style="margin-bottom:10px">
-              <label>Nome completo *</label>
-              <input type="text" id="pName" placeholder="Nome do professor">
-            </div>
-            <div class="full form-group" style="margin-bottom:0">
-              <label>Disciplina</label>
-              <input type="text" id="pDisciplina" placeholder="Ex: História">
-            </div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn-sm primary" id="btnAddProf" style="background:#3d6b4f;flex:1">Salvar professor</button>
-            <button class="btn-sm outline" id="btnCancelProf">Cancelar</button>
-          </div>
-        </div>
-
-        <div class="ranking-section" id="rankingSection" style="display:none">
-          <div class="section-label">🏆 Ranking de cadastros</div>
-          <div id="rankingList"></div>
-        </div>
-        <div class="student-list-wrap" id="studentList">
-          <div class="empty-state"><p>Nenhum aluno cadastrado.<br>Clique em "+ Aluno" para começar.</p></div>
-        </div>
+        <div class="students-header"><div class="students-title">👥 Alunos / Eletiva</div><div class="students-actions" style="flex-wrap:wrap;gap:6px;"><button class="btn-sm outline" id="btnToggleAddForm">+ Aluno <span id="cntAlunos" style="font-size:0.68rem;opacity:0.7">(0/32)</span></button><button class="btn-sm outline" id="btnToggleProfForm" style="border-color:#3d6b4f;color:#3d6b4f;">+ Professor <span id="cntProfs" style="font-size:0.68rem;opacity:0.7">(0/2)</span></button><button class="btn-sm secondary" id="btnPDF">📄 PDF</button></div></div>
+        <div class="report-stats"><div class="stat-box"><div class="stat-num" id="statAlunos">0</div><div class="stat-lbl">Alunos</div></div><div class="stat-box"><div class="stat-num" id="statPontos">0</div><div class="stat-lbl">Pontos</div></div><div class="stat-box"><div class="stat-num" id="statParticip">0</div><div class="stat-lbl">Participaram</div></div></div>
+        <div id="limitBanner" style="display:none" class="limit-banner">🔒 Limite de 34 participantes atingido.</div>
+        <div class="add-student-form" id="addStudentForm"><div class="add-student-row" style="margin-bottom:10px"><div class="full form-group" style="margin-bottom:10px"><label>Nome completo *</label><input type="text" id="sName" placeholder="Nome do aluno"></div><div class="form-group" style="margin-bottom:0"><label>Turma</label><input type="text" id="sTurma" placeholder="Ex: 9ºA"></div><div class="form-group" style="margin-bottom:0"><label>Nº</label><input type="number" id="sNum" placeholder="01" min="1" max="50"></div></div><div style="display:flex;gap:8px"><button class="btn-sm primary" id="btnAddStudent" style="flex:1">Salvar</button><button class="btn-sm outline" id="btnCancelAdd">Cancelar</button></div></div>
+        <div class="add-student-form" id="addProfForm"><div style="background:rgba(61,107,79,0.08);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:0.78rem;color:#3d6b4f;font-weight:500;">👨‍🏫 Cadastrar professor — máx. 2 vagas</div><div class="add-student-row" style="margin-bottom:10px"><div class="full form-group" style="margin-bottom:10px"><label>Nome completo *</label><input type="text" id="pName" placeholder="Nome do professor"></div><div class="full form-group" style="margin-bottom:0"><label>Disciplina</label><input type="text" id="pDisciplina" placeholder="Ex: História"></div></div><div style="display:flex;gap:8px"><button class="btn-sm primary" id="btnAddProf" style="background:#3d6b4f;flex:1">Salvar professor</button><button class="btn-sm outline" id="btnCancelProf">Cancelar</button></div></div>
+        <div class="ranking-section" id="rankingSection" style="display:none"><div class="section-label">🏆 Ranking de cadastros</div><div id="rankingList"></div></div>
+        <div class="student-list-wrap" id="studentList"><div class="empty-state"><p>Nenhum aluno cadastrado.<br>Clique em "+ Aluno" para começar.</p></div></div>
       </div>
     </div>
   </div>
-
-  <!-- Drag handle — só visível no mobile -->
-  <div class="drag-handle" id="dragHandle" style="display:none">
-    <div class="drag-handle-bar"></div>
-  </div>
-
-  <div class="map-wrap">
-    <div id="map"></div>
-    <button class="map-layer-btn" id="btnLayerToggle">🗺️ Camada</button>
-  </div>
+  <div class="drag-handle" id="dragHandle" style="display:none"><div class="drag-handle-bar"></div></div>
+  <div class="map-wrap"><div id="map"></div><button class="map-layer-btn" id="btnLayerToggle">🗺️ Camada</button></div>
 </div>
-
-<!-- MODAL PONTO -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <div class="modal-header">
-      <div><div class="modal-title" id="modalTitle"></div><div class="modal-cat" id="modalCat"></div></div>
-      <button class="modal-close" id="btnCloseModal">×</button>
-    </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div style="padding:0 20px 16px;">
-      <button class="btn-excluir-ponto" id="btnExcluirPonto" style="display:none;">🗑️ Excluir este ponto</button>
-    </div>
-  </div>
-</div>
-
+<div class="modal-overlay" id="modalOverlay"><div class="modal"><div class="modal-header"><div><div class="modal-title" id="modalTitle"></div><div class="modal-cat" id="modalCat"></div></div><button class="modal-close" id="btnCloseModal">×</button></div><div class="modal-body" id="modalBody"></div><div style="padding:0 20px 16px;"><button class="btn-excluir-ponto" id="btnExcluirPonto" style="display:none;">🗑️ Excluir este ponto</button></div></div></div>
 <div class="toast" id="toast"></div>
-
-<!-- MODAL AVALIAÇÃO PROFESSOR -->
-<div class="aval-overlay" id="avalOverlay">
-  <div class="aval-modal">
-    <div class="aval-header">
-      <div>
-        <h2>📊 Avaliação dos Alunos</h2>
-        <p>PK do Ontem e do Hoje · registre a participação e o conceito de cada aluno</p>
-      </div>
-      <button class="aval-close" id="btnCloseAval">✕</button>
-    </div>
-    <div class="aval-legend">
-      <span><span class="dot" style="background:#3d6b4f"></span> Participou</span>
-      <span><span class="dot" style="background:#e6a817"></span> Participou parcialmente</span>
-      <span><span class="dot" style="background:#b5451b"></span> Não participou</span>
-      <span style="margin-left:8px">|</span>
-      <span><span class="dot" style="background:#3d6b4f"></span> Excelente</span>
-      <span><span class="dot" style="background:#c4933a"></span> Bom</span>
-      <span><span class="dot" style="background:#e6a817"></span> Regular</span>
-      <span><span class="dot" style="background:#b5451b"></span> Insuficiente</span>
-    </div>
-    <div class="aval-body">
-      <table class="aval-table">
-        <thead>
-          <tr>
-            <th style="min-width:130px">Aluno</th>
-            <th class="center" style="min-width:120px">Participação</th>
-            <th class="center" style="min-width:180px">Conceito</th>
-            <th style="min-width:120px">Observação</th>
-          </tr>
-        </thead>
-        <tbody id="avalTableBody"></tbody>
-      </table>
-    </div>
-    <div class="aval-footer">
-      <button class="aval-save-btn" id="btnSaveAval">💾 Salvar avaliações</button>
-      <button class="aval-pdf-btn" id="btnAvalPDF">📄 Gerar PDF</button>
-    </div>
-  </div>
-</div>
-
+<div class="aval-overlay" id="avalOverlay"><div class="aval-modal"><div class="aval-header"><div><h2>📊 Avaliação dos Alunos</h2><p>PK do Ontem e do Hoje · registre a participação e o conceito de cada aluno</p></div><button class="aval-close" id="btnCloseAval">✕</button></div><div class="aval-legend"><span><span class="dot" style="background:#3d6b4f"></span> Participou</span><span><span class="dot" style="background:#e6a817"></span> Participou parcialmente</span><span><span class="dot" style="background:#b5451b"></span> Não participou</span><span style="margin-left:8px">|</span><span><span class="dot" style="background:#3d6b4f"></span> Excelente</span><span><span class="dot" style="background:#c4933a"></span> Bom</span><span><span class="dot" style="background:#e6a817"></span> Regular</span><span><span class="dot" style="background:#b5451b"></span> Insuficiente</span></div><div class="aval-body"><table class="aval-table"><thead><tr><th style="min-width:130px">Aluno</th><th class="center" style="min-width:120px">Participação</th><th class="center" style="min-width:180px">Conceito</th><th style="min-width:120px">Observação</th></tr></thead><tbody id="avalTableBody"></tbody></table></div><div class="aval-footer"><button class="aval-save-btn" id="btnSaveAval">💾 Salvar avaliações</button><button class="aval-pdf-btn" id="btnAvalPDF">📄 Gerar PDF</button></div></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, doc, setDoc, deleteDoc, enableNetwork, disableNetwork } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 import { enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-storage.js";
 
@@ -806,23 +400,18 @@ const firebaseConfig = {
   appId: "1:731000410555:web:d715162b1bb96787f1349e"
 };
 
-const LIMITE_PARTICIPANTES = 34; // 32 alunos + 2 professores
-
 const fbApp = initializeApp(firebaseConfig);
 const db = getFirestore(fbApp);
 const storage = getStorage(fbApp);
 
-// ===== PERSISTÊNCIA OFFLINE =====
 enableIndexedDbPersistence(db).catch(err => {
-  if (err.code === 'failed-precondition') console.warn('Offline: múltiplas abas abertas');
-  else if (err.code === 'unimplemented') console.warn('Offline: navegador não suporta');
+  if (err.code === 'failed-precondition') console.warn('Offline: múltiplas abas');
+  else if (err.code === 'unimplemented') console.warn('Offline: não suportado');
 });
 
-// Fila de mídias pendentes para upload quando voltar a internet
 let pendingUploads = JSON.parse(localStorage.getItem('pk_pending') || '[]');
-
-// Monitorar conexão
 let isOnline = navigator.onLine;
+
 function updateOnlineStatus() {
   isOnline = navigator.onLine;
   const dot = document.getElementById('statusDot');
@@ -830,1525 +419,601 @@ function updateOnlineStatus() {
   if (!isOnline) {
     dot.style.cssText = 'background:#e6a817;box-shadow:0 0 8px #e6a817';
     lbl.textContent = '📵 Offline — dados salvos localmente';
-    showToast('📵 Sem internet. Dados salvos offline!', '');
+    showToast('📵 Sem internet. Dados salvos offline!','');
   } else {
     dot.style.cssText = 'background:#4caf50;box-shadow:0 0 8px #4caf50';
     lbl.textContent = 'Tempo real ativo';
-    if (pendingUploads.length > 0) {
-      showToast(`📶 Internet voltou! Sincronizando ${pendingUploads.length} ponto(s)...`, 'success');
-      processPendingUploads();
-    }
+    if (pendingUploads.length > 0) { showToast(`📶 Internet voltou! Sincronizando ${pendingUploads.length} ponto(s)...`,'success'); processPendingUploads(); }
   }
 }
-window.addEventListener('online',  updateOnlineStatus);
+window.addEventListener('online', updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
-setTimeout(updateOnlineStatus, 1500); // checar status inicial
+setTimeout(updateOnlineStatus, 1500);
 
-// ===== MAPA =====
-const map = L.map('map', { zoomControl: false }).setView([-5.28, -44.47], 14);
-L.control.zoom({ position: 'bottomright' }).addTo(map);
-// Rua: OpenStreetMap nativo — cobertura completa do Brasil
-const layerRua = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:'© OpenStreetMap contributors', minZoom:1, maxZoom:19, maxNativeZoom:19
-});
-// Satelite: Google — excelente cobertura do interior do Brasil
-const layerSat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-  attribution:'© Google', minZoom:1, maxZoom:20, maxNativeZoom:20
-});
-// Hibrid: Google satelite + nomes de ruas
-const layerHibrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-  attribution:'© Google', minZoom:1, maxZoom:20, maxNativeZoom:20
-});
-layerSat.addTo(map); // Padrão: satélite
+const map = L.map('map',{zoomControl:false}).setView([-5.28,-44.47],14);
+L.control.zoom({position:'bottomright'}).addTo(map);
+const layerRua = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',minZoom:1,maxZoom:19,maxNativeZoom:19});
+const layerSat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{attribution:'© Google',minZoom:1,maxZoom:20,maxNativeZoom:20});
+const layerHibrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{attribution:'© Google',minZoom:1,maxZoom:20,maxNativeZoom:20});
+layerSat.addTo(map);
 L.control.layers({'🗺️ Rua':layerRua,'🛰️ Satélite':layerSat,'🛰️+🗺️ Híbrido':layerHibrid},{},{position:'topright',collapsed:true}).addTo(map);
 
-// ===== ESTADO =====
-let mediaFiles = { photo:[], video:[] }, audioBlobs = [];
-let mediaRecorder = null, recChunks = [], recInterval = null, recSeconds = 0;
-let pointsData = {}, students = {};
-const markers = {};
-let activeMarkerKey = null;
-let activeChip = null;
+let mediaFiles={photo:[],video:[]}, audioBlobs=[];
+let mediaRecorder=null, recChunks=[], recInterval=null, recSeconds=0;
+let pointsData={}, students={};
+const markers={};
+let activeMarkerKey=null, activeChip=null;
 
-// ===== TOAST =====
-function showToast(msg, type='') {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = `toast show ${type}`;
-  setTimeout(() => t.className = 'toast', 3200);
-}
+function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast show ${type}`;setTimeout(()=>t.className='toast',3200);}
 
-// ===== TABS =====
-let tabHistory = ['form'];
-function switchTab(tab) {
-  if (tabHistory[tabHistory.length-1] !== tab) tabHistory.push(tab);
-  if (tabHistory.length > 5) tabHistory = tabHistory.slice(-5);
-  _applyTab(tab);
+let tabHistory=['form'];
+function switchTab(tab){if(tabHistory[tabHistory.length-1]!==tab)tabHistory.push(tab);if(tabHistory.length>5)tabHistory=tabHistory.slice(-5);_applyTab(tab);}
+function _applyTab(tab){['form','list','roteiro','students'].forEach(t=>{document.getElementById('tab-'+t).classList.toggle('active',t===tab);document.getElementById('tbtn-'+t).classList.toggle('active',t===tab);});document.getElementById('btnBack').style.display=tabHistory.length>1?'block':'none';}
+document.getElementById('tbtn-form').addEventListener('click',()=>switchTab('form'));
+document.getElementById('tbtn-list').addEventListener('click',()=>switchTab('list'));
+document.getElementById('tbtn-roteiro').addEventListener('click',()=>switchTab('roteiro'));
+document.getElementById('tbtn-students').addEventListener('click',()=>switchTab('students'));
+document.getElementById('btnBack').addEventListener('click',()=>{if(tabHistory.length>1){tabHistory.pop();_applyTab(tabHistory[tabHistory.length-1]);}});
+
+document.getElementById('btnLayerToggle').addEventListener('click',()=>{const p=document.querySelector('.leaflet-control-layers');if(!p)return;const v=p.classList.contains('leaflet-control-layers-expanded');if(v){p.classList.remove('leaflet-control-layers-expanded');document.getElementById('btnLayerToggle').innerHTML='🗺️ Camada';}else{p.classList.add('leaflet-control-layers-expanded');document.getElementById('btnLayerToggle').innerHTML='✕ Fechar';}});
+document.addEventListener('change',e=>{if(e.target.classList.contains('leaflet-control-layers-selector')){setTimeout(()=>{const p=document.querySelector('.leaflet-control-layers');if(p)p.classList.remove('leaflet-control-layers-expanded');document.getElementById('btnLayerToggle').innerHTML='🗺️ Camada';},300);}});
+
+function openChip(name){
+  if(activeChip===name){document.getElementById('panel-'+name).classList.remove('open');document.getElementById('chip-'+name).classList.remove('active');activeChip=null;return;}
+  if(activeChip){document.getElementById('panel-'+activeChip).classList.remove('open');document.getElementById('chip-'+activeChip).classList.remove('active');}
+  document.getElementById('panel-'+name).classList.add('open');document.getElementById('chip-'+name).classList.add('active');activeChip=name;
 }
-function _applyTab(tab) {
-  ['form','list','roteiro','students'].forEach(t => {
-    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
-    document.getElementById('tbtn-'+t).classList.toggle('active', t===tab);
+['photos','videos','audio','texts'].forEach(n=>document.getElementById('chip-'+n).addEventListener('click',()=>openChip(n)));
+document.getElementById('chip-aval').addEventListener('click',()=>{const s=prompt('🔒 Área restrita. Digite a senha do professor:');if(s===null)return;if(s!=='prof2026'){showToast('Senha incorreta.','error');return;}openAvalModal();});
+
+document.getElementById('btnSelectPhoto').addEventListener('click',()=>document.getElementById('photoInput').click());
+document.getElementById('btnCamera').addEventListener('click',()=>document.getElementById('photoCameraInput').click());
+document.getElementById('btnSelectVideo').addEventListener('click',()=>document.getElementById('videoInput').click());
+
+// =====================================================================
+// FIX 3 — Compressão de fotos (reduz 5-15MB para ~300KB sem perda visual)
+// =====================================================================
+async function comprimirFoto(file, qualidade=0.75, maxWidth=1600) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const scale = Math.min(1, maxWidth / img.width);
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => resolve(blob || file), 'image/jpeg', qualidade);
+    };
+    img.onerror = () => resolve(file);
+    img.src = URL.createObjectURL(file);
   });
-  document.getElementById('btnBack').style.display = tabHistory.length > 1 ? 'block' : 'none';
 }
-document.getElementById('tbtn-form').addEventListener('click', () => switchTab('form'));
-document.getElementById('tbtn-list').addEventListener('click', () => switchTab('list'));
-document.getElementById('tbtn-roteiro').addEventListener('click', () => switchTab('roteiro'));
-document.getElementById('tbtn-students').addEventListener('click', () => switchTab('students'));
-document.getElementById('btnBack').addEventListener('click', () => {
-  if (tabHistory.length > 1) {
-    tabHistory.pop();
-    _applyTab(tabHistory[tabHistory.length-1]);
-  }
-});
 
-// ===== BOTÃO CAMADA =====
-document.getElementById('btnLayerToggle').addEventListener('click', () => {
-  const panel = document.querySelector('.leaflet-control-layers');
-  if (!panel) return;
-  const visible = panel.classList.contains('leaflet-control-layers-expanded');
-  if (visible) {
-    panel.classList.remove('leaflet-control-layers-expanded');
-    document.getElementById('btnLayerToggle').innerHTML = '🗺️ Camada';
-  } else {
-    panel.classList.add('leaflet-control-layers-expanded');
-    document.getElementById('btnLayerToggle').innerHTML = '✕ Fechar';
-  }
-});
-// Fechar painel ao escolher qualquer camada
-document.addEventListener('change', e => {
-  if (e.target.classList.contains('leaflet-control-layers-selector')) {
-    setTimeout(() => {
-      const panel = document.querySelector('.leaflet-control-layers');
-      if (panel) panel.classList.remove('leaflet-control-layers-expanded');
-      document.getElementById('btnLayerToggle').innerHTML = '🗺️ Camada';
-    }, 300);
-  }
-});
-
-// ===== MEDIA CHIPS =====
-function openChip(name) {
-  if (activeChip === name) {
-    document.getElementById('panel-'+name).classList.remove('open');
-    document.getElementById('chip-'+name).classList.remove('active');
-    activeChip = null; return;
-  }
-  if (activeChip) {
-    document.getElementById('panel-'+activeChip).classList.remove('open');
-    document.getElementById('chip-'+activeChip).classList.remove('active');
-  }
-  document.getElementById('panel-'+name).classList.add('open');
-  document.getElementById('chip-'+name).classList.add('active');
-  activeChip = name;
+function addPhotoThumb(file){
+  mediaFiles.photo.push(file);
+  const thumb=document.createElement('div');thumb.className='media-thumb';
+  const img=document.createElement('img');img.src=URL.createObjectURL(file);
+  thumb.appendChild(img);
+  const rm=document.createElement('button');rm.className='remove-btn';rm.textContent='×';
+  const idx=mediaFiles.photo.length-1;
+  rm.onclick=()=>{mediaFiles.photo.splice(idx,1);thumb.remove();};
+  thumb.appendChild(rm);
+  document.getElementById('photoPreview').appendChild(thumb);
 }
-['photos','videos','audio','texts'].forEach(n =>
-  document.getElementById('chip-'+n).addEventListener('click', () => openChip(n))
-);
+document.getElementById('photoCameraInput').addEventListener('change',function(){Array.from(this.files).forEach(f=>addPhotoThumb(f));this.value='';});
+document.getElementById('photoInput').addEventListener('change',function(){Array.from(this.files).forEach(f=>addPhotoThumb(f));this.value='';});
 
-// Chip avaliação — requer senha
-document.getElementById('chip-aval').addEventListener('click', () => {
-  const senha = prompt('🔒 Área restrita. Digite a senha do professor:');
-  if (senha === null) return;
-  if (senha !== 'prof2026') { showToast('Senha incorreta.', 'error'); return; }
-  openAvalModal();
-});
+const VIDEO_LIMIT_SEC=20;
+let videoRecorder=null,videoChunks=[],videoRecInterval=null,videoRecSeconds=0,videoStream=null;
 
-// ===== UPLOAD FOTOS/VÍDEOS =====
-document.getElementById('btnSelectPhoto').addEventListener('click', () => document.getElementById('photoInput').click());
-document.getElementById('btnCamera').addEventListener('click', () => document.getElementById('photoCameraInput').click());
-document.getElementById('btnSelectVideo').addEventListener('click', () => document.getElementById('videoInput').click());
-
-// Câmera direta (capture="environment" = câmera traseira)
-document.getElementById('photoCameraInput').addEventListener('change', function() {
-  Array.from(this.files).forEach(file => {
-    mediaFiles.photo.push(file);
-    const thumb = document.createElement('div'); thumb.className = 'media-thumb';
-    const img = document.createElement('img'); img.src = URL.createObjectURL(file);
-    thumb.appendChild(img);
-    const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
-    const idx = mediaFiles.photo.length - 1;
-    rm.onclick = () => { mediaFiles.photo.splice(idx, 1); thumb.remove(); };
-    thumb.appendChild(rm);
-    document.getElementById('photoPreview').appendChild(thumb);
-  });
-  this.value = '';
-});
-
-document.getElementById('photoInput').addEventListener('change', function() {
-  Array.from(this.files).forEach(file => {
-    mediaFiles.photo.push(file);
-    const thumb = document.createElement('div'); thumb.className = 'media-thumb';
-    const img = document.createElement('img'); img.src = URL.createObjectURL(file);
-    thumb.appendChild(img);
-    const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
-    const idx = mediaFiles.photo.length - 1;
-    rm.onclick = () => { mediaFiles.photo.splice(idx, 1); thumb.remove(); };
-    thumb.appendChild(rm);
-    document.getElementById('photoPreview').appendChild(thumb);
-  });
-  this.value = '';
-});
-
-// ===== GRAVADOR DE VÍDEO =====
-const VIDEO_LIMIT_SEC = 20;
-let videoRecorder = null, videoChunks = [], videoRecInterval = null, videoRecSeconds = 0;
-let videoStream = null;
-
-document.getElementById('vRecStartBtn').addEventListener('click', async () => {
-  try {
-    videoStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
-      audio: true
-    });
-    // Mostrar preview ao vivo
-    const liveVideo = document.getElementById('videoLive');
-    liveVideo.srcObject = videoStream;
+document.getElementById('vRecStartBtn').addEventListener('click',async()=>{
+  try{
+    videoStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:true});
+    const lv=document.getElementById('videoLive');lv.srcObject=videoStream;
     document.getElementById('videoLiveWrap').classList.add('active');
-    document.getElementById('videoRecOverlay').style.display = 'flex';
-
-    // Configurar MediaRecorder com qualidade reduzida (~1Mbps)
-    const opts = { mimeType: 'video/webm;codecs=vp8,opus', videoBitsPerSecond: 1_000_000 };
-    if (!MediaRecorder.isTypeSupported(opts.mimeType)) delete opts.mimeType;
-    videoChunks = [];
-    videoRecorder = new MediaRecorder(videoStream, opts);
-    videoRecorder.ondataavailable = e => { if (e.data.size > 0) videoChunks.push(e.data); };
-    videoRecorder.onstop = () => {
-      const blob = new Blob(videoChunks, { type: 'video/webm' });
-      const sizeMB = (blob.size / 1024 / 1024).toFixed(1);
-      const url = URL.createObjectURL(blob);
-      const idx = mediaFiles.video.length;
-      mediaFiles.video.push(blob);
-
-      // Adicionar na lista com preview
-      const item = document.createElement('div'); item.className = 'video-item';
-      item.innerHTML = `<video src="${url}" controls playsinline></video>
-        <p class="video-size-info">🎬 ${videoRecSeconds}s gravados · ${sizeMB}MB</p>`;
-      const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
-      rm.onclick = () => { mediaFiles.video.splice(idx, 1); item.remove(); };
-      item.appendChild(rm);
+    document.getElementById('videoRecOverlay').style.display='flex';
+    const opts={mimeType:'video/webm;codecs=vp8,opus',videoBitsPerSecond:1_000_000};
+    if(!MediaRecorder.isTypeSupported(opts.mimeType))delete opts.mimeType;
+    videoChunks=[];videoRecorder=new MediaRecorder(videoStream,opts);
+    videoRecorder.ondataavailable=e=>{if(e.data.size>0)videoChunks.push(e.data);};
+    videoRecorder.onstop=()=>{
+      const blob=new Blob(videoChunks,{type:'video/webm'});
+      const sizeMB=(blob.size/1024/1024).toFixed(1);
+      const url=URL.createObjectURL(blob);
+      const idx=mediaFiles.video.length;mediaFiles.video.push(blob);
+      const item=document.createElement('div');item.className='video-item';
+      item.innerHTML=`<video src="${url}" controls playsinline></video><p class="video-size-info">🎬 ${videoRecSeconds}s · ${sizeMB}MB</p>`;
+      const rm=document.createElement('button');rm.className='remove-btn';rm.textContent='×';
+      rm.onclick=()=>{mediaFiles.video.splice(idx,1);item.remove();};item.appendChild(rm);
       document.getElementById('videoList').appendChild(item);
-
-      // Resetar UI
       document.getElementById('videoLiveWrap').classList.remove('active');
-      document.getElementById('videoRecOverlay').style.display = 'none';
-      document.getElementById('videoProgressBar').style.width = '0%';
-      document.getElementById('vRecTimerDisplay').style.display = 'none';
-      document.getElementById('vRecStartBtn').disabled = false;
-      document.getElementById('vRecStopBtn').disabled = true;
-      liveVideo.srcObject = null;
-      videoStream.getTracks().forEach(t => t.stop());
-      showToast(`🎬 Vídeo gravado! (${sizeMB}MB)`, 'success');
+      document.getElementById('videoRecOverlay').style.display='none';
+      document.getElementById('videoProgressBar').style.width='0%';
+      document.getElementById('vRecTimerDisplay').style.display='none';
+      document.getElementById('vRecStartBtn').disabled=false;
+      document.getElementById('vRecStopBtn').disabled=true;
+      lv.srcObject=null;videoStream.getTracks().forEach(t=>t.stop());
+      showToast(`🎬 Vídeo gravado! (${sizeMB}MB)`,'success');
     };
-
-    videoRecorder.start(200); // chunks a cada 200ms
-    videoRecSeconds = 0;
-    document.getElementById('vRecStartBtn').disabled = true;
-    document.getElementById('vRecStopBtn').disabled = false;
-    document.getElementById('vRecTimerDisplay').style.display = 'inline';
-    document.getElementById('vRecCountdown').textContent = VIDEO_LIMIT_SEC;
-    document.getElementById('videoRecTimer').textContent = '00:00';
-    document.getElementById('videoProgressBar').style.width = '0%';
-
-    videoRecInterval = setInterval(() => {
+    videoRecorder.start(200);videoRecSeconds=0;
+    document.getElementById('vRecStartBtn').disabled=true;
+    document.getElementById('vRecStopBtn').disabled=false;
+    document.getElementById('vRecTimerDisplay').style.display='inline';
+    document.getElementById('vRecCountdown').textContent=VIDEO_LIMIT_SEC;
+    document.getElementById('videoRecTimer').textContent='00:00';
+    document.getElementById('videoProgressBar').style.width='0%';
+    videoRecInterval=setInterval(()=>{
       videoRecSeconds++;
-      const remaining = VIDEO_LIMIT_SEC - videoRecSeconds;
-      const mm = String(Math.floor(videoRecSeconds/60)).padStart(2,'0');
-      const ss = String(videoRecSeconds%60).padStart(2,'0');
-      document.getElementById('videoRecTimer').textContent = `${mm}:${ss}`;
-      document.getElementById('vRecCountdown').textContent = remaining;
-      document.getElementById('videoProgressBar').style.width = `${(videoRecSeconds/VIDEO_LIMIT_SEC)*100}%`;
-
-      // Mudar cor nos últimos 5s
-      const bar = document.getElementById('videoProgressBar');
-      bar.style.background = remaining <= 5 ? '#ef4444' : '#e6a817';
-
-      // Parar automaticamente ao atingir o limite
-      if (videoRecSeconds >= VIDEO_LIMIT_SEC) {
-        clearInterval(videoRecInterval);
-        if (videoRecorder?.state === 'recording') videoRecorder.stop();
-        showToast('⏱️ Limite de 20s atingido — vídeo salvo!', '');
-      }
-    }, 1000);
-
-  } catch(e) {
-    console.error(e);
-    showToast('Sem acesso à câmera. Verifique as permissões.', 'error');
-  }
+      const rem=VIDEO_LIMIT_SEC-videoRecSeconds;
+      const mm=String(Math.floor(videoRecSeconds/60)).padStart(2,'0');
+      const ss=String(videoRecSeconds%60).padStart(2,'0');
+      document.getElementById('videoRecTimer').textContent=`${mm}:${ss}`;
+      document.getElementById('vRecCountdown').textContent=rem;
+      document.getElementById('videoProgressBar').style.width=`${(videoRecSeconds/VIDEO_LIMIT_SEC)*100}%`;
+      document.getElementById('videoProgressBar').style.background=rem<=5?'#ef4444':'#e6a817';
+      if(videoRecSeconds>=VIDEO_LIMIT_SEC){clearInterval(videoRecInterval);if(videoRecorder?.state==='recording')videoRecorder.stop();showToast('⏱️ Limite de 20s atingido!','');}
+    },1000);
+  }catch(e){console.error(e);showToast('Sem acesso à câmera.','error');}
 });
-
-document.getElementById('vRecStopBtn').addEventListener('click', () => {
-  if (videoRecorder?.state === 'recording') {
-    clearInterval(videoRecInterval);
-    videoRecorder.stop();
-    document.getElementById('vRecStopBtn').disabled = true;
-  }
-});
-
-// Upload de arquivo de vídeo (mantido como alternativa)
-document.getElementById('videoInput').addEventListener('change', function() {
-  Array.from(this.files).forEach(file => {
-    const sizeMB = (file.size / 1024 / 1024).toFixed(1);
-    if (file.size > 150 * 1024 * 1024) {
-      showToast(`⚠️ Arquivo muito grande (${sizeMB}MB). Use vídeos menores.`, 'error'); return;
-    }
+document.getElementById('vRecStopBtn').addEventListener('click',()=>{if(videoRecorder?.state==='recording'){clearInterval(videoRecInterval);videoRecorder.stop();document.getElementById('vRecStopBtn').disabled=true;}});
+document.getElementById('videoInput').addEventListener('change',function(){
+  Array.from(this.files).forEach(file=>{
+    const sizeMB=(file.size/1024/1024).toFixed(1);
+    if(file.size>150*1024*1024){showToast(`⚠️ Arquivo muito grande (${sizeMB}MB).`,'error');return;}
     mediaFiles.video.push(file);
-    const url = URL.createObjectURL(file);
-    const idx = mediaFiles.video.length - 1;
-    const item = document.createElement('div'); item.className = 'video-item';
-    item.innerHTML = `<video src="${url}" controls playsinline></video>
-      <p class="video-size-info">📁 ${file.name} · ${sizeMB}MB</p>`;
-    const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
-    rm.onclick = () => { mediaFiles.video.splice(idx, 1); item.remove(); };
-    item.appendChild(rm);
+    const url=URL.createObjectURL(file);const idx=mediaFiles.video.length-1;
+    const item=document.createElement('div');item.className='video-item';
+    item.innerHTML=`<video src="${url}" controls playsinline></video><p class="video-size-info">📁 ${file.name} · ${sizeMB}MB</p>`;
+    const rm=document.createElement('button');rm.className='remove-btn';rm.textContent='×';
+    rm.onclick=()=>{mediaFiles.video.splice(idx,1);item.remove();};item.appendChild(rm);
     document.getElementById('videoList').appendChild(item);
-  });
-  this.value = '';
+  });this.value='';
 });
 
-// ===== ÁUDIO =====
-document.getElementById('recStartBtn').addEventListener('click', async () => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    recChunks = []; mediaRecorder = new MediaRecorder(stream);
-    mediaRecorder.ondataavailable = e => recChunks.push(e.data);
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(recChunks, { type: 'audio/webm' });
-      audioBlobs.push(blob);
-      const url = URL.createObjectURL(blob);
-      const idx = audioBlobs.length - 1;
-      const item = document.createElement('div'); item.className = 'audio-item';
-      item.innerHTML = `<audio controls src="${url}"></audio>`;
-      const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = '×';
-      rm.onclick = () => { audioBlobs[idx] = null; item.remove(); };
-      item.appendChild(rm);
+document.getElementById('recStartBtn').addEventListener('click',async()=>{
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    recChunks=[];mediaRecorder=new MediaRecorder(stream);
+    mediaRecorder.ondataavailable=e=>recChunks.push(e.data);
+    mediaRecorder.onstop=()=>{
+      const blob=new Blob(recChunks,{type:'audio/webm'});audioBlobs.push(blob);
+      const url=URL.createObjectURL(blob);const idx=audioBlobs.length-1;
+      const item=document.createElement('div');item.className='audio-item';
+      item.innerHTML=`<audio controls src="${url}"></audio>`;
+      const rm=document.createElement('button');rm.className='remove-btn';rm.textContent='×';
+      rm.onclick=()=>{audioBlobs[idx]=null;item.remove();};item.appendChild(rm);
       document.getElementById('audioList').appendChild(item);
-      stream.getTracks().forEach(t => t.stop());
-      showToast('🎙️ Áudio gravado!', 'success');
+      stream.getTracks().forEach(t=>t.stop());showToast('🎙️ Áudio gravado!','success');
     };
-    mediaRecorder.start(); recSeconds = 0;
-    document.getElementById('recTimer').textContent = '00:00';
-    document.getElementById('recDot').style.display = 'inline-block';
-    document.getElementById('recStartBtn').disabled = true;
-    document.getElementById('recStopBtn').disabled = false;
-    recInterval = setInterval(() => {
-      recSeconds++;
-      document.getElementById('recTimer').textContent =
-        String(Math.floor(recSeconds/60)).padStart(2,'0') + ':' + String(recSeconds%60).padStart(2,'0');
-    }, 1000);
-  } catch { showToast('Sem acesso ao microfone.', 'error'); }
+    mediaRecorder.start();recSeconds=0;
+    document.getElementById('recTimer').textContent='00:00';
+    document.getElementById('recDot').style.display='inline-block';
+    document.getElementById('recStartBtn').disabled=true;
+    document.getElementById('recStopBtn').disabled=false;
+    recInterval=setInterval(()=>{recSeconds++;document.getElementById('recTimer').textContent=String(Math.floor(recSeconds/60)).padStart(2,'0')+':'+String(recSeconds%60).padStart(2,'0');},1000);
+  }catch{showToast('Sem acesso ao microfone.','error');}
 });
+document.getElementById('recStopBtn').addEventListener('click',()=>{if(mediaRecorder?.state!=='inactive'){mediaRecorder.stop();clearInterval(recInterval);document.getElementById('recDot').style.display='none';document.getElementById('recStartBtn').disabled=false;document.getElementById('recStopBtn').disabled=true;}});
 
-document.getElementById('recStopBtn').addEventListener('click', () => {
-  if (mediaRecorder?.state !== 'inactive') {
-    mediaRecorder.stop(); clearInterval(recInterval);
-    document.getElementById('recDot').style.display = 'none';
-    document.getElementById('recStartBtn').disabled = false;
-    document.getElementById('recStopBtn').disabled = true;
-  }
-});
-
-// ===== GPS =====
-document.getElementById('btnGPS').addEventListener('click', () => {
-  if (!navigator.geolocation) { showToast('GPS não disponível.', 'error'); return; }
-  const btn = document.getElementById('btnGPS');
-  btn.innerHTML = '<div class="loading"></div> Obtendo...'; btn.disabled = true;
-  // Estratégia: tentar até 3 leituras e pegar a mais precisa
-  let bestAccuracy = Infinity, attempts = 0;
-  const watchId = navigator.geolocation.watchPosition(pos => {
+document.getElementById('btnGPS').addEventListener('click',()=>{
+  if(!navigator.geolocation){showToast('GPS não disponível.','error');return;}
+  const btn=document.getElementById('btnGPS');
+  btn.innerHTML='<div class="loading"></div> Obtendo...';btn.disabled=true;
+  let bestAcc=Infinity,attempts=0;
+  const wid=navigator.geolocation.watchPosition(pos=>{
     attempts++;
-    if (pos.coords.accuracy < bestAccuracy) {
-      bestAccuracy = pos.coords.accuracy;
-      document.getElementById('lat').value = pos.coords.latitude.toFixed(7);
-      document.getElementById('lng').value = pos.coords.longitude.toFixed(7);
-      map.flyTo([pos.coords.latitude, pos.coords.longitude], 18, { duration: 1.0 });
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> ✓ ±${Math.round(pos.coords.accuracy)}m`;
-    }
-    // Para após 3 leituras ou precisão < 15m
-    if (attempts >= 3 || pos.coords.accuracy < 15) {
-      navigator.geolocation.clearWatch(watchId);
-      btn.disabled = false;
-      showToast(`📍 GPS: ±${Math.round(bestAccuracy)}m de precisão`, bestAccuracy < 30 ? 'success' : '');
-    }
-  }, () => {
-    navigator.geolocation.clearWatch(watchId);
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Usar minha localização atual`;
-    btn.disabled = false; showToast('Erro ao obter GPS.', 'error');
-  }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
+    if(pos.coords.accuracy<bestAcc){bestAcc=pos.coords.accuracy;document.getElementById('lat').value=pos.coords.latitude.toFixed(7);document.getElementById('lng').value=pos.coords.longitude.toFixed(7);map.flyTo([pos.coords.latitude,pos.coords.longitude],18,{duration:1.0});btn.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> ✓ ±${Math.round(pos.coords.accuracy)}m`;}
+    if(attempts>=3||pos.coords.accuracy<15){navigator.geolocation.clearWatch(wid);btn.disabled=false;showToast(`📍 GPS: ±${Math.round(bestAcc)}m`,bestAcc<30?'success':'');}
+  },()=>{navigator.geolocation.clearWatch(wid);btn.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Usar minha localização atual`;btn.disabled=false;showToast('Erro ao obter GPS.','error');},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
 });
+map.on('click',e=>{document.getElementById('lat').value=e.latlng.lat.toFixed(6);document.getElementById('lng').value=e.latlng.lng.toFixed(6);showToast('📍 Coordenadas definidas pelo clique.');});
 
-// Clique no mapa define coordenadas
-map.on('click', e => {
-  document.getElementById('lat').value = e.latlng.lat.toFixed(6);
-  document.getElementById('lng').value = e.latlng.lng.toFixed(6);
-  showToast('📍 Coordenadas definidas pelo clique.');
-});
+function createRoteirIcon(num,big=false){const s=big?38:32;return L.divIcon({className:'',html:`<div style="position:relative;width:${s}px;height:${s+8}px;text-align:center;"><div style="width:${s}px;height:${s}px;background:#c4933a;border:2.5px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.35);font-size:${s*0.42}px;font-weight:700;color:white;font-family:'DM Sans',sans-serif;">${num}</div></div>`,iconSize:[s,s+8],iconAnchor:[s/2,s+8],popupAnchor:[0,-(s+12)]});}
+function createIcon(big=false){const s=big?38:30;return L.divIcon({className:'',html:`<div style="position:relative;width:${s}px;height:${s+8}px"><div style="width:${s}px;height:${s}px;background:#3d6b4f;border:3px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 ${big?6:2}px ${big?20:8}px rgba(0,0,0,${big?0.45:0.3})"></div></div>`,iconSize:[s,s+8],iconAnchor:[s/2,s+8],popupAnchor:[0,-(s+12)]});}
 
-// ===== ÍCONE =====
-// Ícone estrela dourada para pontos do roteiro
-function createRoteirIcon(num, big = false) {
-  const s = big ? 38 : 32;
-  return L.divIcon({
-    className: '',
-    html: `<div style="position:relative;width:${s}px;height:${s+8}px;text-align:center;">
-      <div style="width:${s}px;height:${s}px;background:#c4933a;border:2.5px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.35);font-size:${s*0.42}px;font-weight:700;color:white;font-family:'DM Sans',sans-serif;">${num}</div>
-      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:${big?8:5}px;height:3px;background:rgba(0,0,0,0.2);border-radius:50%;filter:blur(2px)"></div>
-    </div>`,
-    iconSize: [s, s+8], iconAnchor: [s/2, s+8], popupAnchor: [0, -(s+12)]
-  });
-}
-
-// Preencher form de Registrar com dados do ponto do roteiro
-window.iniciarVisita = function(num, nome, categoria) {
+window.iniciarVisita=function(num,nome,categoria){
   switchTab('form');
-  // Preencher nome e categoria automaticamente
-  const fNome = document.getElementById('pointName');
-  const fCat  = document.getElementById('category');
-  if (fNome) fNome.value = nome;
-  if (fCat) {
-    // Tentar selecionar a categoria correspondente
-    const opts = Array.from(fCat.options);
-    const match = opts.find(o => o.value === categoria || o.text.includes(categoria));
-    if (match) fCat.value = match.value;
-  }
-  // Rolar o form para o topo
-  document.getElementById('tab-form').scrollTop = 0;
-  showToast('📍 Ponto ' + num + ' pré-preenchido! Capture o GPS e complete o registro.', 'success');
-  // Destacar campo GPS
-  setTimeout(() => {
-    const gpsBtn = document.getElementById('btnGPS');
-    if (gpsBtn) { gpsBtn.style.animation = 'pulse-dot 0.8s 3'; }
-  }, 500);
+  const fNome=document.getElementById('pointName');const fCat=document.getElementById('category');
+  if(fNome)fNome.value=nome;
+  if(fCat){const match=Array.from(fCat.options).find(o=>o.value===categoria||o.text.includes(categoria));if(match)fCat.value=match.value;}
+  document.getElementById('tab-form').scrollTop=0;
+  showToast('📍 Ponto '+num+' pré-preenchido! Capture o GPS e complete o registro.','success');
 };
 
-function createIcon(big = false) {
-  const s = big ? 38 : 30;
-  return L.divIcon({
-    className: '',
-    html: `<div style="position:relative;width:${s}px;height:${s+8}px">
-      <div style="width:${s}px;height:${s}px;background:#3d6b4f;border:3px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 ${big?6:2}px ${big?20:8}px rgba(0,0,0,${big?0.45:0.3})"></div>
-      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:${big?10:6}px;height:3px;background:rgba(0,0,0,0.2);border-radius:50%;filter:blur(2px)"></div>
-    </div>`,
-    iconSize: [s, s+8], iconAnchor: [s/2, s+8], popupAnchor: [0, -(s+12)]
-  });
-}
-
-// ===== MODAL =====
-// ===== LIGHTBOX COM PINCH-TO-ZOOM =====
-const lightbox = document.createElement('div');
-lightbox.className = 'lightbox';
-lightbox.innerHTML = `
-  <button class="lightbox-close" id="lbClose">✕</button>
-  <img class="lightbox-img" id="lbImg">
-  <div class="lightbox-hint">Dois dedos para zoom · Toque para fechar</div>`;
+// =====================================================================
+// FIX 1 — openLightbox exposta no window (dentro de module era invisível)
+// =====================================================================
+const lightbox=document.createElement('div');lightbox.className='lightbox';
+lightbox.innerHTML=`<button class="lightbox-close" id="lbClose">✕</button><img class="lightbox-img" id="lbImg"><div class="lightbox-hint">Dois dedos para zoom · Toque para fechar</div>`;
 document.body.appendChild(lightbox);
+let lbScale=1,lbLastDist=0;
+const lbImg=document.getElementById('lbImg');
 
-let lbScale = 1, lbLastDist = 0;
-const lbImg = document.getElementById('lbImg');
+function openLightbox(src){lbImg.src=src;lbScale=1;lbImg.style.transform='scale(1)';lightbox.classList.add('open');}
+window.openLightbox = openLightbox; // FIX1
 
-function openLightbox(src) {
-  lbImg.src = src; lbScale = 1;
-  lbImg.style.transform = 'scale(1)';
-  lightbox.classList.add('open');
-}
-document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
-lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target === lbImg) lightbox.classList.remove('open'); });
+document.getElementById('lbClose').addEventListener('click',()=>lightbox.classList.remove('open'));
+lightbox.addEventListener('click',e=>{if(e.target===lightbox||e.target===lbImg)lightbox.classList.remove('open');});
+lbImg.addEventListener('touchstart',e=>{if(e.touches.length===2)lbLastDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);},{passive:true});
+lbImg.addEventListener('touchmove',e=>{if(e.touches.length===2){const dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);lbScale=Math.max(0.5,Math.min(5,lbScale*(dist/lbLastDist)));lbImg.style.transform=`scale(${lbScale})`;lbLastDist=dist;e.preventDefault();}},{passive:false});
+lbImg.addEventListener('touchend',e=>{if(e.touches.length<2&&lbScale<1){lbScale=1;lbImg.style.transform='scale(1)';}});
 
-// Pinch-to-zoom
-lbImg.addEventListener('touchstart', e => {
-  if (e.touches.length === 2) {
-    lbLastDist = Math.hypot(
-      e.touches[0].clientX - e.touches[1].clientX,
-      e.touches[0].clientY - e.touches[1].clientY
-    );
-  }
-}, { passive: true });
+let carouselIdx=0;
+function carouselMoveTo(i){const imgs=document.querySelectorAll('.carousel-track img');const dots=document.querySelectorAll('.carousel-dot');const counter=document.querySelector('.carousel-counter');if(!imgs.length)return;i=(i+imgs.length)%imgs.length;carouselIdx=i;imgs.forEach((img,j)=>{img.style.display=j===i?'block':'none';});dots.forEach((d,j)=>d.classList.toggle('active',j===i));if(counter)counter.textContent=`${i+1} / ${imgs.length}`;}
+window._carouselGo=function(dir){carouselMoveTo(carouselIdx+dir);};
+window._carouselDot=function(i){carouselMoveTo(i);};
 
-lbImg.addEventListener('touchmove', e => {
-  if (e.touches.length === 2) {
-    const dist = Math.hypot(
-      e.touches[0].clientX - e.touches[1].clientX,
-      e.touches[0].clientY - e.touches[1].clientY
-    );
-    lbScale = Math.max(0.5, Math.min(5, lbScale * (dist / lbLastDist)));
-    lbImg.style.transform = `scale(${lbScale})`;
-    lbLastDist = dist;
-    e.preventDefault();
-  }
-}, { passive: false });
-
-lbImg.addEventListener('touchend', e => {
-  if (e.touches.length < 2 && lbScale < 1) {
-    lbScale = 1; lbImg.style.transform = 'scale(1)';
-  }
-});
-
-// ===== CARROSSEL — sem animação, troca instantânea =====
-let carouselIdx = 0;
-
-function carouselMoveTo(i) {
-  const track   = document.querySelector('.carousel-track');
-  const imgs    = document.querySelectorAll('.carousel-track img');
-  const dots    = document.querySelectorAll('.carousel-dot');
-  const counter = document.querySelector('.carousel-counter');
-  if (!track || !imgs.length) return;
-  i = (i + imgs.length) % imgs.length;
-  carouselIdx = i;
-  // Esconder todas, mostrar só a atual — sem transform, sem tremido
-  imgs.forEach((img, j) => { img.style.display = j === i ? 'block' : 'none'; });
-  dots.forEach((d, j) => d.classList.toggle('active', j === i));
-  if (counter) counter.textContent = `${i+1} / ${imgs.length}`;
-}
-
-window._carouselGo  = function(dir) { carouselMoveTo(carouselIdx + dir); };
-window._carouselDot = function(i)   { carouselMoveTo(i); };
-
-function buildPhotosHTML(photos) {
-  if (!photos?.length) return '';
-  const label = `<div class="modal-media-label">📷 Fotos (${photos.length})</div>`;
-
-  if (photos.length >= 5) {
-    carouselIdx = 0;
-    // Primeira foto visível, demais ocultas
-    const slides = photos.map((u, i) =>
-      `<img src="${u}" alt="Foto ${i+1}"
-        style="width:100%;height:280px;object-fit:contain;background:#111;cursor:zoom-in;display:${i===0?'block':'none'};"
-        onclick="openLightbox('${u}')">`
-    ).join('');
-    const dots = photos.map((_, i) =>
-      `<span class="carousel-dot${i===0?' active':''}" onclick="_carouselDot(${i})"></span>`
-    ).join('');
-    return `<div class="modal-media-section">${label}
-      <div class="photo-carousel" id="photoCarousel">
-        <div class="carousel-track" style="display:block;">${slides}</div>
-        <button class="carousel-btn carousel-prev" onclick="_carouselGo(-1)">‹</button>
-        <button class="carousel-btn carousel-next" onclick="_carouselGo(1)">›</button>
-        <div class="carousel-counter">1 / ${photos.length}</div>
-      </div>
-      <div class="carousel-dots">${dots}</div>
-    </div>`;
-  } else {
-    const imgs = photos.map(u =>
-      `<img class="modal-photo" src="${u}" onclick="openLightbox('${u}')" loading="lazy" title="Clique para ampliar">`
-    ).join('');
-    return `<div class="modal-media-section">${label}<div class="modal-photos">${imgs}</div></div>`;
+function buildPhotosHTML(photos){
+  if(!photos?.length)return'';
+  const label=`<div class="modal-media-label">📷 Fotos (${photos.length})</div>`;
+  if(photos.length>=5){
+    carouselIdx=0;
+    const slides=photos.map((u,i)=>`<img src="${u}" alt="Foto ${i+1}" style="width:100%;height:280px;object-fit:contain;background:#111;cursor:zoom-in;display:${i===0?'block':'none'};" onclick="openLightbox('${u}')">`).join('');
+    const dots=photos.map((_,i)=>`<span class="carousel-dot${i===0?' active':''}" onclick="_carouselDot(${i})"></span>`).join('');
+    return`<div class="modal-media-section">${label}<div class="photo-carousel"><div class="carousel-track" style="display:block;">${slides}</div><button class="carousel-btn carousel-prev" onclick="_carouselGo(-1)">‹</button><button class="carousel-btn carousel-next" onclick="_carouselGo(1)">›</button><div class="carousel-counter">1 / ${photos.length}</div></div><div class="carousel-dots">${dots}</div></div>`;
+  }else{
+    const imgs=photos.map(u=>`<img class="modal-photo" src="${u}" onclick="openLightbox('${u}')" loading="lazy">`).join('');
+    return`<div class="modal-media-section">${label}<div class="modal-photos">${imgs}</div></div>`;
   }
 }
 
-function openModal(id) {
-  const d = pointsData[id]; if (!d) return;
-  document.getElementById('modalTitle').textContent = d.name;
-  document.getElementById('modalCat').textContent = d.category;
-  const hora = d.createdAt?.toDate
-    ? d.createdAt.toDate().toLocaleString('pt-BR')
-    : (d.createdAt ? new Date(d.createdAt).toLocaleString('pt-BR') : '—');
-
-  let body = `
-    <div class="modal-meta">
-      <div class="modal-meta-item">👤 <strong>${d.author}</strong></div>
-      <div class="modal-meta-item">🕐 ${hora}</div>
-      <div class="modal-meta-item">📍 ${d.lat?.toFixed(5)}, ${d.lng?.toFixed(5)}</div>
-    </div>
-    <div class="modal-desc">${d.description || 'Sem descrição.'}</div>`;
-
-  body += buildPhotosHTML(d.photos);
-
-  if (d.videos?.length) {
-    body += `<div class="modal-media-section"><div class="modal-media-label">🎬 Vídeos</div>`;
-    d.videos.forEach(u => { body += `<video class="modal-video" controls src="${u}" playsinline></video>`; });
-    body += `</div>`;
-  }
-  if (d.audios?.length) {
-    body += `<div class="modal-media-section"><div class="modal-media-label">🎙️ Áudios</div>`;
-    d.audios.forEach(u => { body += `<audio class="modal-audio" controls src="${u}"></audio>`; });
-    body += `</div>`;
-  }
-  if (d.extraText) {
-    body += `<div class="modal-media-section"><div class="modal-media-label">📝 Anotações</div>
-      <div class="modal-text-note">${d.extraText}</div></div>`;
-  }
-
-  document.getElementById('modalBody').innerHTML = body;
-  document.getElementById('modalBody').scrollTop = 0;
+function openModal(id){
+  const d=pointsData[id];if(!d)return;
+  document.getElementById('modalTitle').textContent=d.name;
+  document.getElementById('modalCat').textContent=d.category;
+  const hora=d.createdAt?.toDate?d.createdAt.toDate().toLocaleString('pt-BR'):(d.createdAt?new Date(d.createdAt).toLocaleString('pt-BR'):'—');
+  let body=`<div class="modal-meta"><div class="modal-meta-item">👤 <strong>${d.author}</strong></div><div class="modal-meta-item">🕐 ${hora}</div><div class="modal-meta-item">📍 ${d.lat?.toFixed(5)}, ${d.lng?.toFixed(5)}</div></div><div class="modal-desc">${d.description||'Sem descrição.'}</div>`;
+  body+=buildPhotosHTML(d.photos);
+  if(d.videos?.length){body+=`<div class="modal-media-section"><div class="modal-media-label">🎬 Vídeos</div>`;d.videos.forEach(u=>{body+=`<video class="modal-video" controls src="${u}" playsinline></video>`;});body+=`</div>`;}
+  if(d.audios?.length){body+=`<div class="modal-media-section"><div class="modal-media-label">🎙️ Áudios</div>`;d.audios.forEach(u=>{body+=`<audio class="modal-audio" controls src="${u}"></audio>`;});body+=`</div>`;}
+  if(d.extraText){body+=`<div class="modal-media-section"><div class="modal-media-label">📝 Anotações</div><div class="modal-text-note">${d.extraText}</div></div>`;}
+  document.getElementById('modalBody').innerHTML=body;
+  document.getElementById('modalBody').scrollTop=0;
   document.getElementById('modalOverlay').classList.add('open');
-  atualizarBotaoExcluir(id, d.name);
+  atualizarBotaoExcluir(id,d.name);
 }
-
-document.getElementById('btnCloseModal').addEventListener('click', () => document.getElementById('modalOverlay').classList.remove('open'));
-
-// Botão excluir ponto — conectar ao abrir o modal
-function atualizarBotaoExcluir(pointId, pointName) {
-  const btnExcluir = document.getElementById('btnExcluirPonto');
-  if (!btnExcluir) return;
-  // Verificar se o autor selecionado é professor autorizado
-  const profAtual = document.getElementById('authorSelect')?.value || '';
-  const podeExcluir = ['francisco','jhaimson'].some(p => profAtual.toLowerCase().includes(p));
-  btnExcluir.style.display = podeExcluir ? 'block' : 'none';
-  btnExcluir.onclick = () => confirmarExclusao(pointId, pointName);
+function atualizarBotaoExcluir(pointId,pointName){
+  const btn=document.getElementById('btnExcluirPonto');if(!btn)return;
+  const prof=document.getElementById('authorSelect')?.value||'';
+  const pode=['francisco','jhaimson'].some(p=>prof.toLowerCase().includes(p));
+  btn.style.display=pode?'block':'none';
+  btn.onclick=()=>confirmarExclusao(pointId,pointName);
 }
-document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
-// ESC fecha modal
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('modalOverlay').classList.remove('open'); lightbox.classList.remove('open'); } });
+document.getElementById('btnCloseModal').addEventListener('click',()=>document.getElementById('modalOverlay').classList.remove('open'));
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('modalOverlay').classList.remove('open');lightbox.classList.remove('open');}});
+window._openModal=openModal;
 
-// ===== RENDER PONTO NO MAPA E LISTA =====
-function renderPoint(id, data) {
-  pointsData[id] = data;
-
-  // Marker no mapa — sempre verde, sem status "pendente"
-  if (!markers[id] && data.lat && data.lng) {
-    const badges = [];
-    if (data.photos?.length) badges.push(`📷 ${data.photos.length}`);
-    if (data.videos?.length) badges.push(`🎬 ${data.videos.length}`);
-    if (data.audios?.length) badges.push(`🎙️ ${data.audios.length}`);
-    if (data.extraText) badges.push('📝');
-
-    const hora = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '—';
-    const thumbHTML = data.photos?.length
-      ? `<img class="popup-thumb" src="${data.photos[0]}" onclick="window.open('${data.photos[0]}','_blank')">`
-      : '';
-
-    const popup = L.popup({ autoPan: true, maxWidth: 300, maxHeight: 400 }).setContent(`
-      <div style="min-width:240px;max-height:360px;overflow-y:auto;padding-right:2px;position:relative;">
-        <button class="popup-close-btn" onclick="this.closest('.leaflet-popup').querySelector('.leaflet-popup-close-button')?.click()" title="Fechar">✕</button>
-        <div class="popup-title" style="padding-right:28px">${data.name}</div>
-        <div class="popup-cat">${data.category}</div>
-        <div class="popup-desc">${(data.description||'').substring(0,180)}${(data.description||'').length>180?'...':''}</div>
-        <div class="popup-meta">👤 ${data.author} · 🕐 ${hora}</div>
-        ${badges.length ? `<div class="popup-media-row">${badges.map(b=>`<span class="popup-media-badge">${b}</span>`).join('')}</div>` : ''}
-        ${thumbHTML}
-        <button class="popup-open-btn" onclick="window._openModal('${id}')">🔍 Ver tudo →</button>
-      </div>`);
-
-    // Verificar se é um ponto do roteiro para usar ícone dourado
-    const roteiroNomes = ["Riacho Firmino", "Brejeiras", "Praça São Sebastião", "U.E. Dr. Murilo Braga", "Riacho Preguiça", "As Furnas"];
-    const roteiroIdx = roteiroNomes.findIndex(n => data.name?.toLowerCase().includes(n.toLowerCase()));
-    const isRoteiro = roteiroIdx >= 0;
-    const marker = L.marker([data.lat, data.lng], {
-      icon: isRoteiro ? createRoteirIcon(roteiroIdx + 1, false) : createIcon(false)
-    });
+function renderPoint(id,data){
+  pointsData[id]=data;
+  if(!markers[id]&&data.lat&&data.lng){
+    const badges=[];
+    if(data.photos?.length)badges.push(`📷 ${data.photos.length}`);
+    if(data.videos?.length)badges.push(`🎬 ${data.videos.length}`);
+    if(data.audios?.length)badges.push(`🎙️ ${data.audios.length}`);
+    if(data.extraText)badges.push('📝');
+    const hora=data.createdAt?.toDate?data.createdAt.toDate().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}):'—';
+    const thumbHTML=data.photos?.length?`<img class="popup-thumb" src="${data.photos[0]}" onclick="window.open('${data.photos[0]}','_blank')">`:'';
+    const popup=L.popup({autoPan:true,maxWidth:300,maxHeight:400}).setContent(`<div style="min-width:240px;max-height:360px;overflow-y:auto;padding-right:2px;position:relative;"><button class="popup-close-btn" onclick="this.closest('.leaflet-popup').querySelector('.leaflet-popup-close-button')?.click()">✕</button><div class="popup-title" style="padding-right:28px">${data.name}</div><div class="popup-cat">${data.category}</div><div class="popup-desc">${(data.description||'').substring(0,180)}${(data.description||'').length>180?'...':''}</div><div class="popup-meta">👤 ${data.author} · 🕐 ${hora}</div>${badges.length?`<div class="popup-media-row">${badges.map(b=>`<span class="popup-media-badge">${b}</span>`).join('')}</div>`:''}${thumbHTML}<button class="popup-open-btn" onclick="window._openModal('${id}')">🔍 Ver tudo →</button></div>`);
+    const rNomes=["Riacho Firmino","Brejeiras","Praça São Sebastião","U.E. Dr. Murilo Braga","Riacho Preguiça","As Furnas"];
+    const rIdx=rNomes.findIndex(n=>data.name?.toLowerCase().includes(n.toLowerCase()));
+    const marker=L.marker([data.lat,data.lng],{icon:rIdx>=0?createRoteirIcon(rIdx+1,false):createIcon(false)});
     marker.bindPopup(popup);
-
-    function flyAndOpen() {
-      if (activeMarkerKey && activeMarkerKey !== id && markers[activeMarkerKey])
-        markers[activeMarkerKey].setIcon(createIcon(false));
-      activeMarkerKey = id;
-      marker.setIcon(createIcon(true));
-      const tll = L.latLng(data.lat, data.lng);
-      if (map.getZoom() >= 17 && map.getBounds().contains(tll)) { marker.openPopup(); return; }
-      map.flyTo(tll, 18, { duration: 1.2, easeLinearity: 0.4 });
-      const onZE = () => { map.off('zoomend', onZE); setTimeout(() => marker.openPopup(), 120); };
-      map.on('zoomend', onZE);
+    function flyAndOpen(){
+      if(activeMarkerKey&&activeMarkerKey!==id&&markers[activeMarkerKey])markers[activeMarkerKey].setIcon(createIcon(false));
+      activeMarkerKey=id;marker.setIcon(createIcon(true));
+      const tll=L.latLng(data.lat,data.lng);
+      if(map.getZoom()>=17&&map.getBounds().contains(tll)){marker.openPopup();return;}
+      map.flyTo(tll,18,{duration:1.2,easeLinearity:0.4});
+      const onZE=()=>{map.off('zoomend',onZE);setTimeout(()=>marker.openPopup(),120);};map.on('zoomend',onZE);
     }
-
-    marker.on('click', e => { L.DomEvent.stopPropagation(e); flyAndOpen(); });
-    marker.on('popupclose', () => { marker.setIcon(createIcon(false)); activeMarkerKey = null; });
-    marker.addTo(map);
-    markers[id] = marker;
-    markers[id]._flyAndOpen = flyAndOpen;
+    marker.on('click',e=>{L.DomEvent.stopPropagation(e);flyAndOpen();});
+    marker.on('popupclose',()=>{marker.setIcon(createIcon(false));activeMarkerKey=null;});
+    marker.addTo(map);markers[id]=marker;markers[id]._flyAndOpen=flyAndOpen;
   }
-
-  // Card na lista
-  let card = document.getElementById(`card-${id}`);
-  if (!card) {
-    card = document.createElement('div');
-    card.id = `card-${id}`; card.className = 'point-card';
-    card.addEventListener('click', () => { switchTab('list'); markers[id]?._flyAndOpen?.(); });
-    const empty = document.querySelector('#pointsList .empty-state');
-    if (empty) empty.remove();
-    document.getElementById('pointsList').insertBefore(card, document.getElementById('pointsList').firstChild);
-  }
-  const mb = [];
-  if (data.photos?.length) mb.push(`📷 ${data.photos.length}`);
-  if (data.videos?.length) mb.push(`🎬 ${data.videos.length}`);
-  if (data.audios?.length) mb.push(`🎙️ ${data.audios.length}`);
-  if (data.extraText) mb.push('📝');
-  card.innerHTML = `<div class="point-title">${data.name}</div>
-    <div class="point-meta">
-      <span class="category-tag">${data.category}</span>
-      <span>👤 ${data.author}</span>
-    </div>
-    ${mb.length ? `<div class="point-media-icons">${mb.map(b=>`<span class="media-icon-badge">${b}</span>`).join('')}</div>` : ''}`;
-
-  document.getElementById('countBadge').textContent = Object.keys(markers).length;
+  let card=document.getElementById(`card-${id}`);
+  if(!card){card=document.createElement('div');card.id=`card-${id}`;card.className='point-card';card.addEventListener('click',()=>{switchTab('list');markers[id]?._flyAndOpen?.();});const empty=document.querySelector('#pointsList .empty-state');if(empty)empty.remove();document.getElementById('pointsList').insertBefore(card,document.getElementById('pointsList').firstChild);}
+  const mb=[];if(data.photos?.length)mb.push(`📷 ${data.photos.length}`);if(data.videos?.length)mb.push(`🎬 ${data.videos.length}`);if(data.audios?.length)mb.push(`🎙️ ${data.audios.length}`);if(data.extraText)mb.push('📝');
+  card.innerHTML=`<div class="point-title">${data.name}</div><div class="point-meta"><span class="category-tag">${data.category}</span><span>👤 ${data.author}</span></div>${mb.length?`<div class="point-media-icons">${mb.map(b=>`<span class="media-icon-badge">${b}</span>`).join('')}</div>`:''}`;
+  document.getElementById('countBadge').textContent=Object.keys(markers).length;
   updateStats();
 }
 
-// expor openModal para o popup HTML inline
-window._openModal = openModal;
+async function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file);});}
+async function uploadOneFile(file,path){const r=sRef(storage,path);await uploadBytes(r,file);return getDownloadURL(r);}
 
-// ===== UPLOAD MÍDIAS =====
-// Converter arquivo para base64 para guardar offline
-async function fileToBase64(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-}
-
-// Upload de um arquivo para o Storage
-async function uploadOneFile(file, path) {
-  const r = sRef(storage, path);
-  await uploadBytes(r, file);
-  return getDownloadURL(r);
-}
-
-// Upload imediato (online)
-async function uploadFiles(pointId) {
-  const urls = { photos:[], videos:[], audios:[] };
-  for (const [i,f] of mediaFiles.photo.entries()) urls.photos.push(await uploadOneFile(f, `pontos/${pointId}/foto_${i}`));
-  for (const [i,f] of mediaFiles.video.entries()) urls.videos.push(await uploadOneFile(f, `pontos/${pointId}/video_${i}`));
-  for (const [i,b] of audioBlobs.filter(Boolean).entries()) urls.audios.push(await uploadOneFile(b, `pontos/${pointId}/audio_${i}`));
-  return urls;
-}
-
-// Processar fila offline quando internet voltar
-async function processPendingUploads() {
-  if (!isOnline || pendingUploads.length === 0) return;
-  const queue = [...pendingUploads];
-  let synced = 0;
-  for (const item of queue) {
-    try {
-      // Re-upload das mídias em base64
-      const urls = { photos:[], videos:[], audios:[] };
-      for (const [i, b64] of (item.photosB64||[]).entries()) {
-        const blob = await fetch(b64).then(r=>r.blob());
-        urls.photos.push(await uploadOneFile(blob, `pontos/${item.pointId}/foto_${i}`));
-      }
-      for (const [i, b64] of (item.videosB64||[]).entries()) {
-        const blob = await fetch(b64).then(r=>r.blob());
-        urls.videos.push(await uploadOneFile(blob, `pontos/${item.pointId}/video_${i}`));
-      }
-      for (const [i, b64] of (item.audiosB64||[]).entries()) {
-        const blob = await fetch(b64).then(r=>r.blob());
-        urls.audios.push(await uploadOneFile(blob, `pontos/${item.pointId}/audio_${i}`));
-      }
-      // Salvar ponto completo com URLs reais
-      await addDoc(collection(db, 'pontos'), {
-        ...item.data, ...urls, syncedAt: serverTimestamp()
-      });
-      synced++;
-    } catch(e) { console.error('Erro ao sincronizar ponto offline:', e); }
-    // Remover da fila independente de erro
-    pendingUploads = pendingUploads.filter(p => p.pointId !== item.pointId);
-    localStorage.setItem('pk_pending', JSON.stringify(pendingUploads));
+// =====================================================================
+// FIX 2 — processPendingUploads exposta no window
+// =====================================================================
+async function processPendingUploads(){
+  if(!isOnline||pendingUploads.length===0)return;
+  const queue=[...pendingUploads];let synced=0;
+  for(const item of queue){
+    try{
+      const urls={photos:[],videos:[],audios:[]};
+      for(const[i,b64]of(item.photosB64||[]).entries()){const blob=await fetch(b64).then(r=>r.blob());urls.photos.push(await uploadOneFile(blob,`pontos/${item.pointId}/foto_${i}`));}
+      for(const[i,b64]of(item.videosB64||[]).entries()){const blob=await fetch(b64).then(r=>r.blob());urls.videos.push(await uploadOneFile(blob,`pontos/${item.pointId}/video_${i}`));}
+      for(const[i,b64]of(item.audiosB64||[]).entries()){const blob=await fetch(b64).then(r=>r.blob());urls.audios.push(await uploadOneFile(blob,`pontos/${item.pointId}/audio_${i}`));}
+      await addDoc(collection(db,'pontos'),{...item.data,...urls,syncedAt:serverTimestamp()});synced++;
+    }catch(e){console.error('Erro sync offline:',e);}
+    pendingUploads=pendingUploads.filter(p=>p.pointId!==item.pointId);
+    localStorage.setItem('pk_pending',JSON.stringify(pendingUploads));
   }
-  if (synced > 0) {
-    showToast(`✅ ${synced} ponto(s) sincronizado(s) com sucesso!`, 'success');
-    updateOfflineBadge();
-  }
+  if(synced>0){showToast(`✅ ${synced} ponto(s) sincronizado(s)!`,'success');updateOfflineBadge();}
 }
+window.processPendingUploads = processPendingUploads; // FIX2
 
-// ===== SUBMIT PONTO =====
-document.getElementById('submitBtn').addEventListener('click', async () => {
-  const author = document.getElementById('authorSelect').value;
-  const name = document.getElementById('pointName').value.trim();
-  const category = document.getElementById('category').value;
-  const description = document.getElementById('description').value.trim();
-  const extraText = document.getElementById('extraText').value.trim();
-  const lat = parseFloat(document.getElementById('lat').value);
-  const lng = parseFloat(document.getElementById('lng').value);
-
-  if (!author) { showToast('Selecione o aluno responsável.', 'error'); return; }
-  if (!name || !category) { showToast('Preencha nome e categoria.', 'error'); return; }
-  if (isNaN(lat) || isNaN(lng)) { showToast('Capture a localização GPS primeiro.', 'error'); return; }
-
-  // ⚠️ Verificar nome duplicado
-  const nomeLower = name.toLowerCase().trim();
-  const pontoExistente = Object.values(pointsData).find(p =>
-    p.name?.toLowerCase().trim() === nomeLower
-  );
-  if (pontoExistente) {
-    const continuar = confirm(`⚠️ Já existe um ponto com o nome:\n\n"${pontoExistente.name}" (cadastrado por ${pontoExistente.author})\n\nDeseja cadastrar mesmo assim?`);
-    if (!continuar) return;
+document.getElementById('submitBtn').addEventListener('click',async()=>{
+  const author=document.getElementById('authorSelect').value;
+  const name=document.getElementById('pointName').value.trim();
+  const category=document.getElementById('category').value;
+  const description=document.getElementById('description').value.trim();
+  const extraText=document.getElementById('extraText').value.trim();
+  const lat=parseFloat(document.getElementById('lat').value);
+  const lng=parseFloat(document.getElementById('lng').value);
+  if(!author){showToast('Selecione o aluno responsável.','error');return;}
+  if(!name||!category){showToast('Preencha nome e categoria.','error');return;}
+  if(isNaN(lat)||isNaN(lng)){showToast('Capture a localização GPS primeiro.','error');return;}
+  const nomeLower=name.toLowerCase().trim();
+  const existe=Object.values(pointsData).find(p=>p.name?.toLowerCase().trim()===nomeLower);
+  if(existe){const ok=confirm(`⚠️ Já existe um ponto com o nome:\n\n"${existe.name}" (cadastrado por ${existe.author})\n\nDeseja cadastrar mesmo assim?`);if(!ok)return;}
+  const btn=document.getElementById('submitBtn');btn.disabled=true;btn.innerHTML='<div class="loading"></div> Enviando...';
+  const pointId='pt_'+Date.now();
+  if(isOnline){
+    try{
+      const fotosParaEnviar=[...mediaFiles.photo];
+      const videosParaEnviar=[...mediaFiles.video];
+      const audiosParaEnviar=[...audioBlobs.filter(Boolean)];
+      const totalMidias=fotosParaEnviar.length+videosParaEnviar.length+audiosParaEnviar.length;
+      const docRef=await addDoc(collection(db,'pontos'),{name,author,category,description,extraText,lat,lng,photos:[],videos:[],audios:[],createdAt:serverTimestamp(),fotosEnviando:totalMidias>0});
+      const fid=docRef.id;
+      const urls={photos:[],videos:[],audios:[]};
+      if(totalMidias>0){
+        let enviados=0;
+        const prog=()=>{enviados++;btn.innerHTML='<div class="loading"></div> Enviando '+enviados+'/'+totalMidias+'...';};
+        try{
+          // FIX3 — compressão antes do upload
+          for(const[i,f]of fotosParaEnviar.entries()){const c=await comprimirFoto(f);urls.photos.push(await uploadOneFile(c,'pontos/'+fid+'/foto_'+i));prog();}
+          for(const[i,f]of videosParaEnviar.entries()){urls.videos.push(await uploadOneFile(f,'pontos/'+fid+'/video_'+i));prog();}
+          for(const[i,b]of audiosParaEnviar.entries()){urls.audios.push(await uploadOneFile(b,'pontos/'+fid+'/audio_'+i));prog();}
+        }catch(ue){console.error('Erro upload:',ue);showToast('⚠️ Ponto salvo, erro ao enviar mídias.','error');}
+        await setDoc(doc(db,'pontos',fid),{...urls,fotosEnviando:false},{merge:true});
+        showToast('✅ Ponto e '+totalMidias+' mídia(s) registrados!','success');
+      }else{await setDoc(doc(db,'pontos',fid),{fotosEnviando:false},{merge:true});showToast('✅ Ponto registrado!','success');}
+      const rNomesReg=['Riacho Firmino','Brejeiras','Praça São Sebastião','U.E. Dr. Murilo Braga','Riacho Preguiça','As Furnas'];
+      const ridx=rNomesReg.findIndex(n=>name.toLowerCase().includes(n.toLowerCase()));
+      if(ridx>=0){const el=document.getElementById('rgps-'+(ridx+1));if(el){el.textContent='✅ Registrado por '+author;el.classList.add('ok');}}
+    }catch(e){console.error(e);showToast('Erro ao salvar.','error');btn.disabled=false;btn.innerHTML='📌 Registrar Ponto Histórico';return;}
+  }else{
+    btn.innerHTML='<div class="loading"></div> Salvando offline...';
+    const photosB64=[],videosB64=[],audiosB64=[];
+    for(const f of mediaFiles.photo)photosB64.push(await fileToBase64(f));
+    for(const f of mediaFiles.video)videosB64.push(await fileToBase64(f));
+    for(const b of audioBlobs.filter(Boolean))audiosB64.push(await fileToBase64(b));
+    try{await addDoc(collection(db,'pontos'),{name,author,category,description,extraText,lat,lng,photos:[],videos:[],audios:[],createdAt:serverTimestamp(),offlineSaved:true});}catch(e){console.warn('Firestore offline:',e);}
+    pendingUploads.push({pointId,data:{name,author,category,description,extraText,lat,lng,offlineSaved:true},photosB64,videosB64,audiosB64});
+    localStorage.setItem('pk_pending',JSON.stringify(pendingUploads));updateOfflineBadge();
+    const nM=photosB64.length+videosB64.length+audiosB64.length;
+    showToast(`📵 Ponto salvo offline!${nM>0?' '+nM+' mídia(s) serão enviadas quando a internet voltar.':''}`, 'success');
+    renderPoint(pointId,{name,author,category,description,extraText,lat,lng,photos:[],videos:[],audios:[]});
   }
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true; btn.innerHTML = '<div class="loading"></div> Enviando...';
-
-  const pointId = 'pt_' + Date.now();
-  let mediaUrls = { photos:[], videos:[], audios:[] };
-
-  if (isOnline) {
-    // ONLINE: upload síncrono com progresso — garante que fotos chegam antes de salvar
-    try {
-      const fotosParaEnviar  = [...mediaFiles.photo];
-      const videosParaEnviar = [...mediaFiles.video];
-      const audiosParaEnviar = [...audioBlobs.filter(Boolean)];
-      const totalMidias = fotosParaEnviar.length + videosParaEnviar.length + audiosParaEnviar.length;
-
-      // Criar doc primeiro para obter firestoreId
-      const docRef = await addDoc(collection(db, 'pontos'), {
-        name, author, category, description, extraText,
-        lat, lng, photos:[], videos:[], audios:[],
-        createdAt: serverTimestamp(), fotosEnviando: totalMidias > 0
-      });
-      const firestoreId = docRef.id;
-
-      // Upload das mídias com progresso no botão
-      const urls = { photos:[], videos:[], audios:[] };
-      if (totalMidias > 0) {
-        let enviados = 0;
-        const atualizarProgresso = () => {
-          enviados++;
-          btn.innerHTML = '<div class="loading"></div> Enviando ' + enviados + '/' + totalMidias + '...';
-        };
-        try {
-          for (const [i,f] of fotosParaEnviar.entries()) {
-            urls.photos.push(await uploadOneFile(f, 'pontos/' + firestoreId + '/foto_' + i));
-            atualizarProgresso();
-          }
-          for (const [i,f] of videosParaEnviar.entries()) {
-            urls.videos.push(await uploadOneFile(f, 'pontos/' + firestoreId + '/video_' + i));
-            atualizarProgresso();
-          }
-          for (const [i,b] of audiosParaEnviar.entries()) {
-            urls.audios.push(await uploadOneFile(b, 'pontos/' + firestoreId + '/audio_' + i));
-            atualizarProgresso();
-          }
-        } catch(uploadErr) {
-          console.error('Erro upload mídia:', uploadErr);
-          showToast('⚠️ Ponto salvo, mas erro ao enviar fotos. Tente novamente.', 'error');
-        }
-        // Atualizar doc com URLs reais e desligar flag
-        await setDoc(doc(db, 'pontos', firestoreId), { ...urls, fotosEnviando: false }, { merge: true });
-        showToast('✅ Ponto e ' + totalMidias + ' mídia(s) registrados!', 'success');
-      } else {
-        await setDoc(doc(db, 'pontos', firestoreId), { fotosEnviando: false }, { merge: true });
-        showToast('✅ Ponto registrado!', 'success');
-      }
-
-      // Atualizar badge do roteiro
-      const roteiroNomesReg = ['Riacho Firmino','Brejeiras','Praça São Sebastião','U.E. Dr. Murilo Braga','Riacho Preguiça','As Furnas'];
-      const ridx = roteiroNomesReg.findIndex(n => name.toLowerCase().includes(n.toLowerCase()));
-      if (ridx >= 0) {
-        const gpsEl = document.getElementById('rgps-' + (ridx+1));
-        if (gpsEl) { gpsEl.textContent = '✅ Registrado por ' + author; gpsEl.classList.add('ok'); }
-      }
-
-    } catch(e) {
-      console.error(e); showToast('Erro ao salvar. Verifique a conexão.', 'error');
-      btn.disabled = false; btn.innerHTML = '📌 Registrar Ponto Histórico'; return;
-    }
-  } else {
-    // OFFLINE: guardar na fila com mídias em base64
-    btn.innerHTML = '<div class="loading"></div> Salvando offline...';
-    const photosB64 = [], videosB64 = [], audiosB64 = [];
-    for (const f of mediaFiles.photo) photosB64.push(await fileToBase64(f));
-    for (const f of mediaFiles.video) videosB64.push(await fileToBase64(f));
-    for (const b of audioBlobs.filter(Boolean)) audiosB64.push(await fileToBase64(b));
-
-    // Salvar no Firestore local (offline) sem mídias
-    try {
-      await addDoc(collection(db, 'pontos'), {
-        name, author, category, description, extraText,
-        lat, lng, photos:[], videos:[], audios:[],
-        createdAt: serverTimestamp(), offlineSaved: true
-      });
-    } catch(e) { console.warn('Firestore offline write:', e); }
-
-    // Guardar na fila de sync com as mídias em base64
-    pendingUploads.push({ pointId, data: { name, author, category, description, extraText, lat, lng, offlineSaved: true }, photosB64, videosB64, audiosB64 });
-    localStorage.setItem('pk_pending', JSON.stringify(pendingUploads));
-    updateOfflineBadge();
-
-    const nMedias = photosB64.length + videosB64.length + audiosB64.length;
-    showToast(`📵 Ponto salvo offline!${nMedias>0?' '+nMedias+' mídia(s) serão enviadas quando a internet voltar.':''}`, 'success');
-
-    // Mostrar no mapa local imediatamente
-    renderPoint(pointId, { name, author, category, description, extraText, lat, lng, photos:[], videos:[], audios:[] });
-  }
-
-  // Limpar form
-  ['pointName','description','lat','lng','extraText'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('category').value = '';
-  document.getElementById('authorSelect').value = '';
-  document.getElementById('photoPreview').innerHTML = '';
-  document.getElementById('videoPreview').innerHTML = '';
-  document.getElementById('audioList').innerHTML = '';
-  mediaFiles = { photo:[], video:[] }; audioBlobs = [];
-  // Parar stream de vídeo se ainda ativo
-  if (videoStream) { videoStream.getTracks().forEach(t => t.stop()); videoStream = null; }
-  if (videoRecorder?.state === 'recording') { clearInterval(videoRecInterval); videoRecorder.stop(); }
-  document.getElementById('videoList').innerHTML = '';
+  ['pointName','description','lat','lng','extraText'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('category').value='';document.getElementById('authorSelect').value='';
+  document.getElementById('photoPreview').innerHTML='';document.getElementById('videoPreview').innerHTML='';document.getElementById('audioList').innerHTML='';
+  mediaFiles={photo:[],video:[]};audioBlobs=[];
+  if(videoStream){videoStream.getTracks().forEach(t=>t.stop());videoStream=null;}
+  if(videoRecorder?.state==='recording'){clearInterval(videoRecInterval);videoRecorder.stop();}
+  document.getElementById('videoList').innerHTML='';
   document.getElementById('videoLiveWrap').classList.remove('active');
-  document.getElementById('videoProgressBar').style.width = '0%';
-  // Fechar chips
-  ['photos','videos','audio','texts'].forEach(n => {
-    document.getElementById('panel-'+n).classList.remove('open');
-    document.getElementById('chip-'+n).classList.remove('active');
-  });
-  activeChip = null;
-  document.getElementById('btnGPS').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Usar minha localização atual`;
-  btn.disabled = false; btn.innerHTML = '📌 Registrar Ponto Histórico';
+  document.getElementById('videoProgressBar').style.width='0%';
+  ['photos','videos','audio','texts'].forEach(n=>{document.getElementById('panel-'+n).classList.remove('open');document.getElementById('chip-'+n).classList.remove('active');});
+  activeChip=null;
+  document.getElementById('btnGPS').innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Usar minha localização atual`;
+  btn.disabled=false;btn.innerHTML='📌 Registrar Ponto Histórico';
   switchTab('list');
 });
 
-// ===== ALUNOS =====
-function checkLimit() {
-  const allStudents = Object.values(students);
-  const nAlunos = allStudents.filter(s => s.tipo !== 'professor').length;
-  const nProfs  = allStudents.filter(s => s.tipo === 'professor').length;
-  const alunosOk = nAlunos >= 32;
-  const profsOk  = nProfs  >= 2;
-  const tudo     = alunosOk && profsOk;
-
-  // contadores nos botões
-  document.getElementById('cntAlunos').textContent = `(${nAlunos}/32)`;
-  document.getElementById('cntProfs').textContent  = `(${nProfs}/2)`;
-
-  // bloquear botões individualmente
-  document.getElementById('btnToggleAddForm').disabled = alunosOk;
-  document.getElementById('btnToggleProfForm').disabled = profsOk;
-  if (alunosOk) document.getElementById('addStudentForm').classList.remove('open');
-  if (profsOk)  document.getElementById('addProfForm').classList.remove('open');
-
-  // banner só aparece quando tudo completo
-  document.getElementById('limitBanner').style.display = tudo ? 'block' : 'none';
-  document.getElementById('limitBanner').textContent = tudo
-    ? '🔒 Todos os 32 alunos e 2 professores já estão cadastrados.'
-    : '';
+function checkLimit(){
+  const all=Object.values(students);
+  const nA=all.filter(s=>s.tipo!=='professor').length;const nP=all.filter(s=>s.tipo==='professor').length;
+  const aOk=nA>=32;const pOk=nP>=2;const tudo=aOk&&pOk;
+  document.getElementById('cntAlunos').textContent=`(${nA}/32)`;document.getElementById('cntProfs').textContent=`(${nP}/2)`;
+  document.getElementById('btnToggleAddForm').disabled=aOk;document.getElementById('btnToggleProfForm').disabled=pOk;
+  if(aOk)document.getElementById('addStudentForm').classList.remove('open');
+  if(pOk)document.getElementById('addProfForm').classList.remove('open');
+  document.getElementById('limitBanner').style.display=tudo?'block':'none';
   return tudo;
 }
+document.getElementById('btnToggleAddForm').addEventListener('click',()=>{if(checkLimit())return;const f=document.getElementById('addStudentForm');f.classList.toggle('open');if(f.classList.contains('open'))document.getElementById('sName').focus();});
+document.getElementById('btnCancelAdd').addEventListener('click',()=>document.getElementById('addStudentForm').classList.remove('open'));
+document.getElementById('btnToggleProfForm').addEventListener('click',()=>{const f=document.getElementById('addProfForm');f.classList.toggle('open');if(f.classList.contains('open'))document.getElementById('pName').focus();});
+document.getElementById('btnCancelProf').addEventListener('click',()=>document.getElementById('addProfForm').classList.remove('open'));
 
-document.getElementById('btnToggleAddForm').addEventListener('click', () => {
-  if (checkLimit()) return;
-  const f = document.getElementById('addStudentForm');
-  f.classList.toggle('open');
-  if (f.classList.contains('open')) document.getElementById('sName').focus();
-});
-document.getElementById('btnCancelAdd').addEventListener('click', () => {
-  document.getElementById('addStudentForm').classList.remove('open');
-});
-
-// ===== PROFESSOR =====
-document.getElementById('btnToggleProfForm').addEventListener('click', () => {
-  const f = document.getElementById('addProfForm');
-  f.classList.toggle('open');
-  if (f.classList.contains('open')) document.getElementById('pName').focus();
-});
-document.getElementById('btnCancelProf').addEventListener('click', () => {
-  document.getElementById('addProfForm').classList.remove('open');
-});
-document.getElementById('btnAddProf').addEventListener('click', async () => {
-  const nProfs = Object.values(students).filter(s => s.tipo === 'professor').length;
-  if (nProfs >= 2) { showToast('Limite de 2 professores atingido!', 'error'); return; }
-  const name = document.getElementById('pName').value.trim();
-  const disciplina = document.getElementById('pDisciplina').value.trim();
-  if (!name) { showToast('Informe o nome do professor.', 'error'); return; }
-  if (Object.values(students).some(s => s.name.toLowerCase() === name.toLowerCase())) {
-    showToast('Já existe um participante com esse nome.', 'error'); return;
-  }
-  const id = 'prof_' + Date.now();
-  const sData = { name, disciplina, tipo: 'professor', num: '', turma: '', createdAt: new Date().toISOString() };
-  students[id] = sData;
-  try { await setDoc(doc(db, 'alunos', id), sData); }
-  catch { showToast('Erro ao salvar professor.', 'error'); return; }
-  renderStudents();
-  document.getElementById('pName').value = '';
-  document.getElementById('pDisciplina').value = '';
-  document.getElementById('addProfForm').classList.remove('open');
-  showToast(`✅ Prof. ${name} adicionado!`, 'success');
-  checkLimit();
+document.getElementById('btnAddProf').addEventListener('click',async()=>{
+  const nP=Object.values(students).filter(s=>s.tipo==='professor').length;if(nP>=2){showToast('Limite de 2 professores!','error');return;}
+  const name=document.getElementById('pName').value.trim();const disciplina=document.getElementById('pDisciplina').value.trim();
+  if(!name){showToast('Informe o nome.','error');return;}
+  if(Object.values(students).some(s=>s.name.toLowerCase()===name.toLowerCase())){showToast('Nome já cadastrado.','error');return;}
+  const id='prof_'+Date.now();const sData={name,disciplina,tipo:'professor',num:'',turma:'',createdAt:new Date().toISOString()};
+  students[id]=sData;try{await setDoc(doc(db,'alunos',id),sData);}catch{showToast('Erro ao salvar.','error');return;}
+  renderStudents();document.getElementById('pName').value='';document.getElementById('pDisciplina').value='';document.getElementById('addProfForm').classList.remove('open');
+  showToast(`✅ Prof. ${name} adicionado!`,'success');checkLimit();
 });
 
-document.getElementById('btnAddStudent').addEventListener('click', async () => {
-  if (checkLimit()) { showToast('Limite de participantes atingido!', 'error'); return; }
-  const name = document.getElementById('sName').value.trim();
-  const turma = document.getElementById('sTurma').value.trim();
-  const num = document.getElementById('sNum').value.trim();
-  if (!name) { showToast('Informe o nome.', 'error'); return; }
-  // Verificar duplicata
-  if (Object.values(students).some(s => s.name.toLowerCase() === name.toLowerCase())) {
-    showToast('Já existe um participante com esse nome.', 'error'); return;
-  }
-  const id = 'aluno_' + Date.now();
-  const sData = { name, turma, num, tipo: 'aluno', createdAt: new Date().toISOString() };
-  students[id] = sData;
-  try { await setDoc(doc(db, 'alunos', id), sData); }
-  catch { showToast('Erro ao salvar aluno.', 'error'); return; }
-  renderStudents();
-  document.getElementById('sName').value = '';
-  document.getElementById('sTurma').value = '';
-  document.getElementById('sNum').value = '';
-  document.getElementById('addStudentForm').classList.remove('open');
-  showToast(`✅ ${name} adicionado!`, 'success');
-  checkLimit();
+document.getElementById('btnAddStudent').addEventListener('click',async()=>{
+  if(checkLimit()){showToast('Limite atingido!','error');return;}
+  const name=document.getElementById('sName').value.trim();const turma=document.getElementById('sTurma').value.trim();const num=document.getElementById('sNum').value.trim();
+  if(!name){showToast('Informe o nome.','error');return;}
+  if(Object.values(students).some(s=>s.name.toLowerCase()===name.toLowerCase())){showToast('Nome já cadastrado.','error');return;}
+  const id='aluno_'+Date.now();const sData={name,turma,num,tipo:'aluno',createdAt:new Date().toISOString()};
+  students[id]=sData;try{await setDoc(doc(db,'alunos',id),sData);}catch{showToast('Erro ao salvar.','error');return;}
+  renderStudents();document.getElementById('sName').value='';document.getElementById('sTurma').value='';document.getElementById('sNum').value='';document.getElementById('addStudentForm').classList.remove('open');
+  showToast(`✅ ${name} adicionado!`,'success');checkLimit();
 });
 
-// Senha do professor para apagar participantes
-const SENHA_PROF = 'pk2025';
-
-window.deleteStudentAuth = async function(id, nome) {
-  const senha = prompt(`🔒 Para remover "${nome}", digite a senha do professor:`);
-  if (senha === null) return; // cancelou
-  if (senha !== SENHA_PROF) { showToast('Senha incorreta.', 'error'); return; }
-  if (!confirm(`Confirmar remoção de "${nome}"?`)) return;
-  delete students[id];
-  try { await deleteDoc(doc(db, 'alunos', id)); } catch {}
-  renderStudents(); checkLimit(); showToast(`✅ ${nome} removido.`, 'success');
+const SENHA_PROF='pk2025';
+window.deleteStudentAuth=async function(id,nome){
+  const senha=prompt(`🔒 Para remover "${nome}", senha do professor:`);if(senha===null)return;
+  if(senha!==SENHA_PROF){showToast('Senha incorreta.','error');return;}
+  if(!confirm(`Confirmar remoção de "${nome}"?`))return;
+  delete students[id];try{await deleteDoc(doc(db,'alunos',id));}catch{}
+  renderStudents();checkLimit();showToast(`✅ ${nome} removido.`,'success');
 };
 
-function renderStudents() {
-  const arr = Object.entries(students).sort((a,b) => {
-    if (a[1].tipo==='professor' && b[1].tipo!=='professor') return -1;
-    if (a[1].tipo!=='professor' && b[1].tipo==='professor') return 1;
-    const na = parseInt(a[1].num)||999, nb = parseInt(b[1].num)||999;
-    return na !== nb ? na - nb : a[1].name.localeCompare(b[1].name);
-  });
+function renderStudents(){
+  const arr=Object.entries(students).sort((a,b)=>{if(a[1].tipo==='professor'&&b[1].tipo!=='professor')return-1;if(a[1].tipo!=='professor'&&b[1].tipo==='professor')return 1;const na=parseInt(a[1].num)||999,nb=parseInt(b[1].num)||999;return na!==nb?na-nb:a[1].name.localeCompare(b[1].name);});
   updateStudentSelect(arr);
-  const list = document.getElementById('studentList');
-  if (!arr.length) { list.innerHTML = '<div class="empty-state"><p>Nenhum participante cadastrado.</p></div>'; updateStats(); return; }
-  list.innerHTML = arr.map(([id,s]) => {
-    const pts = Object.values(pointsData).filter(p => p.author === s.name).length;
-    const ini = s.name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
-    const isProf = s.tipo === 'professor';
-    const avatarBg = isProf ? 'background:linear-gradient(135deg,#3d6b4f,#2f5340)' : 'background:linear-gradient(135deg,var(--sepia),var(--rust))';
-    const nomeFull = isProf ? `Professor · ${s.name}` : s.name;
-    const subInfo = isProf ? (s.disciplina ? `📚 ${s.disciplina}` : '👨‍🏫 Professor') : `${s.num?'Nº '+s.num+' · ':''}${s.turma||'Sem turma'}`;
-    const badge = isProf
-      ? `<span style="background:rgba(61,107,79,0.12);color:#3d6b4f;font-size:0.65rem;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid rgba(61,107,79,0.2)">👨‍🏫 Professor</span>`
-      : `<span class="student-pts ${pts===0?'zero':''}">${pts} pt${pts!==1?'s':''}</span>`;
-    const nameEsc = s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
-    const turmaEsc = (s.turma||'').replace(/'/g,"\\'");
-    const numEsc = String(s.num||'').replace(/'/g,"\\'");
-    const discEsc = (s.disciplina||'').replace(/'/g,"\\'");
-    return `<div style="margin-bottom:6px">
-      <div class="student-card" style="${isProf?'border-color:rgba(61,107,79,0.35);background:rgba(61,107,79,0.04)':''}">
-        <div class="student-avatar" style="${avatarBg}">${ini}</div>
-        <div class="student-info">
-          <div class="student-name">${nomeFull}</div>
-          <div class="student-sub">${subInfo}</div>
-        </div>
-        ${badge}
-        <button class="student-edit-btn" onclick="toggleEditInline('${id}')" title="Editar">✏️</button>
-        <button class="student-del" onclick="deleteStudentAuth('${id}','${nameEsc}')" title="Remover (requer senha)">🔒</button>
-      </div>
-      <div class="edit-inline" id="edit-${id}">
-        <div class="edit-inline-row">
-          <input type="text" id="edit-name-${id}" placeholder="Nome completo" value="${nameEsc}">
-          ${isProf
-            ? `<input type="text" id="edit-disc-${id}" placeholder="Disciplina" value="${discEsc}" style="flex:0.7">`
-            : `<input type="text" id="edit-turma-${id}" placeholder="Turma ex: 9ºA" value="${turmaEsc}" style="flex:0.7">
-               <input type="text" id="edit-num-${id}" placeholder="Nº" value="${numEsc}" style="flex:0.3;min-width:50px">`
-          }
-        </div>
-        <div class="edit-btns">
-          <button class="btn-edit-save" onclick="saveEditInline('${id}','${isProf}')">💾 Salvar</button>
-          <button class="btn-edit-cancel" onclick="toggleEditInline('${id}')">Cancelar</button>
-        </div>
-      </div>
-    </div>`;
+  const list=document.getElementById('studentList');
+  if(!arr.length){list.innerHTML='<div class="empty-state"><p>Nenhum participante cadastrado.</p></div>';updateStats();return;}
+  list.innerHTML=arr.map(([id,s])=>{
+    const pts=Object.values(pointsData).filter(p=>p.author===s.name).length;
+    const ini=s.name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+    const isProf=s.tipo==='professor';
+    const avatarBg=isProf?'background:linear-gradient(135deg,#3d6b4f,#2f5340)':'background:linear-gradient(135deg,var(--sepia),var(--rust))';
+    const nomeFull=isProf?`Professor · ${s.name}`:s.name;
+    const subInfo=isProf?(s.disciplina?`📚 ${s.disciplina}`:'👨‍🏫 Professor'):`${s.num?'Nº '+s.num+' · ':''}${s.turma||'Sem turma'}`;
+    const badge=isProf?`<span style="background:rgba(61,107,79,0.12);color:#3d6b4f;font-size:0.65rem;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid rgba(61,107,79,0.2)">👨‍🏫 Professor</span>`:`<span class="student-pts ${pts===0?'zero':''}">${pts} pt${pts!==1?'s':''}</span>`;
+    const nE=s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const tE=(s.turma||'').replace(/'/g,"\\'");const nuE=String(s.num||'').replace(/'/g,"\\'");const dE=(s.disciplina||'').replace(/'/g,"\\'");
+    return`<div style="margin-bottom:6px"><div class="student-card" style="${isProf?'border-color:rgba(61,107,79,0.35);background:rgba(61,107,79,0.04)':''}"><div class="student-avatar" style="${avatarBg}">${ini}</div><div class="student-info"><div class="student-name">${nomeFull}</div><div class="student-sub">${subInfo}</div></div>${badge}<button class="student-edit-btn" onclick="toggleEditInline('${id}')">✏️</button><button class="student-del" onclick="deleteStudentAuth('${id}','${nE}')">🔒</button></div><div class="edit-inline" id="edit-${id}"><div class="edit-inline-row"><input type="text" id="edit-name-${id}" value="${nE}" placeholder="Nome">${isProf?`<input type="text" id="edit-disc-${id}" value="${dE}" placeholder="Disciplina" style="flex:0.7">`:`<input type="text" id="edit-turma-${id}" value="${tE}" placeholder="Turma" style="flex:0.7"><input type="text" id="edit-num-${id}" value="${nuE}" placeholder="Nº" style="flex:0.3;min-width:50px">`}</div><div class="edit-btns"><button class="btn-edit-save" onclick="saveEditInline('${id}','${isProf}')">💾 Salvar</button><button class="btn-edit-cancel" onclick="toggleEditInline('${id}')">Cancelar</button></div></div></div>`;
   }).join('');
-  renderRanking(arr);
-  updateStats();
+  renderRanking(arr);updateStats();
 }
-
-window.toggleEditInline = function(id) {
-  const el = document.getElementById('edit-'+id);
-  el.classList.toggle('open');
-  if (el.classList.contains('open')) document.getElementById('edit-name-'+id)?.focus();
+window.toggleEditInline=function(id){const el=document.getElementById('edit-'+id);el.classList.toggle('open');if(el.classList.contains('open'))document.getElementById('edit-name-'+id)?.focus();};
+window.saveEditInline=async function(id,isProf){
+  const name=document.getElementById('edit-name-'+id)?.value.trim();if(!name){showToast('Nome vazio.','error');return;}
+  const old=students[id]||{};const updated={...old,name};
+  if(isProf==='true'){updated.disciplina=document.getElementById('edit-disc-'+id)?.value.trim()||'';}
+  else{updated.turma=document.getElementById('edit-turma-'+id)?.value.trim()||'';updated.num=document.getElementById('edit-num-'+id)?.value.trim()||'';}
+  students[id]=updated;try{await setDoc(doc(db,'alunos',id),updated);showToast('✅ Salvo!','success');}catch{showToast('Erro.','error');return;}renderStudents();
 };
 
-window.saveEditInline = async function(id, isProf) {
-  const name = document.getElementById('edit-name-'+id)?.value.trim();
-  if (!name) { showToast('Nome não pode ser vazio.','error'); return; }
-  const old = students[id] || {};
-  const updated = { ...old, name };
-  if (isProf === 'true') {
-    updated.disciplina = document.getElementById('edit-disc-'+id)?.value.trim() || '';
-  } else {
-    updated.turma = document.getElementById('edit-turma-'+id)?.value.trim() || '';
-    updated.num   = document.getElementById('edit-num-'+id)?.value.trim() || '';
-  }
-  students[id] = updated;
-  try {
-    await setDoc(doc(db, 'alunos', id), updated);
-    showToast('✅ Dados salvos!','success');
-  } catch { showToast('Erro ao salvar.','error'); return; }
-  renderStudents();
-};
-
-
-function updateStudentSelect(arr) {
-  const sel = document.getElementById('authorSelect');
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">Selecionar autor...</option>';
-  const entries = arr || Object.entries(students);
-
-  // Alunos primeiro
-  const alunos = entries.filter(([,s]) => s.tipo !== 'professor');
-  if (alunos.length) {
-    const grp = document.createElement('optgroup');
-    grp.label = '👨‍🎓 Alunos';
-    alunos.forEach(([,s]) => {
-      const o = document.createElement('option');
-      o.value = s.name;
-      o.textContent = s.name + (s.turma ? ' ('+s.turma+')' : '');
-      grp.appendChild(o);
-    });
-    sel.appendChild(grp);
-  }
-
-  // Professores separados
-  const profs = entries.filter(([,s]) => s.tipo === 'professor');
-  if (profs.length) {
-    const grp = document.createElement('optgroup');
-    grp.label = '👨‍🏫 Professores';
-    profs.forEach(([,s]) => {
-      const o = document.createElement('option');
-      o.value = s.name;
-      o.textContent = s.name + ' — Professor';
-      grp.appendChild(o);
-    });
-    sel.appendChild(grp);
-  }
-
-  if (cur) sel.value = cur;
+function updateStudentSelect(arr){
+  const sel=document.getElementById('authorSelect');const cur=sel.value;sel.innerHTML='<option value="">Selecionar autor...</option>';
+  const entries=arr||Object.entries(students);
+  const alunos=entries.filter(([,s])=>s.tipo!=='professor');
+  if(alunos.length){const g=document.createElement('optgroup');g.label='👨‍🎓 Alunos';alunos.forEach(([,s])=>{const o=document.createElement('option');o.value=s.name;o.textContent=s.name+(s.turma?' ('+s.turma+')':'');g.appendChild(o);});sel.appendChild(g);}
+  const profs=entries.filter(([,s])=>s.tipo==='professor');
+  if(profs.length){const g=document.createElement('optgroup');g.label='👨‍🏫 Professores';profs.forEach(([,s])=>{const o=document.createElement('option');o.value=s.name;o.textContent=s.name+' — Professor';g.appendChild(o);});sel.appendChild(g);}
+  if(cur)sel.value=cur;
 }
-
-function renderRanking(arr) {
-  if (!arr || arr.length === 0) { document.getElementById('rankingSection').style.display='none'; return; }
-  document.getElementById('rankingSection').style.display = 'block';
-
-  // Deduplicar por nome antes de montar o ranking
-  const seen = new Set();
-  const unique = arr.filter(([,s]) => {
-    if (seen.has(s.name)) return false;
-    seen.add(s.name); return true;
-  });
-
-  // Apenas alunos (não professores) no ranking
-  const top = unique
-    .filter(([,s]) => s.tipo !== 'professor')
-    .map(([,s]) => {
-      const pts = Object.values(pointsData).filter(p => p.author === s.name).length;
-      // Exibir primeiro nome + inicial do sobrenome para evitar confusão
-      const partes = s.name.trim().split(' ');
-      const display = partes.length > 1
-        ? `${partes[0]} ${partes[1][0]}.`
-        : partes[0];
-      return { display, fullName: s.name, pts };
-    })
-    .sort((a,b) => b.pts - a.pts)
-    .slice(0, 8);
-
-  const max = Math.max(...top.map(s=>s.pts), 1);
-  document.getElementById('rankingList').innerHTML = top.map((s,i) => `
-    <div class="ranking-row" title="${s.fullName}">
-      <div class="r-pos">${i+1}º</div>
-      <div class="r-name">${s.display}</div>
-      <div class="r-bar-wrap"><div class="r-bar" style="width:${Math.round(s.pts/max*100)}%"></div></div>
-      <div class="r-count">${s.pts}</div>
-    </div>`).join('');
+function renderRanking(arr){
+  if(!arr||!arr.length){document.getElementById('rankingSection').style.display='none';return;}
+  document.getElementById('rankingSection').style.display='block';
+  const seen=new Set();const unique=arr.filter(([,s])=>{if(seen.has(s.name))return false;seen.add(s.name);return true;});
+  const top=unique.filter(([,s])=>s.tipo!=='professor').map(([,s])=>{const pts=Object.values(pointsData).filter(p=>p.author===s.name).length;const p=s.name.trim().split(' ');const display=p.length>1?`${p[0]} ${p[1][0]}.`:p[0];return{display,fullName:s.name,pts};}).sort((a,b)=>b.pts-a.pts).slice(0,8);
+  const max=Math.max(...top.map(s=>s.pts),1);
+  document.getElementById('rankingList').innerHTML=top.map((s,i)=>`<div class="ranking-row" title="${s.fullName}"><div class="r-pos">${i+1}º</div><div class="r-name">${s.display}</div><div class="r-bar-wrap"><div class="r-bar" style="width:${Math.round(s.pts/max*100)}%"></div></div><div class="r-count">${s.pts}</div></div>`).join('');
 }
+function updateStats(){const aArr=Object.values(students);const pArr=Object.values(pointsData);document.getElementById('statAlunos').textContent=aArr.length;document.getElementById('statPontos').textContent=pArr.length;document.getElementById('statParticip').textContent=aArr.filter(s=>pArr.some(p=>p.author===s.name)).length;}
 
-function updateStats() {
-  const aArr = Object.values(students);
-  const pArr = Object.values(pointsData);
-  document.getElementById('statAlunos').textContent = aArr.length;
-  document.getElementById('statPontos').textContent = pArr.length;
-  document.getElementById('statParticip').textContent = aArr.filter(s => pArr.some(p=>p.author===s.name)).length;
-}
-
-// ===== PDF =====
-document.getElementById('btnPDF').addEventListener('click', () => {
-  const arr = Object.values(students).sort((a,b) => { const na=parseInt(a.num)||999,nb=parseInt(b.num)||999; return na!==nb?na-nb:a.name.localeCompare(b.name); });
-  const pts = Object.values(pointsData);
-  const hoje = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
-  const rankTop = arr.map(s=>({name:s.name,pts:pts.filter(p=>p.author===s.name).length}))
-    .sort((a,b)=>b.pts-a.pts).filter(s=>s.pts>0).slice(0,5)
-    .map((s,i)=>`<tr><td style="padding:7px 14px;font-weight:700;color:#c4933a">${i+1}º</td><td style="padding:7px 14px;font-weight:500">${s.name}</td><td style="padding:7px 14px;text-align:center;font-weight:700;color:#b5451b">${s.pts}</td></tr>`).join('');
-  const tableRows = arr.map(s => {
-    const n = pts.filter(p=>p.author===s.name).length;
-    const pList = pts.filter(p=>p.author===s.name).map(p=>`<span style="font-size:11px;background:#f5edd6;padding:2px 7px;border-radius:10px;margin:2px;display:inline-block">${p.name}</span>`).join('');
-    return `<tr style="border-bottom:1px solid #e8dcc8;">
-      <td style="padding:8px 12px;font-size:13px">${s.num||'—'}</td>
-      <td style="padding:8px 12px;font-size:13px;font-weight:500">${s.name}</td>
-      <td style="padding:8px 12px;font-size:13px">${s.turma||'—'}</td>
-      <td style="padding:8px 12px;text-align:center;font-weight:700;color:${n>0?'#b5451b':'#bbb'};font-size:13px">${n}</td>
-      <td style="padding:8px 12px">${pList||'<span style="color:#bbb;font-size:11px">—</span>'}</td>
-    </tr>`;
-  }).join('');
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <style>body{font-family:'DM Sans',sans-serif;color:#1a1208;padding:40px;max-width:960px;margin:0 auto;}
-  h1{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:4px;}
-  h2{font-family:'Playfair Display',serif;font-size:1.15rem;color:#b5451b;margin:28px 0 12px;border-bottom:2px solid #f5edd6;padding-bottom:6px;}
-  .sub{color:#999;font-size:.9rem;margin-bottom:28px;}
-  .stats{display:flex;gap:16px;margin-bottom:28px;}
-  .sbox{background:#f5edd6;border-radius:10px;padding:16px 24px;text-align:center;flex:1;}
-  .snum{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#b5451b;}
-  .slbl{font-size:.72rem;color:#999;text-transform:uppercase;letter-spacing:.06em;}
-  table{width:100%;border-collapse:collapse;}
-  thead{background:#1a1208;color:#f5edd6;}
-  thead th{padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:500;text-align:left;}
-  .print-btn{float:right;background:#b5451b;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;}
-  @media print{.print-btn{display:none}}</style></head><body>
-  <button class="print-btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
-  <h1>PK Explorer</h1>
-  <p class="sub">Relatório da Eletiva · ${hoje}</p>
-  <div class="stats">
-    <div class="sbox"><div class="snum">${arr.length}</div><div class="slbl">Alunos</div></div>
-    <div class="sbox"><div class="snum">${pts.length}</div><div class="slbl">Pontos</div></div>
-    <div class="sbox"><div class="snum">${arr.filter(s=>pts.some(p=>p.author===s.name)).length}</div><div class="slbl">Participaram</div></div>
-    <div class="sbox"><div class="snum">${arr.filter(s=>!pts.some(p=>p.author===s.name)).length}</div><div class="slbl">Sem registro</div></div>
-  </div>
-  ${rankTop?`<h2>🏆 Top 5</h2><table><thead><tr><th>Pos.</th><th>Aluno</th><th>Pontos</th></tr></thead><tbody>${rankTop}</tbody></table>`:''}
-  <h2>📋 Lista completa</h2>
-  <table><thead><tr><th>Nº</th><th>Nome</th><th>Turma</th><th>Pontos</th><th>Locais cadastrados</th></tr></thead>
-  <tbody>${tableRows}</tbody></table>
-  </body></html>`;
-  const win = window.open('','_blank'); win.document.write(html); win.document.close();
+document.getElementById('btnPDF').addEventListener('click',()=>{
+  const arr=Object.values(students).sort((a,b)=>{const na=parseInt(a.num)||999,nb=parseInt(b.num)||999;return na!==nb?na-nb:a.name.localeCompare(b.name);});
+  const pts=Object.values(pointsData);const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  const rows=arr.map(s=>{const n=pts.filter(p=>p.author===s.name).length;const pl=pts.filter(p=>p.author===s.name).map(p=>`<span style="font-size:11px;background:#f5edd6;padding:2px 7px;border-radius:10px;margin:2px;display:inline-block">${p.name}</span>`).join('');return`<tr style="border-bottom:1px solid #e8dcc8;"><td style="padding:8px 12px;font-size:13px">${s.num||'—'}</td><td style="padding:8px 12px;font-size:13px;font-weight:500">${s.name}</td><td style="padding:8px 12px;font-size:13px">${s.turma||'—'}</td><td style="padding:8px 12px;text-align:center;font-weight:700;color:${n>0?'#b5451b':'#bbb'};font-size:13px">${n}</td><td style="padding:8px 12px">${pl||'<span style="color:#bbb;font-size:11px">—</span>'}</td></tr>`;}).join('');
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"><style>body{font-family:'DM Sans',sans-serif;color:#1a1208;padding:40px;max-width:960px;margin:0 auto;}h1{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:4px;}h2{font-family:'Playfair Display',serif;font-size:1.15rem;color:#b5451b;margin:28px 0 12px;border-bottom:2px solid #f5edd6;padding-bottom:6px;}.sub{color:#999;font-size:.9rem;margin-bottom:28px;}.stats{display:flex;gap:16px;margin-bottom:28px;}.sbox{background:#f5edd6;border-radius:10px;padding:16px 24px;text-align:center;flex:1;}.snum{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#b5451b;}.slbl{font-size:.72rem;color:#999;text-transform:uppercase;letter-spacing:.06em;}table{width:100%;border-collapse:collapse;}thead{background:#1a1208;color:#f5edd6;}thead th{padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:500;text-align:left;}.print-btn{float:right;background:#b5451b;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:14px;}@media print{.print-btn{display:none}}</style></head><body><button class="print-btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button><h1>PK Explorer</h1><p class="sub">Relatório da Eletiva · ${hoje}</p><div class="stats"><div class="sbox"><div class="snum">${arr.length}</div><div class="slbl">Alunos</div></div><div class="sbox"><div class="snum">${pts.length}</div><div class="slbl">Pontos</div></div><div class="sbox"><div class="snum">${arr.filter(s=>pts.some(p=>p.author===s.name)).length}</div><div class="slbl">Participaram</div></div><div class="sbox"><div class="snum">${arr.filter(s=>!pts.some(p=>p.author===s.name)).length}</div><div class="slbl">Sem registro</div></div></div><h2>📋 Lista completa</h2><table><thead><tr><th>Nº</th><th>Nome</th><th>Turma</th><th>Pontos</th><th>Locais cadastrados</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+  const win=window.open('','_blank');win.document.write(html);win.document.close();
 });
 
-function updateOfflineBadge() {
-  const badge = document.getElementById('offlineBadge');
-  if (pendingUploads.length > 0) {
-    badge.style.display = 'inline-block';
-    badge.textContent = `📵 ${pendingUploads.length} pendente(s)`;
-  } else {
-    badge.style.display = 'none';
-  }
-}
-// Mostrar badge imediato se há pendentes do uso anterior
+function updateOfflineBadge(){const b=document.getElementById('offlineBadge');if(pendingUploads.length>0){b.style.display='inline-block';b.textContent=`📵 ${pendingUploads.length} pendente(s)`;}else{b.style.display='none';}}
 updateOfflineBadge();
 
-// ===== DRAG HANDLE MOBILE =====
-function isMobile() { return window.innerWidth <= 768; }
-
-function setupDragHandle() {
-  const handle = document.getElementById('dragHandle');
-  const app    = document.querySelector('.app');
-  const sidebar = document.querySelector('.sidebar');
-  const mapWrap = document.querySelector('.map-wrap');
-
-  if (!isMobile()) {
-    handle.style.display = 'none';
-    // Desktop: reset para grid normal
-    app.style.gridTemplateRows = '';
-    sidebar.style.height = '';
-    mapWrap.style.height = '';
-    return;
-  }
-
-  handle.style.display = 'flex';
-
-  const totalH = () => window.innerHeight - 72; // altura disponível
-  let sidebarH = Math.round(totalH() * 0.50);   // começa 50/50
-
-  function applyHeights(sh) {
-    const total = totalH();
-    sh = Math.max(80, Math.min(total - 80, sh)); // limites: min 80px cada lado
-    sidebarH = sh;
-    const mapH = total - sh - 22; // 22px = altura do handle
-    sidebar.style.height  = sh + 'px';
-    mapWrap.style.height  = mapH + 'px';
-    app.style.gridTemplateRows = `${sh}px 22px ${mapH}px`;
-    map.invalidateSize(); // avisar o Leaflet que o tamanho mudou
-  }
-
+function isMobile(){return window.innerWidth<=768;}
+function setupDragHandle(){
+  const handle=document.getElementById('dragHandle');const app=document.querySelector('.app');const sidebar=document.querySelector('.sidebar');const mapWrap=document.querySelector('.map-wrap');
+  if(!isMobile()){handle.style.display='none';app.style.gridTemplateRows='';sidebar.style.height='';mapWrap.style.height='';return;}
+  handle.style.display='flex';
+  const totalH=()=>window.innerHeight-72;let sidebarH=Math.round(totalH()*0.50);
+  function applyHeights(sh){const total=totalH();sh=Math.max(80,Math.min(total-80,sh));sidebarH=sh;const mapH=total-sh-22;sidebar.style.height=sh+'px';mapWrap.style.height=mapH+'px';app.style.gridTemplateRows=`${sh}px 22px ${mapH}px`;map.invalidateSize();}
   applyHeights(sidebarH);
-
-  // ---- Touch ----
-  let startY = 0, startH = 0, dragging = false;
-
-  handle.addEventListener('touchstart', e => {
-    dragging = true;
-    startY = e.touches[0].clientY;
-    startH = sidebarH;
-    handle.style.background = 'rgba(196,147,58,0.15)';
-    e.preventDefault();
-  }, { passive: false });
-
-  window.addEventListener('touchmove', e => {
-    if (!dragging) return;
-    const dy = e.touches[0].clientY - startY;
-    applyHeights(startH + dy);
-    e.preventDefault();
-  }, { passive: false });
-
-  window.addEventListener('touchend', () => {
-    if (!dragging) return;
-    dragging = false;
-    handle.style.background = '';
-  });
-
-  // ---- Mouse (desktop/dev) ----
-  handle.addEventListener('mousedown', e => {
-    dragging = true;
-    startY = e.clientY;
-    startH = sidebarH;
-    handle.style.background = 'rgba(196,147,58,0.15)';
-    e.preventDefault();
-  });
-
-  window.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    applyHeights(startH + (e.clientY - startY));
-  });
-
-  window.addEventListener('mouseup', () => {
-    if (!dragging) return;
-    dragging = false;
-    handle.style.background = '';
-  });
-
-  // Toque duplo: alternar entre 80/20 e 50/50 e 20/80
-  let lastTap = 0;
-  handle.addEventListener('touchend', () => {
-    const now = Date.now();
-    if (now - lastTap < 300) {
-      const total = totalH();
-      const presets = [
-        Math.round(total * 0.20),
-        Math.round(total * 0.50),
-        Math.round(total * 0.80),
-      ];
-      const closest = presets.reduce((a, b) =>
-        Math.abs(b - sidebarH) < Math.abs(a - sidebarH) ? b : a
-      );
-      const next = presets[(presets.indexOf(closest) + 1) % presets.length];
-      applyHeights(next);
-    }
-    lastTap = now;
-  });
+  let startY=0,startH=0,dragging=false;
+  handle.addEventListener('touchstart',e=>{dragging=true;startY=e.touches[0].clientY;startH=sidebarH;handle.style.background='rgba(196,147,58,0.15)';e.preventDefault();},{passive:false});
+  window.addEventListener('touchmove',e=>{if(!dragging)return;applyHeights(startH+(e.touches[0].clientY-startY));e.preventDefault();},{passive:false});
+  window.addEventListener('touchend',()=>{if(!dragging)return;dragging=false;handle.style.background='';});
+  handle.addEventListener('mousedown',e=>{dragging=true;startY=e.clientY;startH=sidebarH;handle.style.background='rgba(196,147,58,0.15)';e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;applyHeights(startH+(e.clientY-startY));});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;handle.style.background='';});
+  let lastTap=0;
+  handle.addEventListener('touchend',()=>{const now=Date.now();if(now-lastTap<300){const total=totalH();const presets=[Math.round(total*0.20),Math.round(total*0.50),Math.round(total*0.80)];const closest=presets.reduce((a,b)=>Math.abs(b-sidebarH)<Math.abs(a-sidebarH)?b:a);const next=presets[(presets.indexOf(closest)+1)%presets.length];applyHeights(next);}lastTap=now;});
 }
+setupDragHandle();window.addEventListener('resize',setupDragHandle);
 
-setupDragHandle();
-window.addEventListener('resize', setupDragHandle);
-
-// ===== AVALIAÇÃO PROFESSOR =====
-let avalData = {}; // { [alunoNome]: { participacao: 1|2|3, conceito: 'E'|'B'|'R'|'I', obs: '' } }
-try { avalData = JSON.parse(localStorage.getItem('pk_aval') || '{}'); } catch {}
-
-function saveAvalLocal() {
-  localStorage.setItem('pk_aval', JSON.stringify(avalData));
-}
-
-function openAvalModal() {
-  // Listar só alunos (não professores)
-  const alunos = Object.values(students)
-    .filter(s => s.tipo !== 'professor')
-    .sort((a,b) => {
-      const na = parseInt(a.num)||999, nb = parseInt(b.num)||999;
-      return na !== nb ? na - nb : a.name.localeCompare(b.name);
-    });
-
-  const tbody = document.getElementById('avalTableBody');
-  tbody.innerHTML = alunos.map(s => {
-    const av = avalData[s.name] || { participacao: 0, conceito: '', obs: '' };
-    const pBtns = [
-      { p:1, icon:'✅', title:'Participou' },
-      { p:2, icon:'⚠️', title:'Participou parcialmente' },
-      { p:3, icon:'❌', title:'Não participou' },
-    ].map(b => `<button class="part-btn${av.participacao===b.p?' sel':''}" data-p="${b.p}" data-nome="${s.name}" onclick="setParticipacao('${s.name}',${b.p})" title="${b.title}">${b.icon}</button>`).join('');
-
-    const cBtns = [
-      { v:'E', label:'Excelente' },
-      { v:'B', label:'Bom' },
-      { v:'R', label:'Regular' },
-      { v:'I', label:'Insuficiente' },
-    ].map(b => `<button class="conceito-btn${av.conceito===b.v?' sel-'+b.v:''}" data-c="${b.v}" data-nome="${s.name}" onclick="setConceito('${s.name}','${b.v}')">${b.label}</button>`).join('');
-
-    const pts = Object.values(pointsData).filter(p => p.author === s.name).length;
-    return `<tr id="aval-row-${s.name.replace(/\s/g,'_')}">
-      <td>
-        <div class="aluno-nome">${s.name}</div>
-        <div class="aluno-turma">${s.turma||''} ${s.num?'· Nº'+s.num:''} · ${pts} pt${pts!==1?'s':''}</div>
-      </td>
-      <td><div class="part-group">${pBtns}</div></td>
-      <td><div class="conceito-group">${cBtns}</div></td>
-      <td><input type="text" placeholder="Obs..." value="${(av.obs||'').replace(/"/g,'&quot;')}"
-        onchange="setObs('${s.name}',this.value)"
-        style="width:100%;border:1px solid rgba(196,147,58,0.25);border-radius:6px;padding:5px 8px;font-size:0.78rem;font-family:'DM Sans',sans-serif;background:white;"></td>
-    </tr>`;
+let avalData={};try{avalData=JSON.parse(localStorage.getItem('pk_aval')||'{}');}catch{}
+function saveAvalLocal(){localStorage.setItem('pk_aval',JSON.stringify(avalData));}
+function openAvalModal(){
+  const alunos=Object.values(students).filter(s=>s.tipo!=='professor').sort((a,b)=>{const na=parseInt(a.num)||999,nb=parseInt(b.num)||999;return na!==nb?na-nb:a.name.localeCompare(b.name);});
+  const tbody=document.getElementById('avalTableBody');
+  tbody.innerHTML=alunos.map(s=>{
+    const av=avalData[s.name]||{participacao:0,conceito:'',obs:''};
+    const pBtns=[{p:1,icon:'✅',title:'Participou'},{p:2,icon:'⚠️',title:'Parcialmente'},{p:3,icon:'❌',title:'Não participou'}].map(b=>`<button class="part-btn${av.participacao===b.p?' sel':''}" data-p="${b.p}" onclick="setParticipacao('${s.name}',${b.p})" title="${b.title}">${b.icon}</button>`).join('');
+    const cBtns=[{v:'E',label:'Excelente'},{v:'B',label:'Bom'},{v:'R',label:'Regular'},{v:'I',label:'Insuficiente'}].map(b=>`<button class="conceito-btn${av.conceito===b.v?' sel-'+b.v:''}" data-c="${b.v}" onclick="setConceito('${s.name}','${b.v}')">${b.label}</button>`).join('');
+    const pts=Object.values(pointsData).filter(p=>p.author===s.name).length;
+    return`<tr id="aval-row-${s.name.replace(/\s/g,'_')}"><td><div class="aluno-nome">${s.name}</div><div class="aluno-turma">${s.turma||''} ${s.num?'· Nº'+s.num:''} · ${pts} pt${pts!==1?'s':''}</div></td><td><div class="part-group">${pBtns}</div></td><td><div class="conceito-group">${cBtns}</div></td><td><input type="text" placeholder="Obs..." value="${(av.obs||'').replace(/"/g,'&quot;')}" onchange="setObs('${s.name}',this.value)" style="width:100%;border:1px solid rgba(196,147,58,0.25);border-radius:6px;padding:5px 8px;font-size:0.78rem;font-family:'DM Sans',sans-serif;background:white;"></td></tr>`;
   }).join('');
-
   document.getElementById('avalOverlay').classList.add('open');
 }
-
-window.setParticipacao = function(nome, p) {
-  if (!avalData[nome]) avalData[nome] = { participacao:0, conceito:'', obs:'' };
-  // Toggle — clicando no mesmo desmarca
-  avalData[nome].participacao = avalData[nome].participacao === p ? 0 : p;
-  saveAvalLocal();
-  // Atualizar visual sem re-renderizar tudo
-  const row = document.getElementById('aval-row-'+nome.replace(/\s/g,'_'));
-  if (!row) return;
-  row.querySelectorAll('.part-btn').forEach(btn => {
-    const bp = parseInt(btn.dataset.p);
-    btn.classList.toggle('sel', bp === avalData[nome].participacao);
-  });
-};
-
-window.setConceito = function(nome, v) {
-  if (!avalData[nome]) avalData[nome] = { participacao:0, conceito:'', obs:'' };
-  avalData[nome].conceito = avalData[nome].conceito === v ? '' : v;
-  saveAvalLocal();
-  const row = document.getElementById('aval-row-'+nome.replace(/\s/g,'_'));
-  if (!row) return;
-  row.querySelectorAll('.conceito-btn').forEach(btn => {
-    btn.className = 'conceito-btn' + (btn.dataset.c === avalData[nome].conceito ? ' sel-'+btn.dataset.c : '');
-  });
-};
-
-window.setObs = function(nome, v) {
-  if (!avalData[nome]) avalData[nome] = { participacao:0, conceito:'', obs:'' };
-  avalData[nome].obs = v;
-  saveAvalLocal();
-};
-
-document.getElementById('btnCloseAval').addEventListener('click', () => {
-  document.getElementById('avalOverlay').classList.remove('open');
-});
-document.getElementById('avalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('open');
+window.setParticipacao=function(nome,p){if(!avalData[nome])avalData[nome]={participacao:0,conceito:'',obs:''};avalData[nome].participacao=avalData[nome].participacao===p?0:p;saveAvalLocal();const row=document.getElementById('aval-row-'+nome.replace(/\s/g,'_'));if(!row)return;row.querySelectorAll('.part-btn').forEach(btn=>btn.classList.toggle('sel',parseInt(btn.dataset.p)===avalData[nome].participacao));};
+window.setConceito=function(nome,v){if(!avalData[nome])avalData[nome]={participacao:0,conceito:'',obs:''};avalData[nome].conceito=avalData[nome].conceito===v?'':v;saveAvalLocal();const row=document.getElementById('aval-row-'+nome.replace(/\s/g,'_'));if(!row)return;row.querySelectorAll('.conceito-btn').forEach(btn=>{btn.className='conceito-btn'+(btn.dataset.c===avalData[nome].conceito?' sel-'+btn.dataset.c:'');});};
+window.setObs=function(nome,v){if(!avalData[nome])avalData[nome]={participacao:0,conceito:'',obs:''};avalData[nome].obs=v;saveAvalLocal();};
+document.getElementById('btnCloseAval').addEventListener('click',()=>document.getElementById('avalOverlay').classList.remove('open'));
+document.getElementById('avalOverlay').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+document.getElementById('btnSaveAval').addEventListener('click',()=>{saveAvalLocal();showToast('✅ Avaliações salvas!','success');document.getElementById('avalOverlay').classList.remove('open');});
+document.getElementById('btnAvalPDF').addEventListener('click',()=>{
+  const alunos=Object.values(students).filter(s=>s.tipo!=='professor').sort((a,b)=>{const na=parseInt(a.num)||999,nb=parseInt(b.num)||999;return na!==nb?na-nb:a.name.localeCompare(b.name);});
+  const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  const pL={0:'—',1:'✅ Participou',2:'⚠️ Parcialmente',3:'❌ Não participou'};const pC={0:'#bbb',1:'#3d6b4f',2:'#e6a817',3:'#b5451b'};
+  const cL={'':'—',E:'Excelente',B:'Bom',R:'Regular',I:'Insuficiente'};const cC={'':'#bbb',E:'#3d6b4f',B:'#c4933a',R:'#e6a817',I:'#b5451b'};
+  const nPart=alunos.filter(s=>(avalData[s.name]?.participacao||0)===1).length;const nParc=alunos.filter(s=>(avalData[s.name]?.participacao||0)===2).length;const nNao=alunos.filter(s=>(avalData[s.name]?.participacao||0)===3).length;
+  const nExc=alunos.filter(s=>(avalData[s.name]?.conceito||'')==='E').length;const nBom=alunos.filter(s=>(avalData[s.name]?.conceito||'')==='B').length;const nReg=alunos.filter(s=>(avalData[s.name]?.conceito||'')==='R').length;const nIns=alunos.filter(s=>(avalData[s.name]?.conceito||'')==='I').length;
+  const rows=alunos.map((s,i)=>{const av=avalData[s.name]||{participacao:0,conceito:'',obs:''};const pts=Object.values(pointsData).filter(p=>p.author===s.name).length;return`<tr style="border-bottom:1px solid #e8dcc8;${i%2===0?'background:#fdfaf4':''}"><td style="padding:8px 12px;font-size:13px;font-weight:500">${s.name}</td><td style="padding:8px 12px;font-size:12px;color:rgba(26,18,8,0.5)">${s.turma||'—'}${s.num?' · Nº'+s.num:''}</td><td style="padding:8px 12px;text-align:center;font-weight:700;color:${pts>0?'#b5451b':'#bbb'};font-size:13px">${pts}</td><td style="padding:8px 12px;font-size:12px;color:${pC[av.participacao]};font-weight:600">${pL[av.participacao]}</td><td style="padding:8px 12px;font-size:12px;color:${cC[av.conceito||'']};font-weight:700">${cL[av.conceito||'']}</td><td style="padding:8px 12px;font-size:11px;color:#666">${av.obs||'—'}</td></tr>`;}).join('');
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"><style>body{font-family:'DM Sans',sans-serif;color:#1a1208;padding:36px;max-width:960px;margin:0 auto;}h1{font-family:'Playfair Display',serif;font-size:1.9rem;margin-bottom:2px;}h2{font-family:'Playfair Display',serif;font-size:1.05rem;color:#b5451b;margin:24px 0 10px;border-bottom:2px solid #f5edd6;padding-bottom:5px;}.sub{color:#999;font-size:.85rem;margin-bottom:24px;}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}.sbox{background:#f5edd6;border-radius:10px;padding:12px;text-align:center;}.snum{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;}.slbl{font-size:.65rem;color:#999;text-transform:uppercase;letter-spacing:.06em;}table{width:100%;border-collapse:collapse;}thead{background:#1a1208;color:#f5edd6;}thead th{padding:9px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:500;text-align:left;}.print-btn{float:right;background:#b5451b;color:white;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:13px;}@media print{.print-btn{display:none}}</style></head><body><button class="print-btn" onclick="window.print()">🖨️ Imprimir / PDF</button><h1>📊 Avaliação da Eletiva</h1><p class="sub">PK do Ontem e do Hoje · Prof. Jhaimson &amp; Prof. Francisco · ${hoje}</p><div class="stats"><div class="sbox"><div class="snum" style="color:#3d6b4f">${nPart}</div><div class="slbl">Participaram</div></div><div class="sbox"><div class="snum" style="color:#e6a817">${nParc}</div><div class="slbl">Parcialmente</div></div><div class="sbox"><div class="snum" style="color:#b5451b">${nNao}</div><div class="slbl">Não participaram</div></div><div class="sbox"><div class="snum" style="color:#999">${alunos.length-(nPart+nParc+nNao)}</div><div class="slbl">Sem avaliação</div></div></div><div class="stats"><div class="sbox"><div class="snum" style="color:#3d6b4f">${nExc}</div><div class="slbl">Excelente</div></div><div class="sbox"><div class="snum" style="color:#c4933a">${nBom}</div><div class="slbl">Bom</div></div><div class="sbox"><div class="snum" style="color:#e6a817">${nReg}</div><div class="slbl">Regular</div></div><div class="sbox"><div class="snum" style="color:#b5451b">${nIns}</div><div class="slbl">Insuficiente</div></div></div><h2>📋 Lista completa</h2><table><thead><tr><th>Nome</th><th>Turma</th><th style="text-align:center">Pontos</th><th>Participação</th><th>Conceito</th><th>Observação</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+  const win=window.open('','_blank');win.document.write(html);win.document.close();
 });
 
-document.getElementById('btnSaveAval').addEventListener('click', () => {
-  saveAvalLocal();
-  showToast('✅ Avaliações salvas!', 'success');
-  document.getElementById('avalOverlay').classList.remove('open');
-});
-
-document.getElementById('btnAvalPDF').addEventListener('click', () => {
-  const alunos = Object.values(students)
-    .filter(s => s.tipo !== 'professor')
-    .sort((a,b) => { const na=parseInt(a.num)||999,nb=parseInt(b.num)||999; return na!==nb?na-nb:a.name.localeCompare(b.name); });
-
-  const hoje = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
-
-  const partLabel = { 0:'—', 1:'✅ Participou', 2:'⚠️ Parcialmente', 3:'❌ Não participou' };
-  const partColor = { 0:'#bbb', 1:'#3d6b4f', 2:'#e6a817', 3:'#b5451b' };
-  const concLabel = { '':'—', E:'Excelente', B:'Bom', R:'Regular', I:'Insuficiente' };
-  const concColor = { '':'#bbb', E:'#3d6b4f', B:'#c4933a', R:'#e6a817', I:'#b5451b' };
-
-  // Estatísticas
-  const total = alunos.length;
-  const nPart = alunos.filter(s => (avalData[s.name]?.participacao||0) === 1).length;
-  const nParc = alunos.filter(s => (avalData[s.name]?.participacao||0) === 2).length;
-  const nNao  = alunos.filter(s => (avalData[s.name]?.participacao||0) === 3).length;
-  const nExc  = alunos.filter(s => (avalData[s.name]?.conceito||'') === 'E').length;
-  const nBom  = alunos.filter(s => (avalData[s.name]?.conceito||'') === 'B').length;
-  const nReg  = alunos.filter(s => (avalData[s.name]?.conceito||'') === 'R').length;
-  const nIns  = alunos.filter(s => (avalData[s.name]?.conceito||'') === 'I').length;
-
-  const rows = alunos.map((s,i) => {
-    const av = avalData[s.name] || { participacao:0, conceito:'', obs:'' };
-    const pts = Object.values(pointsData).filter(p=>p.author===s.name).length;
-    return `<tr style="border-bottom:1px solid #e8dcc8;${i%2===0?'background:#fdfaf4':''}">
-      <td style="padding:8px 12px;font-size:13px;font-weight:500">${s.name}</td>
-      <td style="padding:8px 12px;font-size:12px;color:rgba(26,18,8,0.5)">${s.turma||'—'}${s.num?' · Nº'+s.num:''}</td>
-      <td style="padding:8px 12px;text-align:center;font-weight:700;color:${pts>0?'#b5451b':'#bbb'};font-size:13px">${pts}</td>
-      <td style="padding:8px 12px;font-size:12px;color:${partColor[av.participacao]};font-weight:600">${partLabel[av.participacao]}</td>
-      <td style="padding:8px 12px;font-size:12px;color:${concColor[av.conceito||'']};font-weight:700">${concLabel[av.conceito||'']}</td>
-      <td style="padding:8px 12px;font-size:11px;color:#666">${av.obs||'—'}</td>
-    </tr>`;
-  }).join('');
-
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    body{font-family:'DM Sans',sans-serif;color:#1a1208;padding:36px;max-width:960px;margin:0 auto;}
-    h1{font-family:'Playfair Display',serif;font-size:1.9rem;margin-bottom:2px;}
-    h2{font-family:'Playfair Display',serif;font-size:1.05rem;color:#b5451b;margin:24px 0 10px;border-bottom:2px solid #f5edd6;padding-bottom:5px;}
-    .sub{color:#999;font-size:.85rem;margin-bottom:24px;}
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
-    .sbox{background:#f5edd6;border-radius:10px;padding:12px;text-align:center;}
-    .snum{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;}
-    .slbl{font-size:.65rem;color:#999;text-transform:uppercase;letter-spacing:.06em;}
-    table{width:100%;border-collapse:collapse;}
-    thead{background:#1a1208;color:#f5edd6;}
-    thead th{padding:9px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:500;text-align:left;}
-    .print-btn{float:right;background:#b5451b;color:white;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;}
-    @media print{.print-btn{display:none}}
-  </style></head><body>
-  <button class="print-btn" onclick="window.print()">🖨️ Imprimir / PDF</button>
-  <h1>📊 Avaliação da Eletiva</h1>
-  <p class="sub">PK do Ontem e do Hoje · Prof. Jhaimson &amp; Prof. Francisco · ${hoje}</p>
-  <div class="stats">
-    <div class="sbox"><div class="snum" style="color:#3d6b4f">${nPart}</div><div class="slbl">Participaram</div></div>
-    <div class="sbox"><div class="snum" style="color:#e6a817">${nParc}</div><div class="slbl">Parcialmente</div></div>
-    <div class="sbox"><div class="snum" style="color:#b5451b">${nNao}</div><div class="slbl">Não participaram</div></div>
-    <div class="sbox"><div class="snum" style="color:#999">${total-(nPart+nParc+nNao)}</div><div class="slbl">Sem avaliação</div></div>
-  </div>
-  <div class="stats">
-    <div class="sbox"><div class="snum" style="color:#3d6b4f">${nExc}</div><div class="slbl">Excelente</div></div>
-    <div class="sbox"><div class="snum" style="color:#c4933a">${nBom}</div><div class="slbl">Bom</div></div>
-    <div class="sbox"><div class="snum" style="color:#e6a817">${nReg}</div><div class="slbl">Regular</div></div>
-    <div class="sbox"><div class="snum" style="color:#b5451b">${nIns}</div><div class="slbl">Insuficiente</div></div>
-  </div>
-  <h2>📋 Lista completa</h2>
-  <table>
-    <thead><tr>
-      <th>Nome</th><th>Turma</th><th style="text-align:center">Pontos</th>
-      <th>Participação</th><th>Conceito</th><th>Observação</th>
-    </tr></thead>
-    <tbody>${rows}</tbody>
-  </table>
-  </body></html>`;
-  const win = window.open('','_blank'); win.document.write(html); win.document.close();
-});
-
-
-
-// ===== EXCLUIR PONTO (só professores) =====
-window.confirmarExclusao = async function(pointId, pointName) {
-  const senha = prompt('🔐 Digite a senha para excluir o ponto "' + pointName + '":');
-  if (!senha) return;
-  // Senha dos professores (mesma do sistema de avaliação)
-  if (senha !== 'prof2026') {
-    alert('❌ Senha incorreta. Apenas Prof. Francisco e Prof. Jhaimson podem excluir pontos.');
-    return;
-  }
-  const confirmar = confirm('⚠️ Tem certeza que deseja excluir o ponto "' + pointName + '"? Esta ação não pode ser desfeita.');
-  if (!confirmar) return;
-
-  try {
-    await deleteDoc(doc(db, 'pontos', pointId));
-    document.getElementById('modalOverlay').style.display = 'none';
-    // Remover marcador do mapa
-    if (markers[pointId]) { map.removeLayer(markers[pointId]); delete markers[pointId]; }
-    const li = document.getElementById('pt-' + pointId); if (li) li.remove();
-    delete pointsData[pointId];
-    showToast('🗑️ Ponto "' + pointName + '" excluído.', 'success');
-  } catch(e) {
-    console.error(e);
-    showToast('Erro ao excluir ponto.', 'error');
-  }
+// =====================================================================
+// FIX 5 — confirmarExclusao: fechar modal via classList (style.display bloqueava reabertura)
+// =====================================================================
+window.confirmarExclusao=async function(pointId,pointName){
+  const senha=prompt('🔐 Digite a senha para excluir o ponto "'+pointName+'":');
+  if(!senha)return;
+  if(senha!=='prof2026'){alert('❌ Senha incorreta.');return;}
+  if(!confirm('⚠️ Excluir "'+pointName+'"? Esta ação não pode ser desfeita.'))return;
+  try{
+    await deleteDoc(doc(db,'pontos',pointId));
+    document.getElementById('modalOverlay').classList.remove('open'); // FIX5
+    showToast('🗑️ "'+pointName+'" excluído.','success');
+  }catch(e){console.error(e);showToast('Erro ao excluir.','error');}
 };
 
-// ===== FIREBASE LISTENERS =====
-const qP = query(collection(db, 'pontos'), orderBy('createdAt', 'desc'));
-onSnapshot(qP, { includeMetadataChanges: true }, snap => {
-  const fromCache = snap.metadata.fromCache;
-  if (!fromCache) {
-    document.getElementById('statusDot').style.cssText = 'background:#4caf50;box-shadow:0 0 8px #4caf50';
-    document.getElementById('statusLabel').textContent = 'Tempo real ativo';
-  } else if (!isOnline) {
-    document.getElementById('statusDot').style.cssText = 'background:#e6a817;box-shadow:0 0 8px #e6a817';
-    document.getElementById('statusLabel').textContent = '📵 Offline — dados salvos localmente';
-  }
-  snap.docChanges().forEach(ch => {
-    if (ch.type === 'added' || ch.type === 'modified') {
-      renderPoint(ch.doc.id, ch.doc.data());
+// =====================================================================
+// FIX 4 — handler 'removed' no snapshot de pontos
+// =====================================================================
+const qP=query(collection(db,'pontos'),orderBy('createdAt','desc'));
+onSnapshot(qP,{includeMetadataChanges:true},snap=>{
+  const fromCache=snap.metadata.fromCache;
+  if(!fromCache){document.getElementById('statusDot').style.cssText='background:#4caf50;box-shadow:0 0 8px #4caf50';document.getElementById('statusLabel').textContent='Tempo real ativo';}
+  else if(!isOnline){document.getElementById('statusDot').style.cssText='background:#e6a817;box-shadow:0 0 8px #e6a817';document.getElementById('statusLabel').textContent='📵 Offline — dados salvos localmente';}
+  snap.docChanges().forEach(ch=>{
+    if(ch.type==='added'||ch.type==='modified'){
+      renderPoint(ch.doc.id,ch.doc.data());
+    } else if(ch.type==='removed'){ // FIX4
+      const rid=ch.doc.id;
+      if(markers[rid]){map.removeLayer(markers[rid]);delete markers[rid];}
+      const rc=document.getElementById('card-'+rid);if(rc)rc.remove();
+      delete pointsData[rid];
+      document.getElementById('countBadge').textContent=Object.keys(markers).length;
+      updateStats();
     }
   });
-}, () => {
-  document.getElementById('statusDot').style.background = '#b5451b';
-  document.getElementById('statusLabel').textContent = 'Erro de conexão';
-});
+},()=>{document.getElementById('statusDot').style.background='#b5451b';document.getElementById('statusLabel').textContent='Erro de conexão';});
 
-onSnapshot(collection(db, 'alunos'), snap => {
-  snap.docChanges().forEach(c => {
-    if (c.type === 'added' || c.type === 'modified') students[c.doc.id] = c.doc.data();
-    else if (c.type === 'removed') delete students[c.doc.id];
+onSnapshot(collection(db,'alunos'),snap=>{
+  snap.docChanges().forEach(c=>{
+    if(c.type==='added'||c.type==='modified')students[c.doc.id]=c.doc.data();
+    else if(c.type==='removed')delete students[c.doc.id];
   });
-  renderStudents();
-  checkLimit();
+  renderStudents();checkLimit();
 });
-
 </script>
 </body>
 </html>
